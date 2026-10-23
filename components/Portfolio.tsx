@@ -6,7 +6,6 @@ import {
   carousel,
   caseStudies,
   clients,
-  currentRole,
   location,
   photoStack,
   profile,
@@ -149,62 +148,41 @@ export function Portfolio({ initialSlug }: { initialSlug?: string }) {
           <aside className="side" style={{ display: "flex", flexDirection: "column", gap: 10 }}>
             <ProfileCard ref={profileRef} />
 
-            {/* Currently at */}
-            <section
-              aria-label="Current role"
-              style={{
-                ...cardBase,
-                padding: "18px 20px",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "space-between",
-                gap: 14,
-              }}
-            >
-              <div style={{ display: "flex", flexDirection: "column", gap: 3, minWidth: 0 }}>
-                <span style={{ fontSize: 11, fontWeight: 500, color: meta }}>Currently at</span>
-                <span style={{ fontSize: 15, fontWeight: 700 }}>{currentRole.company}</span>
-                <span style={{ fontSize: 12, color: meta }}>{currentRole.role}</span>
-                <span style={{ fontSize: 11, color: meta }}>{currentRole.years}</span>
-              </div>
-              {currentRole.logo ? (
-                <div style={{ flexShrink: 0, width: 56, height: 56, borderRadius: 999, overflow: "hidden" }}>
-                  <Media img={currentRole.logo} label="" cover aspect="1 / 1" sizes="56px" />
-                </div>
-              ) : (
-                <div
-                  role="img"
-                  aria-label="Company logo placeholder"
-                  className="ph"
-                  style={{ flexShrink: 0, width: 56, height: 56, borderRadius: 999, background: "rgba(232,220,214,0.10)", fontSize: 9 }}
-                >
-                  [LOGO]
-                </div>
-              )}
-            </section>
-
             {/* Clients */}
             <section
-              aria-label="Clients and brands"
-              style={{ ...cardBase, padding: "16px 20px 18px", display: "flex", flexDirection: "column", gap: 12 }}
+              aria-label="Clients and employers"
+              className="span-all"
+              style={{ ...cardBase, padding: "16px 20px 20px", display: "flex", flexDirection: "column", gap: 16 }}
             >
               <div style={{ display: "flex", justifyContent: "space-between", fontSize: 11, fontWeight: 500, color: meta }}>
                 <span>Clients</span>
                 <span>{clients.range}</span>
               </div>
-              <ul style={{ margin: 0, padding: 0, listStyle: "none", display: "flex", gap: 8, flexWrap: "wrap" }}>
-                {clients.items.map((c, i) => (
-                  <li key={i} title={c.name}>
-                    {c.logo ? (
-                      <div style={{ width: 28, height: 28, borderRadius: 999, overflow: "hidden" }}>
-                        <Media img={c.logo} label="" cover aspect="1 / 1" sizes="28px" />
-                      </div>
-                    ) : (
-                      <div
-                        role="img"
-                        aria-label="Client logo placeholder"
-                        style={{ width: 28, height: 28, borderRadius: 999, background: "rgba(232,220,214,0.12)" }}
+              <ul
+                style={{
+                  margin: 0,
+                  padding: 0,
+                  listStyle: "none",
+                  display: "flex",
+                  flexWrap: "wrap",
+                  alignItems: "center",
+                  columnGap: 22,
+                  rowGap: 16,
+                }}
+              >
+                {clients.items.map((c) => (
+                  <li key={c.name} style={{ display: "flex", alignItems: "center", opacity: 0.8 }}>
+                    {c.src ? (
+                      // eslint-disable-next-line @next/next/no-img-element
+                      <img
+                        src={c.src}
+                        alt={c.name}
+                        width={Math.round((c.w * c.h) / c.h0)}
+                        height={c.h}
+                        style={{ display: "block", height: c.h, width: "auto" }}
                       />
+                    ) : (
+                      <span style={{ fontSize: 14, fontWeight: 700, letterSpacing: "-0.02em", lineHeight: 1 }}>{c.name}</span>
                     )}
                   </li>
                 ))}

@@ -87,20 +87,21 @@ export const profile = {
   email: "baylorchanc@gmail.com",
 };
 
-export const currentRole = {
-  company: "ServiceNow",
-  role: "Senior UX Designer",
-  years: "2024 – Present",
-  logo: undefined as Img | undefined,
-};
-
 export const clients = {
   range: "2018 – 2026",
-  /** Add { name, logo } entries. Placeholder circles show until then. */
-  items: Array.from({ length: 7 }, (_, i) => ({
-    name: `[Client ${i + 1}]`,
-    logo: undefined as Img | undefined,
-  })),
+  /**
+   * In resume order. `h` is the display height in px, tuned per logo so wide
+   * wordmarks and compact marks look the same size. A client with no `src`
+   * shows its name as text until a logo is added.
+   */
+  items: [
+    { name: "ServiceNow", src: "/clients/servicenow.png", w: 661, h0: 96, h: 14 },
+    { name: "T. Rowe Price", src: "/clients/t-rowe-price.png", w: 639, h0: 96, h: 15 },
+    { name: "Aerotek", src: "/clients/aerotek.png", w: 156, h0: 96, h: 30 },
+    { name: "PointClickCare", src: null, w: 0, h0: 0, h: 0 },
+    { name: "Under Armour", src: "/clients/under-armour.png", w: 169, h0: 96, h: 22 },
+    { name: "Stanley Black & Decker", src: "/clients/stanley-black-decker.png", w: 123, h0: 96, h: 30 },
+  ] as { name: string; src: string | null; w: number; h0: number; h: number }[],
 };
 
 export const location = {
@@ -110,7 +111,7 @@ export const location = {
 
 export const about = {
   title: "About & Resume",
-  line: "[One line on what you want next, e.g. the kind of team or problem you want to work on.]",
+  line: "I love anime, horror movies, gaming, and most importantly challenging myself to design across multiple mediums! Looking to join a team that's open to experimenting and finding solutions to the world's most complex problems.",
   /** Put the PDF at /public/resume.pdf and set this to "/resume.pdf" */
   resumeUrl: null as string | null,
 };
