@@ -37,6 +37,8 @@ export type Block =
   | { list: string[] }
   | { callout: CalloutKind; title: string; text: string }
   | { figure: Figure }
+  /** An animated preview in place of still figures; `alt` describes it for screen readers */
+  | { preview: "portal"; alt: string; caption: string }
   | { table: { head: string[]; rows: string[][] } }
   | { quote: { text: string; name: string; title: string } };
 

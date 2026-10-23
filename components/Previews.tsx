@@ -7,14 +7,14 @@ import type { Img } from "@/lib/content";
 
 type Kind = "portal" | "builder";
 
-export function CaseStudyPreview({ kind, aspect = "16 / 10", priority }: { kind: Kind; aspect?: string; priority?: boolean }) {
-  return kind === "portal" ? <PortalPreview aspect={aspect} priority={priority} /> : <BuilderPreview aspect={aspect} />;
+export function CaseStudyPreview({ kind, aspect = "16 / 10", priority, sizes }: { kind: Kind; aspect?: string; priority?: boolean; sizes?: string }) {
+  return kind === "portal" ? <PortalPreview aspect={aspect} priority={priority} sizes={sizes} /> : <BuilderPreview aspect={aspect} />;
 }
 
 /* Wipes from the old homepage to the new one, scrolls to the action center,
    and brings in the mobile version. Pure CSS, so it is cheap and pauses for
    reduced motion. */
-function PortalPreview({ aspect, priority }: { aspect: string; priority?: boolean }) {
+function PortalPreview({ aspect, priority, sizes = "(max-width: 1023px) 100vw, 50vw" }: { aspect: string; priority?: boolean; sizes?: string }) {
   const before = IMG["partner-portal/before"];
   const after = IMG["partner-portal/after"];
   const mobile = IMG["partner-portal/mobile"];
@@ -29,7 +29,7 @@ function PortalPreview({ aspect, priority }: { aspect: string; priority?: boolea
           priority={priority}
           placeholder="blur"
           blurDataURL={after.blurDataURL}
-          sizes="(max-width: 1023px) 100vw, 50vw"
+          sizes={sizes}
         />
       </div>
       <div className="pv-layer pv-before">
@@ -41,7 +41,7 @@ function PortalPreview({ aspect, priority }: { aspect: string; priority?: boolea
           priority={priority}
           placeholder="blur"
           blurDataURL={before.blurDataURL}
-          sizes="(max-width: 1023px) 100vw, 50vw"
+          sizes={sizes}
         />
       </div>
       <div className="pv-phone">

@@ -84,27 +84,10 @@ export const partnerPortal: CaseStudy = {
           p: "The hero stayed, because GPC needs a place to launch new pages like AI Control Tower. I argued it down from a rotating carousel to three static cards: a rotator promotes one page and buries two.",
         },
         {
-          figure: {
-            layout: "pair",
-            items: [
-              {
-                img: img(
-                  "partner-portal/before",
-                  "The old Partner Portal homepage: two navigations, promotional banners, a recommended-learning panel and empty deal and deployment registration panels far down the page."
-                ),
-                label: "Before",
-              },
-              {
-                img: img(
-                  "partner-portal/after",
-                  "The shipped homepage: one navigation, a hero with a Visit action center link, three static What's new cards, the action center, an open-items list and a credentials module."
-                ),
-                label: "After",
-              },
-            ],
-            caption:
-              "Before: promotions first, tasks buried. After: one navigation, three static cards and an action center with the four top tasks, followed by each partner's open items.",
-          },
+          preview: "portal",
+          alt: "Animation: the old Partner Portal homepage, with two navigations and promotional banners, wipes away to the shipped homepage with one navigation, three static What's new cards, the action center and open items, then the mobile version slides in.",
+          caption:
+            "Before: promotions first, tasks buried. After: one navigation, three static cards and an action center with the four top tasks, followed by each partner's open items.",
         },
         {
           callout: "Stakeholder feedback",
