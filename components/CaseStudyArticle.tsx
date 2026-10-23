@@ -13,7 +13,7 @@ export function CaseStudyArticle({ cs, headingId }: { cs: CaseStudy; headingId?:
       {cs.preview ? (
         <CaseStudyPreview kind={cs.preview} aspect="16 / 9" priority />
       ) : (
-        <Media img={cs.hero} label="[CASE STUDY HERO IMAGE]" aspect="16 / 8" cover priority sizes="(max-width: 1100px) 100vw, 960px" />
+        <Media img={cs.hero} label="[CASE STUDY HERO IMAGE]" aspect="16 / 8" cover priority sizes="(max-width: 1580px) 100vw, 1440px" />
       )}
       <div
         style={{
@@ -214,7 +214,7 @@ function BlockView({ b }: { b: Block }) {
 
 function FigureView({ f }: { f: Figure }) {
   const cols = f.layout === "stack" ? 1 : f.layout === "pair" ? 2 : 3;
-  const sizes = cols === 1 ? "(max-width: 1100px) 100vw, 820px" : cols === 2 ? "(max-width: 1100px) 50vw, 410px" : "(max-width: 560px) 100vw, 280px";
+  const sizes = cols === 1 ? "(max-width: 1580px) 100vw, 1300px" : cols === 2 ? "(max-width: 1580px) 50vw, 650px" : "(max-width: 560px) 100vw, 430px";
   return (
     <figure style={{ margin: "8px 0", display: "flex", flexDirection: "column", gap: 10, maxWidth: f.maxWidth }}>
       <div className={`fig-grid ${f.layout}`}>

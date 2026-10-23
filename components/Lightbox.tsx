@@ -215,7 +215,7 @@ function VisualDetail({ item }: { item: Exclude<LightboxItem, { kind: "case" }> 
             <Media
               img={ph.img}
               label=""
-              sizes="(max-width: 1100px) 100vw, 940px"
+              sizes="(max-width: 1580px) 100vw, 1420px"
               style={{ borderRadius: 10, width: `min(100%, calc((100vh - 180px) * ${ph.img.width / ph.img.height}))`, height: "auto" }}
             />
             <figcaption style={{ fontSize: 13, fontWeight: 500, padding: "0 4px", textAlign: "center" }}>{ph.caption}</figcaption>
@@ -233,8 +233,8 @@ function VisualDetail({ item }: { item: Exclude<LightboxItem, { kind: "case" }> 
           { img: after, label: "After" },
         ].map((x) => (
           <div key={x.label} style={{ display: "flex", flexDirection: "column", gap: 8, minWidth: 0 }}>
-            <span style={{ fontSize: 11, fontWeight: 500, color: metaColor, padding: "4px 2px 0" }}>{x.label}</span>
-            <Media img={x.img} label="" sizes="(max-width: 1100px) 50vw, 480px" style={{ borderRadius: 10 }} />
+            <span style={{ fontSize: 11, fontWeight: 500, color: metaColor, padding: "4px 2px 0", textAlign: "center" }}>{x.label}</span>
+            <Media img={x.img} label="" sizes="(max-width: 1580px) 50vw, 710px" style={{ borderRadius: 10, width: `min(100%, calc((100vh - 140px) * ${x.img.width / x.img.height}))`, height: "auto", margin: "0 auto" }} />
           </div>
         ))}
       </div>
@@ -257,7 +257,7 @@ function VisualDetail({ item }: { item: Exclude<LightboxItem, { kind: "case" }> 
       <div style={{ display: "flex", flexDirection: "column" }}>
         {item.kind === "work" && item.w.summary && <Summary s={item.w.summary} />}
         {imgs.map((img) => (
-          <Media key={img.src} img={img} label="" sizes="(max-width: 1100px) 100vw, 960px" />
+          <Media key={img.src} img={img} label="" sizes="(max-width: 1580px) 100vw, 1440px" />
         ))}
       </div>
     );
