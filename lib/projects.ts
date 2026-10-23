@@ -33,6 +33,43 @@ export const projects: VisualWork[] = [
     },
   },
   {
+    id: "linkedin-partner-content",
+    title: "LinkedIn partner content and performance analysis",
+    type: "Social design · Performance analysis",
+    captioned: true,
+    placeholderHeight: 0,
+    result: "Carousels averaged 39.3% engagement vs 6.8% for image posts",
+    image: img(
+      "linkedin-partner/thumb",
+      "LinkedIn post headlined Every CRM event in one place, listing CRM Partner Day Sweden, CRM Future Series and CRM AI Academy Sprint above a grid of event photos."
+    ),
+    summary: {
+      about:
+        "LinkedIn posts for the ServiceNow partner channel in Q2 and Q3 2026, promoting webinar series, events, industry learning journeys, partner awards and customer stories. I designed the visuals, and Nikki Kratounis wrote the copy.",
+      did: "I also analyzed the channel's 104 organic posts and 19 paid ads (about $11K in spend) side by side to find which formats, copy patterns and topics drove clicks and engagement. With only 5 carousels and 19 ads in the set, the format findings are directional.",
+      results: [
+        "Carousels averaged 39.3% engagement, vs 6.8% for image posts and 5.2% for video",
+        "Posts without a link averaged 14.2% engagement, vs 7.7% with one",
+        "Whiteboard 2.0, the strongest paid ad at scale: 4,071 clicks on $1,000",
+        "A boosted event post cost $24.39 per click and did worse than its organic version",
+      ],
+    },
+    detail: [
+      img(
+        "linkedin-partner/ai-carousel",
+        "Three portrait posts from one carousel: Three ways to build AI momentum this quarter, The Unified AI Platform for Autonomous Security, and Autonomous IT webinar series, each on a dark gradient with glass panels and 3D sparkle shapes."
+      ),
+      img(
+        "linkedin-partner/events-security",
+        "Two portrait posts: Choose Your Autonomous Security Journey, with two team photos, and Every CRM event in one place, with a grid of keynote and audience photos."
+      ),
+      img(
+        "linkedin-partner/link-posts",
+        "Four landscape link posts: Generic pitches don't win transformational deals, Industry fluency: What customers decide on, Showcase your customer success with nomination dates, and AWS and ServiceNow transform experiences."
+      ),
+    ],
+  },
+  {
     id: "t-rowe-price-headers",
     title: "T.Rowe Header Design",
     type: "Campaign headers · Co-branding",

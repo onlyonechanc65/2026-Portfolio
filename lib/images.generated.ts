@@ -251,5 +251,29 @@ export const IMG = {
     "width": 1600,
     "height": 900,
     "blurDataURL": "data:image/webp;base64,UklGRlYAAABXRUJQVlA4IEoAAAAQAgCdASoMAAcAA4BaJbACdAEfUq0lqpgAAP7AfScq1uJfQXmYWyNhJNIVz0yVR9J2PTjWrgc/I0+ov+zZ0x39irhLNJ49agAAAA=="
+  },
+  "linkedin-partner/ai-carousel": {
+    "src": "/work/linkedin-partner/ai-carousel.webp",
+    "width": 2400,
+    "height": 1028,
+    "blurDataURL": "data:image/webp;base64,UklGRkYAAABXRUJQVlA4IDoAAADQAQCdASoMAAUAA4BaJagCdAD0dsLYAAD+7unfuIymKbKRQ2CIJOQAhssnJZkFzNqIggLmbihx/sAA"
+  },
+  "linkedin-partner/events-security": {
+    "src": "/work/linkedin-partner/events-security.webp",
+    "width": 2400,
+    "height": 1516,
+    "blurDataURL": "data:image/webp;base64,UklGRkwAAABXRUJQVlA4IEAAAABwAQCdASoMAAgAA4BaJbACdAFAAAD+8CC/rSZ7f8X//oXG9PL4ph1N+REvLtR6EnECyJh27bXMweQEHtzbMAAA"
+  },
+  "linkedin-partner/link-posts": {
+    "src": "/work/linkedin-partner/link-posts.webp",
+    "width": 2400,
+    "height": 1316,
+    "blurDataURL": "data:image/webp;base64,UklGRlYAAABXRUJQVlA4IEoAAADQAQCdASoMAAcAA4BaJaACsAD1ZigoiAD+6ZMRTBthu+38G7yeVbAqZ4llhMBBc6oFQ7xb3aEyvEbDYzZj479nHRMaUGnhvmQAAA=="
+  },
+  "linkedin-partner/thumb": {
+    "src": "/work/linkedin-partner/thumb.webp",
+    "width": 1080,
+    "height": 1350,
+    "blurDataURL": "data:image/webp;base64,UklGRmIAAABXRUJQVlA4IFYAAAAQAgCdASoMAA8AA4BaJbACdAEN94s2l2sQAP7u46XexDFxp5/LUR8XU8bzYRcbvmyCeJHNorTooXQ2xedVL6alXje5y4ii9guJsXyzn90p+9UCvswAAA=="
   }
 } as const;
