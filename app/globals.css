@@ -408,6 +408,46 @@ a {
   90%, 100% { opacity: 0; }
 }
 
+/* ---------- Case-study sections: heading column + body column ---------- */
+.cs-section {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 18px;
+}
+.cs-section-head {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+}
+.cs-section-body {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  min-width: 0;
+}
+.cs-section-body p,
+.cs-section-body li,
+.cs-section-body figcaption {
+  text-wrap: pretty;
+}
+.cs-section-body h4,
+.cs-section-body aside > span {
+  text-wrap: balance;
+}
+@media (min-width: 1024px) {
+  .cs-section {
+    grid-template-columns: 180px minmax(0, 1fr);
+    gap: 48px;
+  }
+  .cs-section-head {
+    flex-direction: column;
+    gap: 6px;
+    position: sticky;
+    top: 24px;
+    align-self: start;
+  }
+}
+
 /* ---------- Case-study figures ---------- */
 .fig-grid {
   display: grid;
