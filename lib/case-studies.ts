@@ -9,7 +9,7 @@ const img = (key: keyof typeof IMG, alt: string): Img => ({ ...IMG[key], alt });
 export const partnerPortal: CaseStudy = {
   slug: "partner-portal",
   num: "01",
-  title: "The home of your ServiceNow partnership",
+  title: "Partner portal homepage redesign",
   role: "Product designer",
   outcome: "Top tasks cut from three clicks to one",
   product: "ServiceNow Partner Portal",
@@ -63,37 +63,6 @@ export const partnerPortal: CaseStudy = {
             caption:
               "Two navigations with overlapping labels. Tasks that required choosing between them scored 5–55% in testing. One navigation now owns every task.",
           },
-        },
-      ],
-    },
-    {
-      title: "My role",
-      blocks: [
-        {
-          p: "I owned the IA proposal and the end-to-end homepage design across desktop, tablet and mobile. I worked with a staff UX researcher, an engineer, our creative director and the director of partner engagement, and presented the work to 30 stakeholders across 13 teams.",
-        },
-      ],
-    },
-    {
-      title: "Process",
-      blocks: [
-        { h: "One navigation instead of two" },
-        {
-          p: "Labels like Learning, Products and Resources appeared in both the universal ServiceNow nav and the partner nav. Relabeling can't fix that, because the labels will always compete. I proposed reducing the universal nav to a utility strip inside the authenticated portal.",
-        },
-        { h: "Seven sections to four, three content doors to one" },
-        {
-          p: "Programs alone carried 40,890 sessions across ten unrelated tasks, from deal registration to incentives. Readiness, Resources and Products all promised content with no boundary between them. I restructured around partner intent instead of internal program structure: My Partnership, Register, Resources and Grow. Resources absorbed all three content surfaces into one filtered destination.",
-        },
-        {
-          callout: "Tradeoff",
-          title: "No training section, even though training ranked #1",
-          text: "Training was partners' top priority at 47%, but 20% of sessions already exited to ServiceNow University. A training nav item would have rebuilt the exact label collision I was removing. Instead I designed a credentials module that shows team certification progress and hands off to University, serving the 36% of partners who manage org-wide compliance.",
-        },
-        {
-          callout: "Wrong turn",
-          title: "I inferred the vocabulary instead of testing it",
-          text: "I locked section names without a card sort. The tree test (n=20) was ample to show that content tasks fail and transactional ones succeed, but not to rank individual labels. I validated the structure and inferred the words, and words are exactly what a card sort tests. Next time, I'd run one before naming anything.",
         },
       ],
     },
@@ -186,6 +155,37 @@ export const partnerPortal: CaseStudy = {
               "Mobile. The hero's action center link, the four tasks and the open-items list carry over to a single column.",
             maxWidth: 520,
           },
+        },
+      ],
+    },
+    {
+      title: "My role",
+      blocks: [
+        {
+          p: "I owned the IA proposal and the end-to-end homepage design across desktop, tablet and mobile. I worked with a staff UX researcher, an engineer, our creative director and the director of partner engagement, and presented the work to 30 stakeholders across 13 teams.",
+        },
+      ],
+    },
+    {
+      title: "Process",
+      blocks: [
+        { h: "One navigation instead of two" },
+        {
+          p: "Labels like Learning, Products and Resources appeared in both the universal ServiceNow nav and the partner nav. Relabeling can't fix that, because the labels will always compete. I proposed reducing the universal nav to a utility strip inside the authenticated portal.",
+        },
+        { h: "Seven sections to four, three content doors to one" },
+        {
+          p: "Programs alone carried 40,890 sessions across ten unrelated tasks, from deal registration to incentives. Readiness, Resources and Products all promised content with no boundary between them. I restructured around partner intent instead of internal program structure: My Partnership, Register, Resources and Grow. Resources absorbed all three content surfaces into one filtered destination.",
+        },
+        {
+          callout: "Tradeoff",
+          title: "No training section, even though training ranked #1",
+          text: "Training was partners' top priority at 47%, but 20% of sessions already exited to ServiceNow University. A training nav item would have rebuilt the exact label collision I was removing. Instead I designed a credentials module that shows team certification progress and hands off to University, serving the 36% of partners who manage org-wide compliance.",
+        },
+        {
+          callout: "Wrong turn",
+          title: "I inferred the vocabulary instead of testing it",
+          text: "I locked section names without a card sort. The tree test (n=20) was ample to show that content tasks fail and transactional ones succeed, but not to rank individual labels. I validated the structure and inferred the words, and words are exactly what a card sort tests. Next time, I'd run one before naming anything.",
         },
       ],
     },
