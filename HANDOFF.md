@@ -20,7 +20,7 @@ Read `CLAUDE.md` first (design brief). This file records what's built and what's
 
 **Featured case studies** (sections run Problem, Solution, My role, Process, Impact, with callouts for wrong turns, research, tradeoffs, stakeholder feedback):
 1. **Partner portal homepage redesign** (`/work/partner-portal`): card keeps the animated before→after + mobile preview; the Solution section uses that animation in place of the before/after stills (`preview` block, `fullScroll`: 28s loop that scrolls desktop and mobile to the bottom); the case study header is `heroVideo` (`public/work/partner-portal/hero-loop.mp4`: one hero load cycle at 0.75x, 3.5s hold, 0.6s fade back to the start); nav, homepage, task-first alternative and mobile figures from the PDF; before/after table; targets labeled as targets.
-2. **Partner Comms Image Builder** (`/work/partner-comms-image-builder`): card reads "Sole designer, built with Claude"; recorded tool animation; Solution opens with "What people make with it" (2 Social + 6 Standard real outputs). Tool screens use subtitle "On-brand images in minutes" (no widows). Text-scale images removed.
+2. **Partner Comms Image Builder** (`/work/partner-comms-image-builder`): card reads "Sole designer, built with Claude"; recorded tool animation; Solution opens with "What people make with it": 8 real outputs, all 1200×627 in a 2-column grid (`public/work/image-builder/made/`; the 1920×1080 ones were center-cropped). Tool screens use subtitle "On-brand images in minutes" (no widows). Text-scale images removed.
 
 **Wall, in order:** Off the clock photo carousel (5 captioned photos, rotates every 5s, pause button, Italy photos kept apart); Armis launch (looping video, landing page, "Read FAQ" + "acquisition" fixed in the image); LinkedIn partner content and performance analysis (animated CRM events thumbnail: `CrmEventsPreview` in `Previews.tsx` rebuilds the post from layers in `public/work/linkedin-partner/crm/`, headline rises in on view, photo rows drift, still image under reduced motion; lightbox has 3 composite boards of all 9 posts in `public/work/linkedin-partner/`, plus 4 findings from the Q2–Q3 2026 analysis; Chanc designed the posts and ran the analysis, Nikki Kratounis wrote the copy; exact numbers approved for public use); T.Rowe Header Design (made "with Figma"); Aerotek; Cyberpunk promo (before/after); Colby Solar; Who Can I Run To? (before/after); Ravens poster; Tank Davis poster. Projects with detail images open on the 2nd image, not the thumbnail. Gray placeholders hidden (re-enable in `content.ts`).
 
@@ -30,7 +30,7 @@ Read `CLAUDE.md` first (design brief). This file records what's built and what's
 - **Resume:** Chanc is editing it. When the PDF arrives, put it at `public/resume.pdf` and set `about.resumeUrl = "/resume.pdf"`. The button is inert until then.
 - Profile photo still a placeholder (`profile.photo`).
 - More projects to come; each new project becomes a wall card automatically.
-- Unanswered: Partner Portal team is listed by role, not name (ok to add names?); Image Builder screens use a fallback font (real screenshots welcome); the four 1200×627 Brazil images were left out (add if made with the tool).
+- Unanswered: Partner Portal team is listed by role, not name (ok to add names?); Image Builder screens use a fallback font (real screenshots welcome).
 
 ## Conventions
 - No em dashes in copy except date ranges; never pure white; accent orange used sparingly.

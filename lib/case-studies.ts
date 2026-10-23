@@ -264,38 +264,17 @@ export const imageBuilder: CaseStudy = {
           figure: {
             layout: "pair",
             items: [
-              {
-                img: img(
-                  "image-builder/out-social-workshop",
-                  "Social post: green headline Hands-on implementation readiness over a dark navy gradient, with a fuzzy blue and purple 3D sparkle."
-                ),
-                label: "Social",
-              },
-              {
-                img: img(
-                  "image-builder/out-social-ai-control-tower",
-                  "Social post: centered headline Ready for the AI Control Tower opportunity? above a glass 3D sparkle and floating panels."
-                ),
-                label: "Social",
-              },
-            ],
-            caption: "Social posts from the tool's stacked portrait layout, with a 3D icon anchoring the bottom.",
-            maxWidth: 760,
-          },
-        },
-        {
-          figure: {
-            layout: "trio",
-            items: [
-              { img: img("image-builder/out-shifting-opportunity", "Standard header: The shifting opportunity, beside glass purple sparkles.") },
-              { img: img("image-builder/out-partner-advantage", "Standard header: AI is the partner advantage, beside an iridescent star and a glass cursor.") },
-              { img: img("image-builder/out-profit", "Standard header: Profit beyond implementation, beside a glass gauge with a lightning bolt.") },
-              { img: img("image-builder/out-expertise", "Standard header: Stand out with expertise and IP, beside fuzzy blue and purple sparkles.") },
-              { img: img("image-builder/out-focus", "Standard header: Focus drives growth, beside a glass purple arrow and green sparkles.") },
-              { img: img("image-builder/out-architect", "Standard header: From implementor to architect, beside a glass cube, spheres and a green sparkle.") },
+              { img: img("image-builder/made/brazil-first-look", "Header: Get your first look at the Brazil release, with release broadcast details, beside green glass ribbons on a green gradient.") },
+              { img: img("image-builder/made/brazil-explore", "Header: There's a lot to explore in Brazil, listing AI Workflow Factory Prime, Autonomous CRM and Workflow Data Fabric, beside two glass sparkles.") },
+              { img: img("image-builder/made/cis-deadline", "Header: You have 24 days to complete the free CIS Data Foundations exam, beside a glass 3D power button and sparkles.") },
+              { img: img("image-builder/made/exclusive-networks", "Header: Exclusive Networks is live in EMEA, Your moment for velocity, beside a purple 3D globe with a green pin and clouds.") },
+              { img: img("image-builder/made/opportunity", "Header: The opportunity is larger than you think, beside large glass purple sparkles.") },
+              { img: img("image-builder/made/expertise", "Header: Stand out with expertise and IP, beside fuzzy blue and purple sparkles.") },
+              { img: img("image-builder/made/architect", "Header: From implementor to architect, beside a glass cube, spheres and a green sparkle.") },
+              { img: img("image-builder/made/generic-pitches", "Header: Generic pitches don't win transformational deals, promoting Industry Learning Journeys, beside three speaker photos.") },
             ],
             caption:
-              "Standard headers for a partner program series. Same locked type scale and two-color headline every time; the words, 3D art and layout side are what change.",
+              "Headers made with the tool for releases, certification deadlines, regional launches and a partner program series. The type scale and two-color headline stay locked; the words, 3D art, photos and layout side are what change.",
           },
         },
         { h: "Guardrails over a blank canvas" },
