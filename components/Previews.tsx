@@ -120,3 +120,42 @@ function BuilderPreview({ aspect }: { aspect: string }) {
     </div>
   );
 }
+
+/* A silent looping clip on a wall card. Plays only on screen; reduced motion shows the poster. */
+export function LoopVideo({ src, poster }: { src: string; poster: Img }) {
+  const ref = useRef<HTMLVideoElement>(null);
+  const [reduce, setReduce] = useState(false);
+  useEffect(() => {
+    const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
+    setReduce(mq.matches);
+    const onChange = () => setReduce(mq.matches);
+    mq.addEventListener("change", onChange);
+    return () => mq.removeEventListener("change", onChange);
+  }, []);
+  useEffect(() => {
+    const v = ref.current;
+    if (!v || reduce) {
+      v?.pause();
+      return;
+    }
+    const io = new IntersectionObserver(([e]) => {
+      if (e.isIntersecting) v.play().catch(() => {});
+      else v.pause();
+    });
+    io.observe(v);
+    return () => io.disconnect();
+  }, [reduce]);
+  return (
+    <video
+      ref={ref}
+      src={src}
+      poster={poster.src}
+      muted
+      loop
+      playsInline
+      preload="metadata"
+      aria-hidden="true"
+      style={{ display: "block", width: "100%", height: "auto", aspectRatio: `${poster.width} / ${poster.height}`, background: "var(--ph)" }}
+    />
+  );
+}

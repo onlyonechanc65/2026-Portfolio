@@ -71,6 +71,8 @@ export type VisualWork = {
   result?: string;
   /** Short write-up shown above the images in the lightbox */
   summary?: { about: string; did?: string; results: string[] };
+  /** Looping silent video on the wall card (the poster is its still frame) */
+  video?: { src: string; poster: Img };
   /** Animated before/after on the wall card; both shown side by side in the lightbox */
   compare?: { before: Img; after: Img };
 };
@@ -179,8 +181,8 @@ export const caseStudies: CaseStudy[] = [partnerPortal, imageBuilder];
 void placeholderCase;
 
 /* Gray placeholder tiles that hold space until more projects arrive. Delete one per real project added. */
-const heights = [220, 340, 260, 180, 300, 240, 380, 200, 280];
-const captioned = [true, false, true, false, false, true, false, true, false];
+const heights = [220, 340, 260, 180, 300, 240, 380, 200];
+const captioned = [true, false, true, false, false, true, false, true];
 const placeholders: VisualWork[] = heights.map((h, i) => ({
   id: `work-${String(i + 1).padStart(2, "0")}`,
   title: `[Project title ${i + 1}]`,

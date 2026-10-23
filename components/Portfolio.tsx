@@ -14,7 +14,7 @@ import {
   type VisualWork,
 } from "@/lib/content";
 import { Media } from "./Media";
-import { BeforeAfter, CaseStudyPreview } from "./Previews";
+import { BeforeAfter, CaseStudyPreview, LoopVideo } from "./Previews";
 
 /* Stagger the before/after tiles so they don't flip in unison */
 const beforeAfterDelay = (id: string) =>
@@ -638,7 +638,9 @@ function WorkCard({ w, onClick }: { w: VisualWork; onClick: () => void }) {
       onClick={onClick}
       style={{ ...cardBase, overflow: "hidden" }}
     >
-      {w.compare ? (
+      {w.video ? (
+        <LoopVideo src={w.video.src} poster={w.video.poster} />
+      ) : w.compare ? (
         <BeforeAfter before={w.compare.before} after={w.compare.after} delay={beforeAfterDelay(w.id)} />
       ) : (
         <Media
@@ -672,6 +674,7 @@ function WorkCard({ w, onClick }: { w: VisualWork; onClick: () => void }) {
 /** Approximate height / width of a wall card, used to balance the columns. */
 function workRatio(w: VisualWork) {
   const caption = w.captioned || w.result ? (w.result ? 0.34 : 0.24) : 0;
+  if (w.video) return w.video.poster.height / w.video.poster.width + caption;
   if (w.compare) return w.compare.after.height / w.compare.after.width + caption;
   if (w.image) return w.image.height / w.image.width + caption;
   return w.placeholderHeight / 260 + caption;

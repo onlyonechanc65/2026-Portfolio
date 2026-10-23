@@ -6,6 +6,33 @@ const img = (key: keyof typeof IMG, alt: string): Img => ({ ...IMG[key], alt });
 /* Visual-work projects on the wall, in the order they should appear. */
 export const projects: VisualWork[] = [
   {
+    id: "armis-launch",
+    title: "Interaction design and landing page for Armis launch",
+    type: "Interaction design · Landing page",
+    captioned: true,
+    placeholderHeight: 0,
+    result: "21,080 partners reached at launch; 78.5% went deeper",
+    video: {
+      src: "/work/armis/armis.mp4",
+      poster: img(
+        "armis/poster",
+        "Armis launch page cards for the First Call Deck, Training and FAQ, with hover states on each link."
+      ),
+    },
+    image: img(
+      "armis/landing",
+      "The Armis from ServiceNow partner landing page: an intro with a Read press release button, cards for the Armis First Call Deck and Training, and a Frequently asked questions section with a Read FAQ button."
+    ),
+    summary: {
+      about:
+        "A partner landing page for the launch of Armis from ServiceNow, giving partners one place for the press release, the first call deck, training and the FAQ, with hover interactions that make each next step obvious.",
+      results: [
+        "21,080 unique partners reached in the launch month",
+        "78.5% of sessions continued deeper into the portal and FAQ",
+      ],
+    },
+  },
+  {
     id: "t-rowe-price-headers",
     title: "T.Rowe Header Design",
     type: "Campaign headers · Co-branding",

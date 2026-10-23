@@ -203,5 +203,17 @@ export const IMG = {
     "width": 1600,
     "height": 900,
     "blurDataURL": "data:image/webp;base64,UklGRl4AAABXRUJQVlA4IFIAAADQAQCdASoMAAcAA4BaJagCdADZoCgfAAD+hB7bWxAvnexPfKe7OHitv8/12V40VZcGOsKUd0tUf1X4mnjTfiQJg83+14ByCELyy9H1NjAxQAAA"
+  },
+  "armis/landing": {
+    "src": "/work/armis/landing.webp",
+    "width": 1920,
+    "height": 1440,
+    "blurDataURL": "data:image/webp;base64,UklGRkoAAABXRUJQVlA4ID4AAAAQAgCdASoMAAkAA4BaJaACdAEQUPJdo9wAAP7vW7fgnwu0SjKtQqrFnQrWL/kQVyucK6Ogwaj64uaWVoAAAA=="
+  },
+  "armis/poster": {
+    "src": "/work/armis/poster.webp",
+    "width": 1280,
+    "height": 548,
+    "blurDataURL": "data:image/webp;base64,UklGRkAAAABXRUJQVlA4IDQAAADQAQCdASoMAAUAA4BaJYgCdAEO9s4sAAD+7DGkbfIfuc9JIeM18cLEHBbBzPkeLhOHwAAA"
   }
 } as const;
