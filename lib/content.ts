@@ -98,7 +98,7 @@ export const clients = {
     { name: "ServiceNow", src: "/clients/servicenow.png", w: 661, h0: 96, h: 14 },
     { name: "T. Rowe Price", src: "/clients/t-rowe-price.png", w: 639, h0: 96, h: 15 },
     { name: "Aerotek", src: "/clients/aerotek.png", w: 156, h0: 96, h: 30 },
-    { name: "PointClickCare", src: null, w: 0, h0: 0, h: 0 },
+    { name: "PointClickCare", src: "/clients/pointclickcare.png", w: 798, h0: 96, h: 13 },
     { name: "Under Armour", src: "/clients/under-armour.png", w: 169, h0: 96, h: 22 },
     { name: "Stanley Black & Decker", src: "/clients/stanley-black-decker.png", w: 123, h0: 96, h: 30 },
   ] as { name: string; src: string | null; w: number; h0: number; h: number }[],

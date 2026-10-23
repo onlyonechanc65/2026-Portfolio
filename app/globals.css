@@ -432,3 +432,59 @@ a {
 .frame:focus {
   outline: none;
 }
+
+/* ---------- Clients logo marquee ---------- */
+.marquee {
+  margin: 0 -20px;
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(to right, transparent, #000 28px, #000 calc(100% - 28px), transparent);
+  mask-image: linear-gradient(to right, transparent, #000 28px, #000 calc(100% - 28px), transparent);
+}
+.marquee-track {
+  display: flex;
+  width: max-content;
+  animation: marquee 30s linear infinite;
+}
+.marquee:hover .marquee-track {
+  animation-play-state: paused;
+}
+.marquee-list {
+  display: flex;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  height: 32px;
+}
+.marquee-list li {
+  display: flex;
+  align-items: center;
+  padding-left: 34px;
+  opacity: 0.8;
+}
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .marquee {
+    margin: 0;
+    -webkit-mask-image: none;
+    mask-image: none;
+  }
+  .marquee-track {
+    animation: none;
+    width: auto;
+  }
+  .marquee-list {
+    flex-wrap: wrap;
+    height: auto;
+    row-gap: 16px;
+  }
+  .marquee-list li {
+    padding: 0 22px 0 0;
+  }
+  .marquee-list[aria-hidden="true"] {
+    display: none;
+  }
+}

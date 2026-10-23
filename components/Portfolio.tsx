@@ -158,35 +158,31 @@ export function Portfolio({ initialSlug }: { initialSlug?: string }) {
                 <span>Clients</span>
                 <span>{clients.range}</span>
               </div>
-              <ul
-                style={{
-                  margin: 0,
-                  padding: 0,
-                  listStyle: "none",
-                  display: "flex",
-                  flexWrap: "wrap",
-                  alignItems: "center",
-                  columnGap: 22,
-                  rowGap: 16,
-                }}
-              >
-                {clients.items.map((c) => (
-                  <li key={c.name} style={{ display: "flex", alignItems: "center", opacity: 0.8 }}>
-                    {c.src ? (
-                      // eslint-disable-next-line @next/next/no-img-element
-                      <img
-                        src={c.src}
-                        alt={c.name}
-                        width={Math.round((c.w * c.h) / c.h0)}
-                        height={c.h}
-                        style={{ display: "block", height: c.h, width: "auto" }}
-                      />
-                    ) : (
-                      <span style={{ fontSize: 14, fontWeight: 700, letterSpacing: "-0.02em", lineHeight: 1 }}>{c.name}</span>
-                    )}
-                  </li>
-                ))}
-              </ul>
+              {/* Logos scroll in a continuous loop; the list renders twice so the loop is seamless */}
+              <div className="marquee">
+                <div className="marquee-track">
+                  {[0, 1].map((copy) => (
+                    <ul key={copy} className="marquee-list" aria-hidden={copy === 1 ? true : undefined}>
+                      {clients.items.map((c) => (
+                        <li key={c.name}>
+                          {c.src ? (
+                            // eslint-disable-next-line @next/next/no-img-element
+                            <img
+                              src={c.src}
+                              alt={copy === 0 ? c.name : ""}
+                              width={Math.round((c.w * c.h) / c.h0)}
+                              height={c.h}
+                              style={{ display: "block", height: c.h, width: "auto" }}
+                            />
+                          ) : (
+                            <span style={{ fontSize: 14, fontWeight: 700, letterSpacing: "-0.02em", lineHeight: 1 }}>{c.name}</span>
+                          )}
+                        </li>
+                      ))}
+                    </ul>
+                  ))}
+                </div>
+              </div>
             </section>
 
             {/* Location */}
