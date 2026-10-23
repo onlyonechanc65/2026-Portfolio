@@ -208,7 +208,7 @@ export const IMG = {
     "src": "/work/armis/landing.webp",
     "width": 1920,
     "height": 1440,
-    "blurDataURL": "data:image/webp;base64,UklGRkoAAABXRUJQVlA4ID4AAAAQAgCdASoMAAkAA4BaJaACdAEQUPJdo9wAAP7vW7fgnwu0SjKtQqrFnQrWL/kQVyucK6Ogwaj64uaWVoAAAA=="
+    "blurDataURL": "data:image/webp;base64,UklGRkgAAABXRUJQVlA4IDwAAAAQAgCdASoMAAkAA4BaJaACdAEQUOxEBtUAAP7vW7fgnwu0SjKtQqrFnilszY2oPgs7HXZ591xc0srQAAA="
   },
   "armis/poster": {
     "src": "/work/armis/poster.webp",
