@@ -1,9 +1,10 @@
 "use client";
 
+import Image from "next/image";
+
 import { useCallback, useEffect, useRef, useState, type MouseEvent } from "react";
 import {
   about,
-  carousel,
   caseStudies,
   clients,
   location,
@@ -28,10 +29,9 @@ const meta = "rgba(232,220,214,0.6)";
 
 const cardBase = { background: "var(--card)", borderRadius: 14 } as const;
 
-/* Lightbox order: case studies, carousel, photo set, then the wall */
+/* Lightbox order: case studies, photo gallery, then the wall */
 const items: LightboxItem[] = [
   ...caseStudies.map((cs): LightboxItem => ({ kind: "case", cs })),
-  { kind: "carousel" },
   { kind: "stack" },
   ...visualWork.map((w): LightboxItem => ({ kind: "work", w })),
 ];
@@ -45,7 +45,6 @@ const urlFor = (i: number | null) => {
 export function Portfolio({ initialSlug }: { initialSlug?: string }) {
   const initial = initialSlug ? caseIndex(initialSlug) : -1;
   const [open, setOpen] = useState<number | null>(initial >= 0 ? initial : null);
-  const [slide, setSlide] = useState(0);
   const [showPill, setShowPill] = useState(false);
 
   const openerRef = useRef<HTMLElement | null>(null);
@@ -132,10 +131,8 @@ export function Portfolio({ initialSlug }: { initialSlug?: string }) {
     openAt(i);
   };
 
-  const carouselIdx = caseStudies.length;
-  const stackIdx = caseStudies.length + 1;
-  const workIdx = (i: number) => caseStudies.length + 2 + i;
-  const slideCount = carousel.slides.length;
+  const galleryIdx = caseStudies.length;
+  const workIdx = (i: number) => caseStudies.length + 1 + i;
 
   return (
     <>
@@ -234,48 +231,6 @@ export function Portfolio({ initialSlug }: { initialSlug?: string }) {
               </a>
             </section>
 
-            {/* Photo stack */}
-            <button
-              className="reset card-hover span-all"
-              aria-label={`Open photo set: ${photoStack.title}`}
-              onClick={() => openAt(stackIdx)}
-              style={{ ...cardBase, padding: "16px 18px 26px" }}
-            >
-              <div style={{ display: "flex", justifyContent: "space-between", fontSize: 12, fontWeight: 500, marginBottom: 18 }}>
-                <span>{photoStack.title}</span>
-                <span style={{ color: meta }}>{photoStack.photos.length || photoStack.count}</span>
-              </div>
-              <div aria-hidden="true" style={{ position: "relative", height: 170 }}>
-                {[
-                  { left: "18%", top: 6, rot: -8, bg: "#1d1c1b" },
-                  { left: "28%", top: 14, rot: 6, bg: "#262423" },
-                  { left: "21%", top: 22, rot: -1, bg: "#302e2c" },
-                ].map((p, i) => {
-                  const img = photoStack.photos[2 - i]?.img; // front card shows the first photo
-                  return (
-                    <div
-                      key={i}
-                      className={img ? undefined : "ph"}
-                      style={{
-                        position: "absolute",
-                        left: p.left,
-                        top: p.top,
-                        width: "58%",
-                        height: 140,
-                        borderRadius: 10,
-                        background: p.bg,
-                        transform: `rotate(${p.rot}deg)`,
-                        boxShadow: "0 6px 20px rgba(0,0,0,0.6)",
-                        overflow: "hidden",
-                        fontSize: 10,
-                      }}
-                    >
-                      {img ? <Media img={img} label="" cover style={{ height: "100%" }} sizes="200px" /> : i === 2 ? "[PHOTO]" : null}
-                    </div>
-                  );
-                })}
-              </div>
-            </button>
           </aside>
 
           {/* ============ MAIN ============ */}
@@ -297,74 +252,9 @@ export function Portfolio({ initialSlug }: { initialSlug?: string }) {
             <Masonry
               items={[
                 {
-                  key: "carousel",
+                  key: "gallery",
                   ratio: 5 / 4,
-                  node: (
-                    <div style={{ position: "relative", ...cardBase, overflow: "hidden" }}>
-                      <button
-                        className="reset"
-                        aria-label={`Open ${carousel.title}, slide ${slide + 1} of ${slideCount}`}
-                        onClick={() => openAt(carouselIdx)}
-                      >
-                        <Media
-                          img={carousel.slides[slide].image}
-                          label={`[CAROUSEL IMAGE ${slide + 1} / ${slideCount}]`}
-                          aspect="4 / 5"
-                          cover
-                        />
-                      </button>
-                      <button
-                        className="icon-btn"
-                        aria-label="Previous slide"
-                        onClick={() => setSlide((s) => (s - 1 + slideCount) % slideCount)}
-                        style={carouselArrow("left")}
-                      >
-                        <ChevronLeft />
-                      </button>
-                      <button
-                        className="icon-btn"
-                        aria-label="Next slide"
-                        onClick={() => setSlide((s) => (s + 1) % slideCount)}
-                        style={carouselArrow("right")}
-                      >
-                        <ChevronRight />
-                      </button>
-                      <div
-                        style={{
-                          position: "absolute",
-                          left: 10,
-                          right: 10,
-                          bottom: 10,
-                          display: "flex",
-                          alignItems: "center",
-                          justifyContent: "space-between",
-                          gap: 8,
-                          pointerEvents: "none",
-                        }}
-                      >
-                        <span
-                          aria-live="polite"
-                          style={{ background: "rgba(0,0,0,0.65)", borderRadius: 8, padding: "6px 10px", fontSize: 11, fontWeight: 500 }}
-                        >
-                          {carousel.slides[slide].caption}
-                        </span>
-                        <div style={{ display: "flex", gap: 4 }} aria-hidden="true">
-                          {carousel.slides.map((_, d) => (
-                            <span
-                              key={d}
-                              style={{
-                                display: "block",
-                                width: 6,
-                                height: 6,
-                                borderRadius: 999,
-                                background: d === slide ? "var(--text)" : "rgba(232,220,214,0.3)",
-                              }}
-                            />
-                          ))}
-                        </div>
-                      </div>
-                    </div>
-                  ),
+                  node: <PhotoCarousel onOpen={() => openAt(galleryIdx)} />,
                 },
                 ...visualWork.map((w, i) => ({
                   key: w.id,
@@ -734,6 +624,164 @@ function Masonry({ items }: { items: { key: string; ratio: number; node: React.R
           ))}
         </div>
       ))}
+    </div>
+  );
+}
+
+/* ---------------- Photo gallery carousel ---------------- */
+
+const SLIDE_MS = 5000;
+
+/**
+ * Rotates through the photo set every few seconds with a crossfade. Pauses on
+ * hover or keyboard focus, while off screen or in a background tab, and when
+ * the visitor presses pause. Reduced motion starts paused.
+ */
+function PhotoCarousel({ onOpen }: { onOpen: () => void }) {
+  const photos = photoStack.photos;
+  const n = photos.length;
+  const [slide, setSlide] = useState(0);
+  const [paused, setPaused] = useState(false);
+  const [hovering, setHovering] = useState(false);
+  const [onScreen, setOnScreen] = useState(true);
+  const ref = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) setPaused(true);
+    const el = ref.current;
+    if (!el) return;
+    const io = new IntersectionObserver(([e]) => setOnScreen(e.isIntersecting));
+    io.observe(el);
+    return () => io.disconnect();
+  }, []);
+
+  const running = !paused && !hovering && onScreen && n > 1;
+  useEffect(() => {
+    if (!running) return;
+    const id = setInterval(() => {
+      if (!document.hidden) setSlide((s) => (s + 1) % n);
+    }, SLIDE_MS);
+    return () => clearInterval(id);
+  }, [running, n, slide]); // restarting on slide change gives a full interval after a manual step
+
+  const go = (d: 1 | -1) => setSlide((s) => (s + d + n) % n);
+  const cur = photos[slide];
+
+  return (
+    <div
+      ref={ref}
+      role="group"
+      aria-roledescription="carousel"
+      aria-label={photoStack.title}
+      onMouseEnter={() => setHovering(true)}
+      onMouseLeave={() => setHovering(false)}
+      onFocus={() => setHovering(true)}
+      onBlur={(e) => {
+        if (!e.currentTarget.contains(e.relatedTarget as Node)) setHovering(false);
+      }}
+      style={{ position: "relative", ...cardBase, overflow: "hidden", aspectRatio: "4 / 5" }}
+    >
+      <button
+        className="reset"
+        aria-label={`Open ${photoStack.title}: ${cur.caption}, photo ${slide + 1} of ${n}`}
+        onClick={onOpen}
+        style={{ position: "absolute", inset: 0 }}
+      >
+        {photos.map((ph, i) => (
+          <div
+            key={ph.img.src}
+            className="gallery-slide"
+            aria-hidden={i !== slide}
+            style={{ opacity: i === slide ? 1 : 0 }}
+          >
+            {/* Blurred fill behind, whole photo in front, so landscape shots aren't cropped */}
+            <Image
+              src={ph.img.src}
+              alt=""
+              fill
+              sizes="40px"
+              style={{ objectFit: "cover", filter: "blur(24px) brightness(0.55)", transform: "scale(1.15)" }}
+            />
+            <Image
+              src={ph.img.src}
+              alt={ph.img.alt}
+              fill
+              sizes="(max-width: 479px) 100vw, (max-width: 767px) 50vw, (max-width: 1279px) 30vw, 22vw"
+              placeholder={ph.img.blurDataURL ? "blur" : "empty"}
+              blurDataURL={ph.img.blurDataURL}
+              priority={i === 0}
+              style={{ objectFit: "contain" }}
+            />
+          </div>
+        ))}
+      </button>
+      <button className="icon-btn" aria-label="Previous photo" onClick={() => go(-1)} style={carouselArrow("left")}>
+        <ChevronLeft />
+      </button>
+      <button className="icon-btn" aria-label="Next photo" onClick={() => go(1)} style={carouselArrow("right")}>
+        <ChevronRight />
+      </button>
+      <div
+        style={{
+          position: "absolute",
+          left: 10,
+          right: 10,
+          bottom: 10,
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "space-between",
+          gap: 8,
+          pointerEvents: "none",
+        }}
+      >
+        <span
+          aria-live={running ? "off" : "polite"}
+          style={{ background: "rgba(0,0,0,0.65)", borderRadius: 8, padding: "6px 10px", fontSize: 11, fontWeight: 500, minWidth: 0 }}
+        >
+          {cur.caption}
+        </span>
+        <div style={{ display: "flex", alignItems: "center", gap: 8, flexShrink: 0 }}>
+          <div style={{ display: "flex", gap: 4 }} aria-hidden="true">
+            {photos.map((_, d) => (
+              <span
+                key={d}
+                style={{
+                  display: "block",
+                  width: 6,
+                  height: 6,
+                  borderRadius: 999,
+                  background: d === slide ? "var(--text)" : "rgba(232,220,214,0.3)",
+                }}
+              />
+            ))}
+          </div>
+          <button
+            className="icon-btn"
+            aria-label={paused ? "Play slideshow" : "Pause slideshow"}
+            aria-pressed={paused}
+            onClick={() => setPaused((p) => !p)}
+            style={{
+              pointerEvents: "auto",
+              width: 28,
+              height: 28,
+              borderRadius: 999,
+              border: 0,
+              background: "rgba(0,0,0,0.55)",
+              color: "var(--text)",
+              cursor: "pointer",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+            }}
+          >
+            {paused ? (
+              <svg width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M2 1l7 4-7 4z" fill="currentColor" /></svg>
+            ) : (
+              <svg width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M2 1h2v8H2zM6 1h2v8H6z" fill="currentColor" /></svg>
+            )}
+          </button>
+        </div>
+      </div>
     </div>
   );
 }

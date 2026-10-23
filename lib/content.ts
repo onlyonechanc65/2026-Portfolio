@@ -119,7 +119,7 @@ export const about = {
   resumeUrl: null as string | null,
 };
 
-/** Photo set: the first photo sits on top of the stack. Order keeps the two Italy photos apart. */
+/** Photo gallery (the rotating carousel card on the wall). Order keeps the two Italy photos apart. */
 export const photoStack = {
   id: "photo-set",
   title: "Off the clock",
@@ -192,4 +192,6 @@ const placeholders: VisualWork[] = heights.map((h, i) => ({
 }));
 
 /* Real projects first (they fill the top row of the wall), then placeholders. */
-export const visualWork: VisualWork[] = [...projects, ...placeholders];
+export const visualWork: VisualWork[] = [...projects];
+/* Placeholders are off for now. To hold space for upcoming work again: [...projects, ...placeholders] */
+void placeholders;
