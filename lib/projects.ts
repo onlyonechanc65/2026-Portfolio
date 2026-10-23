@@ -18,7 +18,7 @@ export const projects: VisualWork[] = [
     ),
     summary: {
       about:
-        "Co-branded campaign headers pairing T. Rowe Price with partner companies, from a body of 40+ multimedia marketing campaigns I designed and launched in Adobe Creative Suite.",
+        "Co-branded campaign headers pairing T. Rowe Price with partner companies, from a body of 40+ multimedia marketing campaigns I designed and launched with Figma.",
       results: [
         "$1.64M in new assets under management within one year",
         "78% audience capture rate",
