@@ -20,6 +20,12 @@ export async function generateMetadata({ params }: { params: Promise<Params> }):
     title: `${title} | Chanc Baylor`,
     description: cs.summary,
     alternates: { canonical: `/work/${cs.slug}` },
+    openGraph: {
+      title: `${title} | Chanc Baylor`,
+      description: cs.summary,
+      url: `/work/${cs.slug}`,
+      images: cs.hero ? [{ url: cs.hero.src, width: cs.hero.width, height: cs.hero.height, alt: cs.hero.alt }] : undefined,
+    },
   };
 }
 

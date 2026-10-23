@@ -15,6 +15,29 @@ export type Img = {
   blurDataURL?: string;
 };
 
+import { partnerPortal, imageBuilder } from "./case-studies";
+
+/** The four kinds of story beats the case studies call out */
+export type CalloutKind = "Wrong turn" | "Research that changed direction" | "Tradeoff" | "Stakeholder feedback";
+
+export type Figure = {
+  /** "stack": full width, one under another. "pair"/"trio": side by side (stacks on phones). */
+  layout: "stack" | "pair" | "trio";
+  items: { img: Img; label?: string }[];
+  caption: string;
+  /** Narrow the figure, e.g. for phone screens */
+  maxWidth?: number;
+};
+
+export type Block =
+  | { p: string }
+  | { h: string }
+  | { list: string[] }
+  | { callout: CalloutKind; title: string; text: string }
+  | { figure: Figure }
+  | { table: { head: string[]; rows: string[][] } }
+  | { quote: { text: string; name: string; title: string } };
+
 export type CaseStudy = {
   slug: string;
   num: string;
@@ -24,8 +47,10 @@ export type CaseStudy = {
   product: string;
   summary: string;
   hero?: Img;
+  /** Animated thumbnail shown on the card and at the top of the case study */
+  preview?: "portal" | "builder";
   meta: { label: string; value: string }[];
-  sections: { title: string; body: string[]; images?: Img[]; placeholderImage?: boolean }[];
+  sections: { title: string; blocks: Block[]; placeholderImage?: boolean }[];
   impact: { metric: string; label: string }[];
 };
 
@@ -116,15 +141,15 @@ const placeholderCase = (num: string): CaseStudy => ({
     { label: "Tools", value: "[Tools]" },
   ],
   sections: [
-    { title: "Problem", body: ["[What was broken, for whom, and why it mattered to the business.]"] },
-    { title: "My role", body: ["[What you owned, who you worked with, and the decisions that were yours.]"] },
+    { title: "Problem", blocks: [{ p: "[What was broken, for whom, and why it mattered to the business.]" }] },
+    { title: "My role", blocks: [{ p: "[What you owned, who you worked with, and the decisions that were yours.]" }] },
     {
       title: "Process",
-      body: ["[Research, synthesis, journey mapping, iterations: the moments that changed direction.]"],
+      blocks: [{ p: "[Research, synthesis, journey mapping, iterations: the moments that changed direction.]" }],
       placeholderImage: true,
     },
-    { title: "Solution", body: ["[The shipped design and the key decisions behind it.]"], placeholderImage: true },
-    { title: "Impact", body: ["[Results after launch, and what you would do next.]"] },
+    { title: "Solution", blocks: [{ p: "[The shipped design and the key decisions behind it.]" }], placeholderImage: true },
+    { title: "Impact", blocks: [{ p: "[Results after launch, and what you would do next.]" }] },
   ],
   impact: [
     { metric: "[Metric]", label: "[What it measured]" },
@@ -133,8 +158,9 @@ const placeholderCase = (num: string): CaseStudy => ({
   ],
 });
 
-/** Featured row holds up to 3. Add the 3rd here when it's ready. */
-export const caseStudies: CaseStudy[] = [placeholderCase("01"), placeholderCase("02")];
+/** Featured row holds up to 3. Add the 3rd here when it's ready, e.g. placeholderCase("03"). */
+export const caseStudies: CaseStudy[] = [partnerPortal, imageBuilder];
+void placeholderCase;
 
 const heights = [220, 340, 260, 180, 300, 240, 380, 200, 280, 320, 230, 260, 190, 350, 250, 290];
 const captioned = [true, false, true, false, false, true, false, true, false, true, false, false, true, false, true, false];

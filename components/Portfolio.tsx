@@ -15,6 +15,7 @@ import {
   type VisualWork,
 } from "@/lib/content";
 import { Media } from "./Media";
+import { CaseStudyPreview } from "./Previews";
 import { LiveTime } from "./LiveTime";
 import { Lightbox, type LightboxItem } from "./Lightbox";
 import { ArrowUp, ChevronLeft, ChevronRight, Mail } from "./Icons";
@@ -612,7 +613,11 @@ function CaseCard({ cs, onClick }: { cs: CaseStudy; onClick: (e: MouseEvent<HTML
       aria-label={`Read case study ${cs.num}: ${cs.title}. ${cs.role}, ${cs.outcome}`}
       style={{ ...cardBase, overflow: "hidden", display: "block", textDecoration: "none", color: "inherit" }}
     >
-      <Media img={cs.hero} label="[CASE STUDY HERO IMAGE]" aspect="16 / 10" cover priority sizes="(max-width: 1023px) 100vw, 40vw" />
+      {cs.preview ? (
+        <CaseStudyPreview kind={cs.preview} priority />
+      ) : (
+        <Media img={cs.hero} label="[CASE STUDY HERO IMAGE]" aspect="16 / 10" cover priority sizes="(max-width: 1023px) 100vw, 40vw" />
+      )}
       <div
         style={{
           padding: "16px 18px 18px",

@@ -216,6 +216,124 @@ a {
   }
 }
 
+/* ---------- Animated case-study previews ---------- */
+.pv {
+  position: relative;
+  overflow: hidden;
+  background: var(--card);
+  isolation: isolate;
+}
+.pv-layer {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+}
+.pv-layer img,
+.pv-phone-screen img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: auto;
+  display: block;
+}
+.pv-after img {
+  animation: pvScroll 18s ease-in-out infinite;
+}
+.pv-before {
+  animation: pvWipe 18s ease-in-out infinite;
+}
+.pv-phone {
+  position: absolute;
+  right: 5%;
+  bottom: 6%;
+  width: 21%;
+  aspect-ratio: 9 / 19.5;
+  border-radius: 14px;
+  padding: 3px;
+  background: #000000;
+  box-shadow: 0 0 0 1px rgba(232, 220, 214, 0.18), 0 18px 40px rgba(0, 0, 0, 0.6);
+  animation: pvPhone 18s ease-in-out infinite;
+  z-index: 2;
+}
+.pv-phone-screen {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  border-radius: 11px;
+}
+.pv-phone-screen img {
+  animation: pvMobile 18s ease-in-out infinite;
+}
+.pv-tag {
+  position: absolute;
+  left: 10px;
+  bottom: 10px;
+  z-index: 3;
+  background: rgba(0, 0, 0, 0.7);
+  border-radius: 8px;
+  padding: 6px 10px;
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--text);
+}
+.pv-tag-before {
+  animation: pvTagBefore 18s ease-in-out infinite;
+}
+.pv-tag-after {
+  animation: pvTagAfter 18s ease-in-out infinite;
+}
+
+@keyframes pvWipe {
+  0%, 18% { clip-path: inset(0 0 0 0); }
+  26%, 92% { clip-path: inset(0 0 0 100%); }
+  100% { clip-path: inset(0 0 0 0); }
+}
+@keyframes pvScroll {
+  0%, 32% { transform: translateY(0); }
+  58%, 72% { transform: translateY(-38%); }
+  88%, 100% { transform: translateY(0); }
+}
+@keyframes pvPhone {
+  0%, 26% { transform: translateY(125%); }
+  33%, 86% { transform: translateY(0); }
+  94%, 100% { transform: translateY(125%); }
+}
+@keyframes pvMobile {
+  0%, 38% { transform: translateY(0); }
+  60%, 72% { transform: translateY(-46%); }
+  84%, 100% { transform: translateY(0); }
+}
+@keyframes pvTagBefore {
+  0%, 19% { opacity: 1; }
+  23%, 93% { opacity: 0; }
+  98%, 100% { opacity: 1; }
+}
+@keyframes pvTagAfter {
+  0%, 21% { opacity: 0; }
+  25%, 91% { opacity: 1; }
+  95%, 100% { opacity: 0; }
+}
+
+/* ---------- Case-study figures ---------- */
+.fig-grid {
+  display: grid;
+  gap: 10px;
+  align-items: start;
+}
+.fig-grid.pair {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+.fig-grid.trio {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+@media (max-width: 559px) {
+  .fig-grid.trio {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
 /* ---------- Sticky name pill ---------- */
 .name-pill {
   transition: opacity 0.18s ease-out, transform 0.18s ease-out;
@@ -234,7 +352,24 @@ a {
   .name-pill {
     transition: none;
   }
+  .pv-after img,
+  .pv-phone,
+  .pv-phone-screen img,
+  .pv-tag-after {
+    animation: none;
+  }
+  .pv-before,
+  .pv-tag-before {
+    animation: none;
+    display: none;
+  }
   html {
     scroll-behavior: auto !important;
   }
+}
+
+/* Focus lands on these programmatically; they are not controls, so no ring */
+[role="dialog"]:focus,
+.frame:focus {
+  outline: none;
 }
