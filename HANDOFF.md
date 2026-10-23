@@ -16,7 +16,7 @@ Read `CLAUDE.md` first (design brief). This file records what's built and what's
 - `components/`: `Portfolio.tsx` (grid, cards, sidebar, row-filling `Masonry`, `PhotoCarousel`), `Lightbox.tsx`, `CaseStudyArticle.tsx`, `Previews.tsx` (animated previews, `BeforeAfter`, `LoopVideo`).
 
 ## What's on the site
-**Sidebar:** profile (approved copy, LinkedIn + orange email pill); Clients logo marquee in resume order (ServiceNow, T. Rowe Price, Aerotek, PointClickCare, Under Armour, Stanley Black & Decker), pauses on hover; Baltimore + live time; About & Resume with Chanc's own copy. "Currently at" card removed.
+**Sidebar:** profile (photo at `public/work/photos/profile.webp`, approved copy, LinkedIn + orange email pill); Clients logo marquee in resume order (ServiceNow, T. Rowe Price, Aerotek, PointClickCare, Under Armour, Stanley Black & Decker), pauses on hover; Baltimore + live time; About & Resume with Chanc's own copy. "Currently at" card removed.
 
 **Featured case studies** (sections run Problem, Solution, My role, Process, Impact, with callouts for wrong turns, research, tradeoffs, stakeholder feedback):
 1. **Partner portal homepage redesign** (`/work/partner-portal`): card keeps the animated before→after + mobile preview; the Solution section uses that animation in place of the before/after stills (`preview` block, `fullScroll`: 28s loop that scrolls desktop and mobile to the bottom); the case study header is `heroVideo` (`public/work/partner-portal/hero-loop.mp4`: one hero load cycle at 0.75x, 3.5s hold, 0.6s fade back to the start); nav, homepage, task-first alternative and mobile figures from the PDF; before/after table; targets labeled as targets.
@@ -28,7 +28,6 @@ Read `CLAUDE.md` first (design brief). This file records what's built and what's
 
 ## Open items
 - **Resume:** Chanc is editing it. When the PDF arrives, put it at `public/resume.pdf` and set `about.resumeUrl = "/resume.pdf"`. The button is inert until then.
-- Profile photo still a placeholder (`profile.photo`).
 - More projects to come; each new project becomes a wall card automatically.
 - Unanswered: Partner Portal team is listed by role, not name (ok to add names?); Image Builder screens use a fallback font (real screenshots welcome).
 

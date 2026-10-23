@@ -87,7 +87,7 @@ export const profile = {
   name: "Chanc Baylor",
   title: "Senior Product Designer",
   company: "ServiceNow",
-  photo: undefined as Img | undefined,
+  photo: { ...IMG["photos/profile"], alt: "Chanc Baylor smiling in glasses and a white shirt" } as Img | undefined,
   intro:
     "I design the hard parts of enterprise products: onboarding, permissions and data-heavy workflows. 8+ years turning research and analytics into measurable wins across SaaS, fintech, healthcare and e-commerce for ServiceNow, T. Rowe Price, PointClickCare, Under Armour & more.",
   closing:

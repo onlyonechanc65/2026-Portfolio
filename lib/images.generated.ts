@@ -281,5 +281,11 @@ export const IMG = {
     "width": 1200,
     "height": 627,
     "blurDataURL": "data:image/webp;base64,UklGRkQAAABXRUJQVlA4IDgAAADwAQCdASoMAAYAA4BaJbACdADhiV3mF4AA/s3z6rPWc4Kv7r4eOBOU20HU3kyUNDmboOphX8gAAA=="
+  },
+  "photos/profile": {
+    "src": "/work/photos/profile.webp",
+    "width": 384,
+    "height": 384,
+    "blurDataURL": "data:image/webp;base64,UklGRmAAAABXRUJQVlA4IFQAAAAQAgCdASoMAAwAA4BaJZACdAD6/4/m2DAAAPc2sCwyf5qvv3qnKGNDHvXDythCOmknJvj58zhZ5DkOo7jFab+Rc8uhOg/QRLnUcYsLiHWyf2YAAAA="
   }
 } as const;
