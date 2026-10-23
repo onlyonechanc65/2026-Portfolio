@@ -190,7 +190,7 @@ function Summary({ s }: { s: NonNullable<VisualWork["summary"]> }) {
   return (
     <div style={{ padding: "32px clamp(20px, 6%, 56px)", display: "flex", flexDirection: "column", gap: 14 }}>
       <p style={p}>{s.about}</p>
-      <p style={p}>{s.did}</p>
+      {s.did && <p style={p}>{s.did}</p>}
       <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))", gap: 10, marginTop: 6 }}>
         {s.results.map((r) => (
           <div

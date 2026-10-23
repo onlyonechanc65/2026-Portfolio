@@ -197,5 +197,11 @@ export const IMG = {
     "width": 1600,
     "height": 899,
     "blurDataURL": "data:image/webp;base64,UklGRl4AAABXRUJQVlA4IFIAAADwAQCdASoMAAcAA4BaJbACdADdkQb1JwAA/toTGoeBGPUHC793sf6JEE01Pfa4n8qLwH2/ZvrmHxBUt8kWY5oW5qBsfQbVI8RFC6496XeQwAAA"
+  },
+  "t-rowe-price/headers": {
+    "src": "/work/t-rowe-price/headers.webp",
+    "width": 1600,
+    "height": 900,
+    "blurDataURL": "data:image/webp;base64,UklGRl4AAABXRUJQVlA4IFIAAADQAQCdASoMAAcAA4BaJagCdADZoCgfAAD+hB7bWxAvnexPfKe7OHitv8/12V40VZcGOsKUd0tUf1X4mnjTfiQJg83+14ByCELyy9H1NjAxQAAA"
   }
 } as const;

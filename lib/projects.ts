@@ -6,6 +6,27 @@ const img = (key: keyof typeof IMG, alt: string): Img => ({ ...IMG[key], alt });
 /* Visual-work projects on the wall, in the order they should appear. */
 export const projects: VisualWork[] = [
   {
+    id: "t-rowe-price-headers",
+    title: "T.Rowe Header Design",
+    type: "Campaign headers · Co-branding",
+    captioned: true,
+    placeholderHeight: 0,
+    result: "$1.64M in new AUM from 40+ campaigns in one year",
+    image: img(
+      "t-rowe-price/headers",
+      "Nine co-branded T. Rowe Price campaign headers with partner companies including CarMax, M&T Bank, Syngenta and Experian, each with its own imagery and headline."
+    ),
+    summary: {
+      about:
+        "Co-branded campaign headers pairing T. Rowe Price with partner companies, from a body of 40+ multimedia marketing campaigns I designed and launched in Adobe Creative Suite.",
+      results: [
+        "$1.64M in new assets under management within one year",
+        "78% audience capture rate",
+        "40+ multimedia campaigns designed and launched",
+      ],
+    },
+  },
+  {
     id: "aerotek",
     title: "Aerotek social campaign",
     type: "Social ads · Brand system",
