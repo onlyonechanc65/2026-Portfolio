@@ -238,7 +238,7 @@ export const imageBuilder: CaseStudy = {
   slug: "partner-comms-image-builder",
   num: "02",
   title: "Partner Comms Image Builder",
-  role: "Sole designer and builder",
+  role: "Sole designer, built with Claude",
   outcome: "Thumbnail requests down about 90%",
   product: "Self-serve image tool",
   preview: "builder",

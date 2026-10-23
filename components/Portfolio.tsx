@@ -508,7 +508,7 @@ function CaseCard({ cs, onClick }: { cs: CaseStudy; onClick: (e: MouseEvent<HTML
             CASE STUDY {cs.num}
           </span>
           <span style={{ fontSize: 18, fontWeight: 700, letterSpacing: "-0.015em" }}>{cs.title}</span>
-          <span style={{ fontSize: 13, color: muted }}>
+          <span style={{ fontSize: 13, color: muted, textWrap: "balance" }}>
             {cs.role} · {cs.outcome}
           </span>
         </div>
