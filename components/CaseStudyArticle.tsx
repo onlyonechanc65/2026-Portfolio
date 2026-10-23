@@ -146,7 +146,7 @@ function BlockView({ b }: { b: Block }) {
     return (
       <figure style={{ margin: "8px 0", display: "flex", flexDirection: "column", gap: 10 }}>
         <div role="img" aria-label={b.alt} style={{ borderRadius: 10, overflow: "hidden" }}>
-          <CaseStudyPreview kind={b.preview} aspect="16 / 9" sizes="(max-width: 1580px) 100vw, 1300px" />
+          <CaseStudyPreview kind={b.preview} aspect="16 / 9" sizes="(max-width: 1580px) 100vw, 1300px" fullScroll />
         </div>
         <figcaption style={{ fontSize: 12, lineHeight: 1.5, color: meta, maxWidth: measure }}>{b.caption}</figcaption>
       </figure>

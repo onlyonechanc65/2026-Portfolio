@@ -285,6 +285,45 @@ a {
   animation: pvTagAfter 18s ease-in-out infinite;
 }
 
+/* Full-page variant (case-study Solution figure): scrolls both screenshots to the
+   bottom, holds, and comes back up. --pv-desk / --pv-mob are set per instance. */
+.pv-full .pv-before { animation: pvfWipe 28s ease-in-out infinite; }
+.pv-full .pv-after img { animation: pvfScroll 28s ease-in-out infinite; }
+.pv-full .pv-phone { animation: pvfPhone 28s ease-in-out infinite; }
+.pv-full .pv-phone-screen img { animation: pvfMobile 28s ease-in-out infinite; }
+.pv-full .pv-tag-before { animation: pvfTagBefore 28s ease-in-out infinite; }
+.pv-full .pv-tag-after { animation: pvfTagAfter 28s ease-in-out infinite; }
+@keyframes pvfWipe {
+  0%, 12% { clip-path: inset(0 0 0 0); }
+  18%, 93% { clip-path: inset(0 0 0 100%); }
+  100% { clip-path: inset(0 0 0 0); }
+}
+@keyframes pvfScroll {
+  0%, 24% { transform: translateY(0); }
+  58%, 66% { transform: translateY(calc(var(--pv-desk, 38%) * -1)); }
+  84%, 100% { transform: translateY(0); }
+}
+@keyframes pvfPhone {
+  0%, 20% { transform: translateY(125%); }
+  25%, 88% { transform: translateY(0); }
+  93%, 100% { transform: translateY(125%); }
+}
+@keyframes pvfMobile {
+  0%, 27% { transform: translateY(0); }
+  58%, 66% { transform: translateY(calc(var(--pv-mob, 46%) * -1)); }
+  82%, 100% { transform: translateY(0); }
+}
+@keyframes pvfTagBefore {
+  0%, 13% { opacity: 1; }
+  16%, 94% { opacity: 0; }
+  98%, 100% { opacity: 1; }
+}
+@keyframes pvfTagAfter {
+  0%, 15% { opacity: 0; }
+  19%, 91% { opacity: 1; }
+  95%, 100% { opacity: 0; }
+}
+
 @keyframes pvWipe {
   0%, 18% { clip-path: inset(0 0 0 0); }
   26%, 92% { clip-path: inset(0 0 0 100%); }
@@ -408,11 +447,17 @@ a {
   .pv-after img,
   .pv-phone,
   .pv-phone-screen img,
-  .pv-tag-after {
+  .pv-tag-after,
+  .pv-full .pv-after img,
+  .pv-full .pv-phone,
+  .pv-full .pv-phone-screen img,
+  .pv-full .pv-tag-after {
     animation: none;
   }
   .pv-before,
   .pv-tag-before,
+  .pv-full .pv-before,
+  .pv-full .pv-tag-before,
   .ba-before,
   .ba-line,
   .ba-tag-before {

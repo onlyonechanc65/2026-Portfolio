@@ -7,19 +7,50 @@ import type { Img } from "@/lib/content";
 
 type Kind = "portal" | "builder";
 
-export function CaseStudyPreview({ kind, aspect = "16 / 10", priority, sizes }: { kind: Kind; aspect?: string; priority?: boolean; sizes?: string }) {
-  return kind === "portal" ? <PortalPreview aspect={aspect} priority={priority} sizes={sizes} /> : <BuilderPreview aspect={aspect} />;
+export function CaseStudyPreview({
+  kind,
+  aspect = "16 / 10",
+  priority,
+  sizes,
+  fullScroll,
+}: {
+  kind: Kind;
+  aspect?: string;
+  priority?: boolean;
+  sizes?: string;
+  /** Portal only: scroll both pages all the way to the bottom (a longer loop) */
+  fullScroll?: boolean;
+}) {
+  return kind === "portal" ? <PortalPreview aspect={aspect} priority={priority} sizes={sizes} fullScroll={fullScroll} /> : <BuilderPreview aspect={aspect} />;
 }
 
 /* Wipes from the old homepage to the new one, scrolls to the action center,
    and brings in the mobile version. Pure CSS, so it is cheap and pauses for
    reduced motion. */
-function PortalPreview({ aspect, priority, sizes = "(max-width: 1023px) 100vw, 50vw" }: { aspect: string; priority?: boolean; sizes?: string }) {
+function PortalPreview({
+  aspect,
+  priority,
+  sizes = "(max-width: 1023px) 100vw, 50vw",
+  fullScroll,
+}: {
+  aspect: string;
+  priority?: boolean;
+  sizes?: string;
+  fullScroll?: boolean;
+}) {
   const before = IMG["partner-portal/before"];
   const after = IMG["partner-portal/after"];
   const mobile = IMG["partner-portal/mobile"];
+  // How far each screenshot has to travel (as a % of its own height) to reach its bottom edge.
+  const [aw, ah] = aspect.split("/").map((n) => parseFloat(n));
+  const deskShift = ((after.height - (after.width * ah) / aw) / after.height) * 100;
+  const phoneScreen = (19.5 / 9) * 1.02; // screen height / width, a little taller than the frame ratio because of the bezel
+  const mobShift = ((mobile.height - mobile.width * phoneScreen) / mobile.height) * 100;
+  const vars = fullScroll
+    ? ({ "--pv-desk": `${deskShift.toFixed(2)}%`, "--pv-mob": `${mobShift.toFixed(2)}%` } as CSSProperties)
+    : {};
   return (
-    <div className="pv" style={{ aspectRatio: aspect }} aria-hidden="true">
+    <div className={`pv${fullScroll ? " pv-full" : ""}`} style={{ aspectRatio: aspect, ...vars }} aria-hidden="true">
       <div className="pv-layer pv-after">
         <Image
           src={after.src}
