@@ -267,41 +267,47 @@ export const imageBuilder: CaseStudy = {
       ],
     },
     {
-      title: "My role",
-      blocks: [
-        {
-          p: "I was the sole designer and builder: request audit, information architecture, interaction and visual design, front-end build and rollout. Claude handled implementation under my direction. Six reviewers across creative direction, program management, UX and copy reviewed the build.",
-        },
-      ],
-    },
-    {
-      title: "Process",
-      blocks: [
-        {
-          callout: "Research that changed direction",
-          title: "Past requests set the scope",
-          text: "Before designing anything, I audited our past thumbnail requests. The same asks kept repeating: a headline and supporting line, event dates and times, regional visuals, and a handful of sizes for email, event pages, the partner portal and social. If a request type repeated, the tool had to handle it. If it was rare, it stayed a design request.",
-        },
-        {
-          callout: "Wrong turn",
-          title: "Uploads were the biggest brand risk",
-          text: "Early versions let people upload their own logos and backgrounds. In practice, uploads were exactly where images went off brand, so I removed both.",
-        },
-        {
-          callout: "Wrong turn",
-          title: "Naming formats by size, then by destination",
-          text: "I first labeled formats by pixel size, then by destination: Arc Card, Swoogo. Destinations multiplied and overlapped. The same 16:9 image serves Swoogo event pages and partner portal thumbnails, so a destination label sent people looking for an option that was already there. I settled on labels that describe the output: Standard, 16:9 and Social.",
-        },
-        {
-          callout: "Stakeholder feedback",
-          title: "Six reviewers, three features",
-          text: "Our copywriter helped replace character limits with rendered-row caps. Program managers asked for type-led social layouts, which became the text-scale slider. Our creative director wanted uploaded photos to sit well in frame, which became the focal-point slider.",
-        },
-      ],
-    },
-    {
       title: "Solution",
       blocks: [
+        { h: "What people make with it" },
+        {
+          figure: {
+            layout: "pair",
+            items: [
+              {
+                img: img(
+                  "image-builder/out-social-workshop",
+                  "Social post: green headline Hands-on implementation readiness over a dark navy gradient, with a fuzzy blue and purple 3D sparkle."
+                ),
+                label: "Social",
+              },
+              {
+                img: img(
+                  "image-builder/out-social-ai-control-tower",
+                  "Social post: centered headline Ready for the AI Control Tower opportunity? above a glass 3D sparkle and floating panels."
+                ),
+                label: "Social",
+              },
+            ],
+            caption: "Social posts from the tool's stacked portrait layout, with a 3D icon anchoring the bottom.",
+            maxWidth: 760,
+          },
+        },
+        {
+          figure: {
+            layout: "trio",
+            items: [
+              { img: img("image-builder/out-shifting-opportunity", "Standard header: The shifting opportunity, beside glass purple sparkles.") },
+              { img: img("image-builder/out-partner-advantage", "Standard header: AI is the partner advantage, beside an iridescent star and a glass cursor.") },
+              { img: img("image-builder/out-profit", "Standard header: Profit beyond implementation, beside a glass gauge with a lightning bolt.") },
+              { img: img("image-builder/out-expertise", "Standard header: Stand out with expertise and IP, beside fuzzy blue and purple sparkles.") },
+              { img: img("image-builder/out-focus", "Standard header: Focus drives growth, beside a glass purple arrow and green sparkles.") },
+              { img: img("image-builder/out-architect", "Standard header: From implementor to architect, beside a glass cube, spheres and a green sparkle.") },
+            ],
+            caption:
+              "Standard headers for a partner program series. Same locked type scale and two-color headline every time; the words, 3D art and layout side are what change.",
+          },
+        },
         { h: "Guardrails over a blank canvas" },
         {
           p: "The people using this tool aren't designers, and every open-ended option is a chance to go off brand. So I took options away:",
@@ -339,7 +345,7 @@ export const imageBuilder: CaseStudy = {
         {
           callout: "Tradeoff",
           title: "Less freedom, given back through single controls",
-          text: "Guardrails make the tool harder to misuse, but they take options away. Each time reviewers asked for flexibility, I answered with one bounded control instead of a set of free inputs.",
+          text: "Guardrails make the tool harder to misuse, but they take options away. Each time the six reviewers asked for flexibility, I answered with one bounded control instead of a set of free inputs.",
         },
         { h: "Flexibility through one control, not many" },
         {
@@ -387,6 +393,39 @@ export const imageBuilder: CaseStudy = {
             caption:
               "The shipped tool is a single HTML file with fonts, icons and libraries embedded, so it runs from SharePoint with nothing to install. Three content modes, three formats, JPG export.",
           },
+        },
+      ],
+    },
+    {
+      title: "My role",
+      blocks: [
+        {
+          p: "I was the sole designer and builder: request audit, information architecture, interaction and visual design, front-end build and rollout. Claude handled implementation under my direction. Six reviewers across creative direction, program management, UX and copy reviewed the build.",
+        },
+      ],
+    },
+    {
+      title: "Process",
+      blocks: [
+        {
+          callout: "Research that changed direction",
+          title: "Past requests set the scope",
+          text: "Before designing anything, I audited our past thumbnail requests. The same asks kept repeating: a headline and supporting line, event dates and times, regional visuals, and a handful of sizes for email, event pages, the partner portal and social. If a request type repeated, the tool had to handle it. If it was rare, it stayed a design request.",
+        },
+        {
+          callout: "Wrong turn",
+          title: "Uploads were the biggest brand risk",
+          text: "Early versions let people upload their own logos and backgrounds. In practice, uploads were exactly where images went off brand, so I removed both.",
+        },
+        {
+          callout: "Wrong turn",
+          title: "Naming formats by size, then by destination",
+          text: "I first labeled formats by pixel size, then by destination: Arc Card, Swoogo. Destinations multiplied and overlapped. The same 16:9 image serves Swoogo event pages and partner portal thumbnails, so a destination label sent people looking for an option that was already there. I settled on labels that describe the output: Standard, 16:9 and Social.",
+        },
+        {
+          callout: "Stakeholder feedback",
+          title: "Six reviewers, three features",
+          text: "Our copywriter helped replace character limits with rendered-row caps. Program managers asked for type-led social layouts, which became the text-scale slider. Our creative director wanted uploaded photos to sit well in frame, which became the focal-point slider.",
         },
       ],
     },
