@@ -201,4 +201,48 @@ export const projects: VisualWork[] = [
       "Navy and orange poster of Gervonta Tank Davis upside down over a giant orange 30 wins, with three training photos and the quote I knew he was going to tire down."
     ),
   },
+  {
+    id: "kiana-lede-tribute",
+    title: "Kiana Lede Tribute",
+    type: "Poster design",
+    captioned: true,
+    placeholderHeight: 0,
+    image: img(
+      "kiana-lede/01",
+      "Black and white collage of Kiana Lede performing, layered inside a white frame with the Golden Gate Bridge at night and a train, scattered purple hearts, and her name in white brush lettering with a purple outline."
+    ),
+  },
+  {
+    id: "the-sunflower",
+    title: "The Sunflower",
+    type: "Poster design",
+    captioned: true,
+    placeholderHeight: 0,
+    image: img(
+      "the-sunflower/01",
+      "Collage of a woman in a denim jacket and yellow aviator sunglasses with white eyes, set against a sunflower field, cloudy sky and a starfield, with Only One Chanc in orange brush lettering."
+    ),
+  },
+  {
+    id: "halloween",
+    title: "Halloween",
+    type: "Poster design",
+    captioned: true,
+    placeholderHeight: 0,
+    image: img(
+      "halloween/01",
+      "Three hooded black figures with clasped hands and glowing white rings for faces, standing under a circle of glowing orange orbs against a starry black sky."
+    ),
+  },
+  {
+    id: "nike-kid",
+    title: "Nike kid",
+    type: "Poster design",
+    captioned: true,
+    placeholderHeight: 0,
+    image: img(
+      "nike-kid/01",
+      "Black and white figure with a cracked skull for a face and a white beanie, pulling up a jacket zipper, set against flowing orange and yellow lava."
+    ),
+  },
 ];

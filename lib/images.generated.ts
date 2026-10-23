@@ -287,5 +287,29 @@ export const IMG = {
     "width": 384,
     "height": 384,
     "blurDataURL": "data:image/webp;base64,UklGRmAAAABXRUJQVlA4IFQAAAAQAgCdASoMAAwAA4BaJZACdAD6/4/m2DAAAPc2sCwyf5qvv3qnKGNDHvXDythCOmknJvj58zhZ5DkOo7jFab+Rc8uhOg/QRLnUcYsLiHWyf2YAAAA="
+  },
+  "kiana-lede/01": {
+    "src": "/work/kiana-lede/01.webp",
+    "width": 1200,
+    "height": 1200,
+    "blurDataURL": "data:image/webp;base64,UklGRk4AAABXRUJQVlA4IEIAAADwAQCdASoMAAwAA4BaJZQC7AEPAm0aQAAA/vXaUGlGNNyjlzPXtPQ40ehgaH1gjc3vWmQcVIkB+Dg6bdzaNVZIAAA="
+  },
+  "the-sunflower/01": {
+    "src": "/work/the-sunflower/01.webp",
+    "width": 1080,
+    "height": 1201,
+    "blurDataURL": "data:image/webp;base64,UklGRmYAAABXRUJQVlA4IFoAAAAQAgCdASoMAA0AA4BaJZgCdAEXfmg2tG8AAM4+pezUbQza1uNF8P67nDGoUMAw47hpEsZgxF3FJoQgRfhhXMjYRo0qYRFqvyJQSkQLkwewmOz76bE1vPBjwAA="
+  },
+  "halloween/01": {
+    "src": "/work/halloween/01.webp",
+    "width": 1200,
+    "height": 1200,
+    "blurDataURL": "data:image/webp;base64,UklGRlAAAABXRUJQVlA4IEQAAADQAQCdASoMAAwAA4BaJQBdgBuIeJqgAAD+9vnXV80Ud3FVFTf3Znp5Fq4wJoSw0tKKaP1qWtjvfxR4RBkGVTkOv0AAAA=="
+  },
+  "nike-kid/01": {
+    "src": "/work/nike-kid/01.webp",
+    "width": 1200,
+    "height": 1200,
+    "blurDataURL": "data:image/webp;base64,UklGRoYAAABXRUJQVlA4IHoAAACQAgCdASoMAAwAA4BaJbACdDBJSIgL1AFtuIOeQAD+6k2PmQCyOr1amun0E9m7JTAgnWr62cofJ9/WKrgG4r5VmbqIpeyCmFCtVZoXn3mPXS7TY6oTa3GJ1dwzONWUoSqr0bm8jfR9KnBPYH0/vgOIr2PTn3yEUcAAAA=="
   }
 } as const;
