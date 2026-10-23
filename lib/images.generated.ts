@@ -58,37 +58,37 @@ export const IMG = {
     "src": "/work/image-builder/tool.webp",
     "width": 2064,
     "height": 1290,
-    "blurDataURL": "data:image/webp;base64,UklGRkQAAABXRUJQVlA4IDgAAABwAQCdASoMAAgAA4BaJZgCdAFAAAD+8I2kAda+9h+IVjwIxSgq6Nhtw3QQYmlV+/ZA4NyNvkMAAA=="
+    "blurDataURL": "data:image/webp;base64,UklGRkAAAABXRUJQVlA4IDQAAADwAQCdASoMAAgAA4BaJZgCdAEDfbRU0IAA/uwAVPjARiHVt9l00Qnq8H43UzUa43N138AA"
   },
   "image-builder/standard-text": {
     "src": "/work/image-builder/standard-text.webp",
     "width": 1240,
     "height": 700,
-    "blurDataURL": "data:image/webp;base64,UklGRkAAAABXRUJQVlA4IDQAAAAQAgCdASoMAAcAA4BaJaACdAEUU64gurAAAP7w4QRiGY2U9CCwFIUmEy7zGF5Zz+7GRwAA"
+    "blurDataURL": "data:image/webp;base64,UklGRkAAAABXRUJQVlA4IDQAAADwAQCdASoMAAcAA4BaJaACdAEUU9RE7TAA/vDhBGIZjZdEXb0DIr6TCZd5jC8s5/djI4AA"
   },
   "image-builder/standard-icon": {
     "src": "/work/image-builder/standard-icon.webp",
     "width": 1240,
     "height": 700,
-    "blurDataURL": "data:image/webp;base64,UklGRkQAAABXRUJQVlA4IDgAAADQAQCdASoMAAcAA4BaJaACdADbWrcYgAD+7E2vIVv9nzY6LCPhHd5lfOT/N6mzk69alHlOjAAAAA=="
+    "blurDataURL": "data:image/webp;base64,UklGRkIAAABXRUJQVlA4IDYAAADwAQCdASoMAAcAA4BaJaACdAELMk3eKYAA/u7nGxrDzEWWqozJkuoanSUu8xhfNvLBcGdoAAA="
   },
   "image-builder/social-100": {
     "src": "/work/image-builder/social-100.webp",
     "width": 1240,
     "height": 1552,
-    "blurDataURL": "data:image/webp;base64,UklGRkwAAABXRUJQVlA4IEAAAAAwAgCdASoMAA8AA4BaJaACdAEQ/TGKEZzgAAD+72Na1inLhUueyyQbZYd6VsN47sFmhgmIN8q9Nqv5ZzfkBIAA"
+    "blurDataURL": "data:image/webp;base64,UklGRkwAAABXRUJQVlA4IEAAAAAQAgCdASoMAA8AA4BaJaACdAEQ/ZvZMYsAAP7vY1rWKcuFS590psDXXT3L+TkWQK79F0BtIOVem1X8s5vyAkAA"
   },
   "image-builder/social-175": {
     "src": "/work/image-builder/social-175.webp",
     "width": 1240,
     "height": 1552,
-    "blurDataURL": "data:image/webp;base64,UklGRlIAAABXRUJQVlA4IEYAAAAQAgCdASoMAA8AA4BaJaACdAEVV1lenFwAAP7vY1oEAnplVIwSmuNfsKTwr6DyJXMbqjsRoohyVeLouvgsHI/r1S1xugAA"
+    "blurDataURL": "data:image/webp;base64,UklGRlQAAABXRUJQVlA4IEgAAAAwAgCdASoMAA8AA4BaJaACdAEVV2VSD0KOQAD+72NaBAJ6ZVSPpSFu1D6GfrJp5i0uze8hWylgyBx3SHdfBYOR/XqlrjdAAAA="
   },
   "image-builder/poster": {
     "src": "/work/image-builder/poster.webp",
     "width": 1280,
     "height": 800,
-    "blurDataURL": "data:image/webp;base64,UklGRkQAAABXRUJQVlA4IDgAAADwAQCdASoMAAgAA4BaJZgCdAEQ/d45RAAA/u6mw8VWXMIIl2S1knQdoLrqfA1bLD/68s5v5C7AAA=="
+    "blurDataURL": "data:image/webp;base64,UklGRkYAAABXRUJQVlA4IDoAAADwAQCdASoMAAgAA4BaJZgCdAEQ/ehvJkAA/u6mw8VWXbtGmTLbHJhw2tPrjKu6bLD/68s5v5C7AAAA"
   },
   "aerotek/01": {
     "src": "/work/aerotek/01.webp",
