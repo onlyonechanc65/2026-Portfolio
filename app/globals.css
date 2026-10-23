@@ -502,3 +502,64 @@ a {
     transition: none;
   }
 }
+
+/* ---------- Animated CRM events post (wall tile) ---------- */
+.crm {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  background-color: #03303f;
+  background-size: 100% 100%;
+}
+.crm-row {
+  position: absolute;
+  left: 0;
+  width: 100%;
+}
+.crm-track {
+  height: 100%;
+  background-repeat: repeat-x;
+  background-size: 33.3333% 100%;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  animation-play-state: paused;
+  will-change: transform;
+}
+.crm-in .crm-track {
+  animation-play-state: running;
+}
+.crm-left {
+  animation-name: crmLeft;
+}
+.crm-right {
+  animation-name: crmRight;
+}
+@keyframes crmLeft {
+  from { transform: translateX(0); }
+  to { transform: translateX(-33.3333%); }
+}
+@keyframes crmRight {
+  from { transform: translateX(-33.3333%); }
+  to { transform: translateX(0); }
+}
+.crm-reveal {
+  position: absolute;
+  display: block;
+  height: auto;
+  transition: opacity 600ms ease-out, transform 700ms cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+.crm-armed .crm-reveal {
+  opacity: 0;
+  transform: translateY(14px);
+  transition-delay: 0ms;
+  transition-duration: 200ms;
+}
+.crm-armed .crm-pin {
+  transform: translateY(-22px);
+}
+.crm-armed.crm-in .crm-reveal {
+  opacity: 1;
+  transform: none;
+  transition-duration: 600ms, 700ms;
+  transition-delay: var(--d, 0ms);
+}

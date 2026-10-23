@@ -15,7 +15,7 @@ import {
   type VisualWork,
 } from "@/lib/content";
 import { Media } from "./Media";
-import { BeforeAfter, CaseStudyPreview, LoopVideo } from "./Previews";
+import { BeforeAfter, CaseStudyPreview, CrmEventsPreview, LoopVideo } from "./Previews";
 
 /* Stagger the before/after tiles so they don't flip in unison */
 const beforeAfterDelay = (id: string) =>
@@ -528,7 +528,9 @@ function WorkCard({ w, onClick }: { w: VisualWork; onClick: () => void }) {
       onClick={onClick}
       style={{ ...cardBase, overflow: "hidden" }}
     >
-      {w.video ? (
+      {w.animated === "crm-events" && w.image ? (
+        <CrmEventsPreview still={w.image} />
+      ) : w.video ? (
         <LoopVideo src={w.video.src} poster={w.video.poster} />
       ) : w.compare ? (
         <BeforeAfter before={w.compare.before} after={w.compare.after} delay={beforeAfterDelay(w.id)} />

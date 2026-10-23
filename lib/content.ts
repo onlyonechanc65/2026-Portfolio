@@ -73,6 +73,8 @@ export type VisualWork = {
   summary?: { about: string; did?: string; results: string[] };
   /** Looping silent video on the wall card (the poster is its still frame) */
   video?: { src: string; poster: Img };
+  /** A custom animated thumbnail on the wall card (the image stays the still and reduced-motion fallback) */
+  animated?: "crm-events";
   /** Animated before/after on the wall card; both shown side by side in the lightbox */
   compare?: { before: Img; after: Img };
 };

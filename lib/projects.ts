@@ -38,7 +38,8 @@ export const projects: VisualWork[] = [
     type: "Social design · Performance analysis",
     captioned: true,
     placeholderHeight: 0,
-    result: "Carousels averaged 39.3% engagement vs 6.8% for image posts",
+    result: "Carousels averaged 39.3% engagement vs 6.8% for image\u00a0posts",
+    animated: "crm-events",
     image: img(
       "linkedin-partner/thumb",
       "LinkedIn post headlined Every CRM event in one place, listing CRM Partner Day Sweden, CRM Future Series and CRM AI Academy Sprint above a grid of event photos."

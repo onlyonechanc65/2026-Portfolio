@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, type CSSProperties } from "react";
 import { IMG } from "@/lib/images.generated";
 import type { Img } from "@/lib/content";
 
@@ -157,5 +157,98 @@ export function LoopVideo({ src, poster }: { src: string; poster: Img }) {
       aria-hidden="true"
       style={{ display: "block", width: "100%", height: "auto", aspectRatio: `${poster.width} / ${poster.height}`, background: "var(--ph)" }}
     />
+  );
+}
+
+/* The CRM events post, rebuilt in layers from the flat export: the pin and
+   headline rise in each time the card scrolls into view, and the two photo rows
+   drift in opposite directions like an event reel. Positions are percentages of
+   the original 1080 × 1350 canvas. Reduced motion shows the flat post. */
+const CRM = "/work/linkedin-partner/crm";
+const CRM_W = 1080;
+const CRM_H = 1350;
+const crmText = [
+  { key: "pin", x: 87, y: 70, w: 112, h: 163, delay: 0 },
+  { key: "h1", x: 104, y: 258, w: 876, h: 114, delay: 120 },
+  { key: "h2", x: 101, y: 366, w: 611, h: 117, delay: 240 },
+  { key: "sub", x: 99, y: 518, w: 870, h: 99, delay: 380 },
+];
+const crmRows = [
+  { key: "row1", y: 709, h: 324, period: 1108, dir: "left", secs: 40 },
+  { key: "row2", y: 1069, h: 281, period: 933, dir: "right", secs: 34 },
+];
+const pct = (n: number, of: number) => `${(n / of) * 100}%`;
+
+export function CrmEventsPreview({ still }: { still: Img }) {
+  const ref = useRef<HTMLDivElement>(null);
+  const [reduce, setReduce] = useState(false);
+  const [armed, setArmed] = useState(false);
+  const [inView, setInView] = useState(false);
+  useEffect(() => {
+    const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
+    setReduce(mq.matches);
+    const onChange = () => setReduce(mq.matches);
+    mq.addEventListener("change", onChange);
+    return () => mq.removeEventListener("change", onChange);
+  }, []);
+  useEffect(() => {
+    const el = ref.current;
+    if (!el || reduce) return;
+    setArmed(true);
+    const io = new IntersectionObserver(([e]) => setInView(e.isIntersecting), { threshold: 0.35 });
+    io.observe(el);
+    return () => io.disconnect();
+  }, [reduce]);
+
+  if (reduce) {
+    return (
+      <Image
+        src={still.src}
+        alt=""
+        width={still.width}
+        height={still.height}
+        placeholder="blur"
+        blurDataURL={still.blurDataURL}
+        sizes="(max-width: 479px) 100vw, (max-width: 767px) 50vw, (max-width: 1279px) 30vw, 22vw"
+        style={{ display: "block", width: "100%", height: "auto" }}
+      />
+    );
+  }
+
+  return (
+    <div
+      ref={ref}
+      aria-hidden="true"
+      className={`crm${armed ? " crm-armed" : ""}${inView ? " crm-in" : ""}`}
+      style={{ aspectRatio: `${CRM_W} / ${CRM_H}`, backgroundImage: `url(${CRM}/base.webp)` }}
+    >
+      {crmRows.map((r) => (
+        <div key={r.key} className="crm-row" style={{ top: pct(r.y, CRM_H), height: pct(r.h, CRM_H) }}>
+          <div
+            className={`crm-track crm-${r.dir}`}
+            style={{
+              width: pct(r.period * 3, CRM_W),
+              backgroundImage: `url(${CRM}/${r.key}.webp)`,
+              animationDuration: `${r.secs}s`,
+            }}
+          />
+        </div>
+      ))}
+      {crmText.map((t) => (
+        // eslint-disable-next-line @next/next/no-img-element
+        <img
+          key={t.key}
+          src={`${CRM}/${t.key}.webp`}
+          alt=""
+          className={`crm-reveal${t.key === "pin" ? " crm-pin" : ""}`}
+          style={{
+            left: pct(t.x, CRM_W),
+            top: pct(t.y, CRM_H),
+            width: pct(t.w, CRM_W),
+            ["--d" as string]: `${t.delay}ms`,
+          } as CSSProperties}
+        />
+      ))}
+    </div>
   );
 }
