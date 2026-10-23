@@ -72,18 +72,6 @@ export const IMG = {
     "height": 700,
     "blurDataURL": "data:image/webp;base64,UklGRkIAAABXRUJQVlA4IDYAAADwAQCdASoMAAcAA4BaJaACdAELMk3eKYAA/u7nGxrDzEWWqozJkuoanSUu8xhfNvLBcGdoAAA="
   },
-  "image-builder/social-100": {
-    "src": "/work/image-builder/social-100.webp",
-    "width": 1240,
-    "height": 1552,
-    "blurDataURL": "data:image/webp;base64,UklGRkwAAABXRUJQVlA4IEAAAAAQAgCdASoMAA8AA4BaJaACdAEQ/ZvZMYsAAP7vY1rWKcuFS590psDXXT3L+TkWQK79F0BtIOVem1X8s5vyAkAA"
-  },
-  "image-builder/social-175": {
-    "src": "/work/image-builder/social-175.webp",
-    "width": 1240,
-    "height": 1552,
-    "blurDataURL": "data:image/webp;base64,UklGRlQAAABXRUJQVlA4IEgAAAAwAgCdASoMAA8AA4BaJaACdAEVV2VSD0KOQAD+72NaBAJ6ZVSPpSFu1D6GfrJp5i0uze8hWylgyBx3SHdfBYOR/XqlrjdAAAA="
-  },
   "image-builder/poster": {
     "src": "/work/image-builder/poster.webp",
     "width": 1280,

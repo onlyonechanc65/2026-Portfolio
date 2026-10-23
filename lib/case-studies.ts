@@ -351,25 +351,6 @@ export const imageBuilder: CaseStudy = {
         {
           p: "A text-scale slider from 100% to 175% moves the headline and subhead together, so the brand ratio holds at every setting. When larger type pushes the subhead toward the 3D icon, the text reflows beside it; the icon is the brand anchor, so it stays put. For photos, one horizontal focal-point slider replaced a crop tool, which would have handed everyone a way to make a bad crop.",
         },
-        {
-          figure: {
-            layout: "pair",
-            items: [
-              {
-                img: img("image-builder/social-100", "Social format at 100% text scale, with a 3D globe icon in the bottom-right corner."),
-                label: "Text scale 100%",
-              },
-              {
-                img: img(
-                  "image-builder/social-175",
-                  "Social format at 175% text scale: a much larger headline, with the subtitle reflowing to clear the 3D globe icon."
-                ),
-                label: "Text scale 175%",
-              },
-            ],
-            caption: "One slider makes type-led social posts possible without breaking the 2:1 headline-to-subhead ratio.",
-          },
-        },
         { h: "Formats named by shape, built from one canvas" },
         {
           p: "Standard and 16:9 render from one 1920×1080 canvas, so they always match. Social gets its own stacked layout, because cropping a landscape design into portrait would cut most of the composition. In every format, the preview is exactly what exports.",
