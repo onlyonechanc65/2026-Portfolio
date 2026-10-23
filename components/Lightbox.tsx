@@ -186,19 +186,19 @@ export function Lightbox({
 const metaColor = "rgba(232,220,214,0.6)";
 
 function Summary({ s }: { s: NonNullable<VisualWork["summary"]> }) {
-  const p = { margin: 0, fontSize: 15, lineHeight: 1.6, color: "var(--text-muted)", maxWidth: 680 } as const;
+  const p = { margin: 0, fontSize: "clamp(16px, 1.25vw, 18px)", lineHeight: 1.6, color: "var(--text-muted)", textWrap: "pretty" } as const;
   return (
-    <div style={{ padding: "32px clamp(20px, 6%, 56px)", display: "flex", flexDirection: "column", gap: 14 }}>
+    <div style={{ padding: "32px clamp(20px, 6%, 56px)", display: "flex", flexDirection: "column", gap: 16 }}>
       <p style={p}>{s.about}</p>
       {s.did && <p style={p}>{s.did}</p>}
-      <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))", gap: 10, marginTop: 6 }}>
+      <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))", gap: 10, marginTop: 8 }}>
         {s.results.map((r) => (
           <div
             key={r}
-            style={{ background: "rgba(232,220,214,0.05)", borderRadius: 12, padding: "14px 16px", display: "flex", flexDirection: "column", gap: 4 }}
+            style={{ background: "rgba(232,220,214,0.05)", borderRadius: 12, padding: "16px 18px", display: "flex", flexDirection: "column", gap: 6 }}
           >
-            <span style={{ fontSize: 11, fontWeight: 500, color: metaColor }}>Result</span>
-            <span style={{ fontSize: 15, fontWeight: 700, lineHeight: 1.35 }}>{r}</span>
+            <span style={{ fontSize: 12, fontWeight: 500, color: metaColor }}>Result</span>
+            <span style={{ fontSize: "clamp(16px, 1.3vw, 19px)", fontWeight: 700, lineHeight: 1.35, textWrap: "balance" }}>{r}</span>
           </div>
         ))}
       </div>
