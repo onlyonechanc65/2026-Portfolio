@@ -35,4 +35,4 @@ Read `CLAUDE.md` first (design brief). This file records what's built and what's
 ## Conventions
 - No em dashes in copy except date ranges; never pure white; accent orange used sparingly.
 - Check lone words at line ends and layouts at desktop, tablet and phone before pushing.
-- Commits authored as Chanc Baylor; push to `main` deploys.
+- Commits: author Chanc Baylor <onlyonechanc@gmail.com>, committer left as the environment default (Claude <noreply@anthropic.com>) so the signature shows Verified. Use `git -c author... ` or `--author="Chanc Baylor <onlyonechanc@gmail.com>"`; never override the committer. Push to `main` deploys.
