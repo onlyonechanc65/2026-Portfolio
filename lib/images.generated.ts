@@ -275,5 +275,11 @@ export const IMG = {
     "width": 1080,
     "height": 1350,
     "blurDataURL": "data:image/webp;base64,UklGRmIAAABXRUJQVlA4IFYAAAAQAgCdASoMAA8AA4BaJbACdAEN94s2l2sQAP7u46XexDFxp5/LUR8XU8bzYRcbvmyCeJHNorTooXQ2xedVL6alXje5y4ii9guJsXyzn90p+9UCvswAAA=="
+  },
+  "partner-portal/hero-loop-poster": {
+    "src": "/work/partner-portal/hero-loop-poster.webp",
+    "width": 1920,
+    "height": 954,
+    "blurDataURL": "data:image/webp;base64,UklGRkYAAABXRUJQVlA4IDoAAAAQAgCdASoMAAYAA4BaJZgCdAERCEwC0HKAAP7xAKi61y/E7WPMmw/QL1kf8pKK42Wokqbqqnr79AAA"
   }
 } as const;

@@ -51,6 +51,8 @@ export type CaseStudy = {
   hero?: Img;
   /** Animated thumbnail shown on the card and at the top of the case study */
   preview?: "portal" | "builder";
+  /** Looping video that replaces the animated preview at the top of the case study (the card keeps the preview) */
+  heroVideo?: { src: string; poster: Img };
   meta: { label: string; value: string }[];
   sections: { title: string; blocks: Block[]; placeholderImage?: boolean }[];
   impact: { metric: string; label: string }[];

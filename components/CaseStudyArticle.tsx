@@ -1,6 +1,6 @@
 import type { Block, CaseStudy, Figure } from "@/lib/content";
 import { Media } from "./Media";
-import { CaseStudyPreview } from "./Previews";
+import { CaseStudyPreview, LoopVideo } from "./Previews";
 
 const muted = "var(--text-muted)";
 const meta = "rgba(232,220,214,0.6)";
@@ -10,7 +10,9 @@ const measure = 680;
 export function CaseStudyArticle({ cs, headingId }: { cs: CaseStudy; headingId?: string }) {
   return (
     <article style={{ display: "flex", flexDirection: "column" }}>
-      {cs.preview ? (
+      {cs.heroVideo ? (
+        <LoopVideo src={cs.heroVideo.src} poster={cs.heroVideo.poster} />
+      ) : cs.preview ? (
         <CaseStudyPreview kind={cs.preview} aspect="16 / 9" priority />
       ) : (
         <Media img={cs.hero} label="[CASE STUDY HERO IMAGE]" aspect="16 / 8" cover priority sizes="(max-width: 1580px) 100vw, 1440px" />

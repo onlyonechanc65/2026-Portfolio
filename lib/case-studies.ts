@@ -14,6 +14,13 @@ export const partnerPortal: CaseStudy = {
   outcome: "Top tasks cut from three clicks to one",
   product: "ServiceNow Partner Portal",
   preview: "portal",
+  heroVideo: {
+    src: "/work/partner-portal/hero-loop.mp4",
+    poster: img(
+      "partner-portal/hero-loop-poster",
+      "The redesigned Partner Portal hero: 3D illustrations around the headline The home of your ServiceNow partnership, with Visit ServiceNow University and Visit action center buttons."
+    ),
+  },
   hero: img(
     "partner-portal/hero",
     "The redesigned Partner Portal homepage: a single navigation above a hero headed The home of your ServiceNow partnership."
