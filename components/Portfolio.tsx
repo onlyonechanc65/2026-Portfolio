@@ -15,7 +15,11 @@ import {
   type VisualWork,
 } from "@/lib/content";
 import { Media } from "./Media";
-import { CaseStudyPreview } from "./Previews";
+import { BeforeAfter, CaseStudyPreview } from "./Previews";
+
+/* Stagger the before/after tiles so they don't flip in unison */
+const beforeAfterDelay = (id: string) =>
+  -((visualWork.filter((v) => v.compare).findIndex((v) => v.id === id) * 4.5) % 10);
 import { LiveTime } from "./LiveTime";
 import { Lightbox, type LightboxItem } from "./Lightbox";
 import { ArrowUp, ChevronLeft, ChevronRight, Mail } from "./Icons";
@@ -316,77 +320,85 @@ export function Portfolio({ initialSlug }: { initialSlug?: string }) {
             </div>
 
             <h2 className="sr-only">Visual work</h2>
-            <div className="masonry">
-              {/* Carousel */}
-              <div className="m-item" style={{ position: "relative", ...cardBase, overflow: "hidden" }}>
-                <button
-                  className="reset"
-                  aria-label={`Open ${carousel.title}, slide ${slide + 1} of ${slideCount}`}
-                  onClick={() => openAt(carouselIdx)}
-                >
-                  <Media
-                    img={carousel.slides[slide].image}
-                    label={`[CAROUSEL IMAGE ${slide + 1} / ${slideCount}]`}
-                    aspect="4 / 5"
-                    cover
-                  />
-                </button>
-                <button
-                  className="icon-btn"
-                  aria-label="Previous slide"
-                  onClick={() => setSlide((s) => (s - 1 + slideCount) % slideCount)}
-                  style={carouselArrow("left")}
-                >
-                  <ChevronLeft />
-                </button>
-                <button
-                  className="icon-btn"
-                  aria-label="Next slide"
-                  onClick={() => setSlide((s) => (s + 1) % slideCount)}
-                  style={carouselArrow("right")}
-                >
-                  <ChevronRight />
-                </button>
-                <div
-                  style={{
-                    position: "absolute",
-                    left: 10,
-                    right: 10,
-                    bottom: 10,
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "space-between",
-                    gap: 8,
-                    pointerEvents: "none",
-                  }}
-                >
-                  <span
-                    aria-live="polite"
-                    style={{ background: "rgba(0,0,0,0.65)", borderRadius: 8, padding: "6px 10px", fontSize: 11, fontWeight: 500 }}
-                  >
-                    {carousel.slides[slide].caption}
-                  </span>
-                  <div style={{ display: "flex", gap: 4 }} aria-hidden="true">
-                    {carousel.slides.map((_, d) => (
-                      <span
-                        key={d}
+            <Masonry
+              items={[
+                {
+                  key: "carousel",
+                  ratio: 5 / 4,
+                  node: (
+                    <div style={{ position: "relative", ...cardBase, overflow: "hidden" }}>
+                      <button
+                        className="reset"
+                        aria-label={`Open ${carousel.title}, slide ${slide + 1} of ${slideCount}`}
+                        onClick={() => openAt(carouselIdx)}
+                      >
+                        <Media
+                          img={carousel.slides[slide].image}
+                          label={`[CAROUSEL IMAGE ${slide + 1} / ${slideCount}]`}
+                          aspect="4 / 5"
+                          cover
+                        />
+                      </button>
+                      <button
+                        className="icon-btn"
+                        aria-label="Previous slide"
+                        onClick={() => setSlide((s) => (s - 1 + slideCount) % slideCount)}
+                        style={carouselArrow("left")}
+                      >
+                        <ChevronLeft />
+                      </button>
+                      <button
+                        className="icon-btn"
+                        aria-label="Next slide"
+                        onClick={() => setSlide((s) => (s + 1) % slideCount)}
+                        style={carouselArrow("right")}
+                      >
+                        <ChevronRight />
+                      </button>
+                      <div
                         style={{
-                          display: "block",
-                          width: 6,
-                          height: 6,
-                          borderRadius: 999,
-                          background: d === slide ? "var(--text)" : "rgba(232,220,214,0.3)",
+                          position: "absolute",
+                          left: 10,
+                          right: 10,
+                          bottom: 10,
+                          display: "flex",
+                          alignItems: "center",
+                          justifyContent: "space-between",
+                          gap: 8,
+                          pointerEvents: "none",
                         }}
-                      />
-                    ))}
-                  </div>
-                </div>
-              </div>
-
-              {visualWork.map((w, i) => (
-                <WorkCard key={w.id} w={w} onClick={() => openAt(workIdx(i))} />
-              ))}
-            </div>
+                      >
+                        <span
+                          aria-live="polite"
+                          style={{ background: "rgba(0,0,0,0.65)", borderRadius: 8, padding: "6px 10px", fontSize: 11, fontWeight: 500 }}
+                        >
+                          {carousel.slides[slide].caption}
+                        </span>
+                        <div style={{ display: "flex", gap: 4 }} aria-hidden="true">
+                          {carousel.slides.map((_, d) => (
+                            <span
+                              key={d}
+                              style={{
+                                display: "block",
+                                width: 6,
+                                height: 6,
+                                borderRadius: 999,
+                                background: d === slide ? "var(--text)" : "rgba(232,220,214,0.3)",
+                              }}
+                            />
+                          ))}
+                        </div>
+                      </div>
+                    </div>
+                  ),
+                },
+                ...visualWork.map((w, i) => ({
+                  key: w.id,
+                  ratio: workRatio(w),
+                  node: <WorkCard w={w} onClick={() => openAt(workIdx(i))} />,
+                })),
+              ]}
+            />
           </main>
         </div>
       </div>
@@ -647,18 +659,104 @@ function CaseCard({ cs, onClick }: { cs: CaseStudy; onClick: (e: MouseEvent<HTML
 function WorkCard({ w, onClick }: { w: VisualWork; onClick: () => void }) {
   return (
     <button
-      className="reset card-hover m-item"
-      aria-label={`Open project: ${w.title}, ${w.type}`}
+      className="reset card-hover"
+      aria-label={`Open project: ${w.title}, ${w.type}${w.result ? `. ${w.result}` : ""}${w.compare ? ". Before and after" : ""}`}
       onClick={onClick}
       style={{ ...cardBase, overflow: "hidden" }}
     >
-      <Media img={w.image} label={`[IMAGE ${w.id.replace("work-", "")}]`} height={w.image ? undefined : w.placeholderHeight} />
-      {w.captioned && (
-        <div style={{ padding: "12px 14px 14px", display: "flex", flexDirection: "column", gap: 3 }}>
+      {w.compare ? (
+        <BeforeAfter before={w.compare.before} after={w.compare.after} delay={beforeAfterDelay(w.id)} />
+      ) : (
+        <Media
+          img={w.image}
+          label={`[IMAGE ${w.id.replace("work-", "")}]`}
+          height={w.image ? undefined : w.placeholderHeight}
+          sizes="(max-width: 479px) 100vw, (max-width: 767px) 50vw, (max-width: 1279px) 30vw, 22vw"
+        />
+      )}
+      {(w.captioned || w.result) && (
+        <div style={{ padding: "12px 14px 14px", display: "flex", flexDirection: "column", gap: 4 }}>
           <span style={{ fontSize: 13, fontWeight: 500 }}>{w.title}</span>
+          {w.result && (
+            <span style={{ display: "flex", gap: 7, fontSize: 12, lineHeight: 1.4, fontWeight: 500 }}>
+              <span
+                aria-hidden="true"
+                style={{ flexShrink: 0, width: 5, height: 5, marginTop: 6, borderRadius: 999, background: "var(--accent)" }}
+              />
+              {w.result}
+            </span>
+          )}
           <span style={{ fontSize: 11, color: meta }}>{w.type}</span>
         </div>
       )}
     </button>
+  );
+}
+
+/* ---------------- Masonry ---------------- */
+
+/** Approximate height / width of a wall card, used to balance the columns. */
+function workRatio(w: VisualWork) {
+  const caption = w.captioned || w.result ? (w.result ? 0.34 : 0.24) : 0;
+  if (w.compare) return w.compare.after.height / w.compare.after.width + caption;
+  if (w.image) return w.image.height / w.image.width + caption;
+  return w.placeholderHeight / 260 + caption;
+}
+
+/* Column counts from the approved layout: 5 / 4 / 3 / 2 / 1 */
+const COLUMN_QUERIES: [string, number][] = [
+  ["(min-width: 1600px)", 5],
+  ["(min-width: 1280px)", 4],
+  ["(min-width: 768px)", 3],
+  ["(min-width: 480px)", 2],
+];
+
+function useColumnCount() {
+  const [cols, setCols] = useState<number | null>(null);
+  useEffect(() => {
+    const mqs = COLUMN_QUERIES.map(([q, n]) => [window.matchMedia(q), n] as const);
+    const update = () => setCols(mqs.find(([m]) => m.matches)?.[1] ?? 1);
+    update();
+    mqs.forEach(([m]) => m.addEventListener("change", update));
+    return () => mqs.forEach(([m]) => m.removeEventListener("change", update));
+  }, []);
+  return cols;
+}
+
+/**
+ * Fills across rows: each card goes into the shortest column, so the first
+ * cards in the list always sit along the top of the wall. Before the column
+ * count is known (server render), it falls back to CSS columns.
+ */
+function Masonry({ items }: { items: { key: string; ratio: number; node: React.ReactNode }[] }) {
+  const cols = useColumnCount();
+  if (cols === null) {
+    return (
+      <div className="masonry">
+        {items.map((it) => (
+          <div key={it.key} className="m-item">
+            {it.node}
+          </div>
+        ))}
+      </div>
+    );
+  }
+  const columns: (typeof items)[] = Array.from({ length: cols }, () => []);
+  const heights = new Array(cols).fill(0);
+  for (const it of items) {
+    const c = heights.indexOf(Math.min(...heights));
+    columns[c].push(it);
+    heights[c] += it.ratio + 0.04;
+  }
+  return (
+    <div style={{ display: "flex", gap: 10, alignItems: "flex-start" }}>
+      {columns.map((col, i) => (
+        <div key={i} style={{ flex: "1 1 0", minWidth: 0, display: "flex", flexDirection: "column", gap: 10 }}>
+          {col.map((it) => (
+            <div key={it.key}>{it.node}</div>
+          ))}
+        </div>
+      ))}
+    </div>
   );
 }

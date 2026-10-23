@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 import { IMG } from "@/lib/images.generated";
+import type { Img } from "@/lib/content";
 
 type Kind = "portal" | "builder";
 
@@ -50,6 +51,27 @@ function PortalPreview({ aspect, priority }: { aspect: string; priority?: boolea
       </div>
       <span className="pv-tag pv-tag-before">Before</span>
       <span className="pv-tag pv-tag-after">After</span>
+    </div>
+  );
+}
+
+/* Wall tile: a divider sweeps across to reveal the after, holds, then sweeps back. */
+export function BeforeAfter({ before, after, delay = 0 }: { before: Img; after: Img; delay?: number }) {
+  const anim = { animationDelay: `${delay}s` };
+  const sizes = "(max-width: 479px) 100vw, (max-width: 767px) 50vw, (max-width: 1279px) 30vw, 22vw";
+  return (
+    <div className="ba" style={{ aspectRatio: `${after.width} / ${after.height}` }} aria-hidden="true">
+      <Image src={after.src} alt="" fill sizes={sizes} placeholder="blur" blurDataURL={after.blurDataURL} style={{ objectFit: "cover" }} />
+      <div className="ba-before" style={anim}>
+        <Image src={before.src} alt="" fill sizes={sizes} placeholder="blur" blurDataURL={before.blurDataURL} style={{ objectFit: "cover" }} />
+      </div>
+      <span className="ba-line" style={anim} />
+      <span className="pv-tag ba-tag-before" style={anim}>
+        Before
+      </span>
+      <span className="pv-tag ba-tag-after" style={anim}>
+        After
+      </span>
     </div>
   );
 }

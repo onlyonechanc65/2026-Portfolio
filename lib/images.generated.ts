@@ -89,5 +89,83 @@ export const IMG = {
     "width": 1280,
     "height": 800,
     "blurDataURL": "data:image/webp;base64,UklGRkQAAABXRUJQVlA4IDgAAADwAQCdASoMAAgAA4BaJZgCdAEQ/d45RAAA/u6mw8VWXMIIl2S1knQdoLrqfA1bLD/68s5v5C7AAA=="
+  },
+  "aerotek/01": {
+    "src": "/work/aerotek/01.webp",
+    "width": 1091,
+    "height": 930,
+    "blurDataURL": "data:image/webp;base64,UklGRmgAAABXRUJQVlA4IFwAAADwAQCdASoMAAoAA4BaJYgCdAELS7C4qwAA/tIvu53Es16dqsvzv1kDJlDBktqwFX19kyiQqrI8KOxSW/wc5oHxOgos24Ay3mRmLPTYLiZXT2G3VOCZGe8sdQPAAA=="
+  },
+  "aerotek/02": {
+    "src": "/work/aerotek/02.webp",
+    "width": 1920,
+    "height": 1080,
+    "blurDataURL": "data:image/webp;base64,UklGRlIAAABXRUJQVlA4IEYAAAAwAgCdASoMAAcAA4BaJYwC7AYqXzkTntzFAAD+9xKEHvtwdblz/Xvjr0W7WBedGacGNr2lvG3eRZnYHFm79+iAb1FiwAAA"
+  },
+  "aerotek/03": {
+    "src": "/work/aerotek/03.webp",
+    "width": 1920,
+    "height": 1080,
+    "blurDataURL": "data:image/webp;base64,UklGRlIAAABXRUJQVlA4IEYAAADwAQCdASoMAAcAA4BaJZQCdAEPhRt53ZAA/sqBkUOE+NYfHHJPcvDwM2hz2SFHN9UlgG2+kbnIwwO/whoPjei/SZw2AAAA"
+  },
+  "colby-solar/01": {
+    "src": "/work/colby-solar/01.webp",
+    "width": 1920,
+    "height": 1080,
+    "blurDataURL": "data:image/webp;base64,UklGRkwAAABXRUJQVlA4IEAAAAAQAgCdASoMAAcAA4BaJZwCdAEXp0xJk+rgAP7zJhN81UFQOGK6xQ2z8p043IgUn2VzhXgzIipH0oxXlUZpIAAA"
+  },
+  "colby-solar/02": {
+    "src": "/work/colby-solar/02.webp",
+    "width": 1920,
+    "height": 1080,
+    "blurDataURL": "data:image/webp;base64,UklGRk4AAABXRUJQVlA4IEIAAADQAQCdASoMAAcAA4BaJZQC7ADbINLXAAD+9OaLplUb9E0xf14PHYV6V3YJODzXYI+KLcfCLGxWv2Oq2lzc0yCBgAA="
+  },
+  "colby-solar/03": {
+    "src": "/work/colby-solar/03.webp",
+    "width": 1920,
+    "height": 1080,
+    "blurDataURL": "data:image/webp;base64,UklGRjwAAABXRUJQVlA4IDAAAABwAQCdASoMAAcAA4BaJZQCdAFAAAD+8QBzOAqJ1qq6UQ7U+r0L6cJOo98GfdYAAAA="
+  },
+  "colby-solar/04": {
+    "src": "/work/colby-solar/04.webp",
+    "width": 1920,
+    "height": 1080,
+    "blurDataURL": "data:image/webp;base64,UklGRkYAAABXRUJQVlA4IDoAAADwAQCdASoMAAcAA4BaJZQCdAEWPXjEpzwA/t3TSi+dM16mnXExaY+0rW9V7VJWkZ8Giap0FWURjgAA"
+  },
+  "cyberpunk-promo/before": {
+    "src": "/work/cyberpunk-promo/before.webp",
+    "width": 1080,
+    "height": 1350,
+    "blurDataURL": "data:image/webp;base64,UklGRmAAAABXRUJQVlA4IFQAAAAQAgCdASoMAA8AA4BaJYwCdADdRjFHNGdAAP70p0TcLZQ9DHG1njU/c9U3Qk9UApamFO3FCIM2yoPcU90LZKe7p9Hjh3Tec90IixG5uO2tGAuoAAA="
+  },
+  "cyberpunk-promo/after": {
+    "src": "/work/cyberpunk-promo/after.webp",
+    "width": 1080,
+    "height": 1350,
+    "blurDataURL": "data:image/webp;base64,UklGRnIAAABXRUJQVlA4IGYAAAAwAgCdASoMAA8AA4BaJbACdADdIdErihoeAAD+T+SCH65DW77g8HiF2haEO4dEO/jbXqltOdsKBEWt1XsLt1ndgm6Xza2RKBIQA2iGITqC1BGX3J9z8f25djmv2lPFMWgYewUwAAA="
+  },
+  "who-can-i-run-to/before": {
+    "src": "/work/who-can-i-run-to/before.webp",
+    "width": 1080,
+    "height": 1350,
+    "blurDataURL": "data:image/webp;base64,UklGRkYAAABXRUJQVlA4IDoAAABQAgCdASoMAA8AA4BaJbACdLoAAkc3AM55pdAA+dmKN5ofJQSVXdor/7+78aXxLv/xvHgV0w59AAAA"
+  },
+  "who-can-i-run-to/after": {
+    "src": "/work/who-can-i-run-to/after.webp",
+    "width": 1080,
+    "height": 1350,
+    "blurDataURL": "data:image/webp;base64,UklGRkgAAABXRUJQVlA4IDwAAADwAQCdASoMAA8AA4BaJbACdAEPAASsXQAA/uvRd4ziFbu3cdQAPXFW5iIreDZIpuR/8EF/EF/EFYAAAAA="
+  },
+  "ravens-poster/01": {
+    "src": "/work/ravens-poster/01.webp",
+    "width": 1080,
+    "height": 1350,
+    "blurDataURL": "data:image/webp;base64,UklGRmQAAABXRUJQVlA4IFgAAADwAQCdASoMAA8AA4BaJbACdAEPAltQ/IAA/vbhYheZn9uQ3+Jvk9wWGiHZUeQUUyKy7MHksB+dFnQQqYgfyEG3zG5id/eM+MDFfRQm3EEYg/hxjex5BlAA"
+  },
+  "tank-davis-poster/01": {
+    "src": "/work/tank-davis-poster/01.webp",
+    "width": 1500,
+    "height": 2000,
+    "blurDataURL": "data:image/webp;base64,UklGRowAAABXRUJQVlA4IIAAAACwAgCdASoMABAAA4BaJbACdFQAFO6Vz1Z9H7XyMUAA/vG1Fty25N8gYS6HAxqYIDB0uzxcsnTD4PgTrfvp6404A6CRXYrsI9okkmKPF/mbKU/MIsdtNZi0ITT0IPBPcQGx73egLU2cGIOXWO+CXn8QBPuQV50EJaefRzphYQuAAA=="
   }
 } as const;

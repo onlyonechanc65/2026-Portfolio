@@ -16,6 +16,7 @@ export type Img = {
 };
 
 import { partnerPortal, imageBuilder } from "./case-studies";
+import { projects } from "./projects";
 
 /** The four kinds of story beats the case studies call out */
 export type CalloutKind = "Wrong turn" | "Research that changed direction" | "Tradeoff" | "Stakeholder feedback";
@@ -65,6 +66,12 @@ export type VisualWork = {
   image?: Img;
   /** Full-length images shown inside the lightbox, top to bottom */
   detail?: Img[];
+  /** One-line result shown on the wall card */
+  result?: string;
+  /** Short write-up shown above the images in the lightbox */
+  summary?: { about: string; did: string; results: string[] };
+  /** Animated before/after on the wall card; both shown side by side in the lightbox */
+  compare?: { before: Img; after: Img };
 };
 
 export const profile = {
@@ -162,13 +169,16 @@ const placeholderCase = (num: string): CaseStudy => ({
 export const caseStudies: CaseStudy[] = [partnerPortal, imageBuilder];
 void placeholderCase;
 
-const heights = [220, 340, 260, 180, 300, 240, 380, 200, 280, 320, 230, 260, 190, 350, 250, 290];
-const captioned = [true, false, true, false, false, true, false, true, false, true, false, false, true, false, true, false];
-
-export const visualWork: VisualWork[] = heights.map((h, i) => ({
+/* Gray placeholder tiles that hold space until more projects arrive. Delete one per real project added. */
+const heights = [220, 340, 260, 180, 300, 240, 380, 200, 280, 320];
+const captioned = [true, false, true, false, false, true, false, true, false, true];
+const placeholders: VisualWork[] = heights.map((h, i) => ({
   id: `work-${String(i + 1).padStart(2, "0")}`,
   title: `[Project title ${i + 1}]`,
   type: "[Project type]",
   captioned: captioned[i],
   placeholderHeight: h,
 }));
+
+/* Real projects first (they fill the top row of the wall), then placeholders. */
+export const visualWork: VisualWork[] = [...projects, ...placeholders];

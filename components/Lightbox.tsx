@@ -183,10 +183,50 @@ export function Lightbox({
   );
 }
 
+const metaColor = "rgba(232,220,214,0.6)";
+
+function Summary({ s }: { s: NonNullable<VisualWork["summary"]> }) {
+  const p = { margin: 0, fontSize: 15, lineHeight: 1.6, color: "var(--text-muted)", maxWidth: 680 } as const;
+  return (
+    <div style={{ padding: "32px clamp(20px, 6%, 56px)", display: "flex", flexDirection: "column", gap: 14 }}>
+      <p style={p}>{s.about}</p>
+      <p style={p}>{s.did}</p>
+      <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))", gap: 10, marginTop: 6 }}>
+        {s.results.map((r) => (
+          <div
+            key={r}
+            style={{ background: "rgba(232,220,214,0.05)", borderRadius: 12, padding: "14px 16px", display: "flex", flexDirection: "column", gap: 4 }}
+          >
+            <span style={{ fontSize: 11, fontWeight: 500, color: metaColor }}>Result</span>
+            <span style={{ fontSize: 15, fontWeight: 700, lineHeight: 1.35 }}>{r}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
 function VisualDetail({ item }: { item: Exclude<LightboxItem, { kind: "case" }> }) {
+  if (item.kind === "work" && item.w.compare) {
+    const { before, after } = item.w.compare;
+    return (
+      <div className="fig-grid pair" style={{ padding: 10 }}>
+        {[
+          { img: before, label: "Before" },
+          { img: after, label: "After" },
+        ].map((x) => (
+          <div key={x.label} style={{ display: "flex", flexDirection: "column", gap: 8, minWidth: 0 }}>
+            <span style={{ fontSize: 11, fontWeight: 500, color: metaColor, padding: "4px 2px 0" }}>{x.label}</span>
+            <Media img={x.img} label="" sizes="(max-width: 1100px) 50vw, 480px" style={{ borderRadius: 10 }} />
+          </div>
+        ))}
+      </div>
+    );
+  }
+
   const imgs =
     item.kind === "work"
-      ? item.w.detail ?? (item.w.image ? [item.w.image] : [])
+      ? [...(item.w.image ? [item.w.image] : []), ...(item.w.detail ?? [])]
       : item.kind === "carousel"
         ? carousel.slides.flatMap((s) => (s.image ? [s.image] : []))
         : photoStack.photos;
@@ -194,6 +234,7 @@ function VisualDetail({ item }: { item: Exclude<LightboxItem, { kind: "case" }> 
   if (imgs.length) {
     return (
       <div style={{ display: "flex", flexDirection: "column" }}>
+        {item.kind === "work" && item.w.summary && <Summary s={item.w.summary} />}
         {imgs.map((img) => (
           <Media key={img.src} img={img} label="" sizes="(max-width: 1100px) 100vw, 960px" />
         ))}

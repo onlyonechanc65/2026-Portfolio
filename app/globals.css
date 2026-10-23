@@ -316,6 +316,59 @@ a {
   95%, 100% { opacity: 0; }
 }
 
+/* ---------- Before / after wall tiles ---------- */
+.ba {
+  position: relative;
+  overflow: hidden;
+  background: var(--card);
+}
+.ba-before {
+  position: absolute;
+  inset: 0;
+  animation: baWipe 10s ease-in-out infinite;
+}
+.ba-line {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  margin-left: -1px;
+  background: var(--text);
+  box-shadow: 0 0 12px rgba(0, 0, 0, 0.6);
+  animation: baLine 10s ease-in-out infinite;
+  z-index: 2;
+}
+.ba-tag-before {
+  animation: baTagBefore 10s ease-in-out infinite;
+}
+.ba-tag-after {
+  animation: baTagAfter 10s ease-in-out infinite;
+}
+@keyframes baWipe {
+  0%, 30% { clip-path: inset(0 0 0 0); }
+  48%, 82% { clip-path: inset(0 0 0 100%); }
+  100% { clip-path: inset(0 0 0 0); }
+}
+@keyframes baLine {
+  0%, 30% { left: 0%; opacity: 0; }
+  32% { left: 2%; opacity: 1; }
+  46% { left: 98%; opacity: 1; }
+  48%, 82% { left: 100%; opacity: 0; }
+  84% { left: 98%; opacity: 1; }
+  98% { left: 2%; opacity: 1; }
+  100% { left: 0%; opacity: 0; }
+}
+@keyframes baTagBefore {
+  0%, 34% { opacity: 1; }
+  38%, 94% { opacity: 0; }
+  98%, 100% { opacity: 1; }
+}
+@keyframes baTagAfter {
+  0%, 40% { opacity: 0; }
+  44%, 86% { opacity: 1; }
+  90%, 100% { opacity: 0; }
+}
+
 /* ---------- Case-study figures ---------- */
 .fig-grid {
   display: grid;
@@ -359,9 +412,15 @@ a {
     animation: none;
   }
   .pv-before,
-  .pv-tag-before {
+  .pv-tag-before,
+  .ba-before,
+  .ba-line,
+  .ba-tag-before {
     animation: none;
     display: none;
+  }
+  .ba-tag-after {
+    animation: none;
   }
   html {
     scroll-behavior: auto !important;
