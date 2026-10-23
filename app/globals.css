@@ -1,0 +1,240 @@
+@import "tailwindcss";
+
+:root {
+  --bg: #000000;
+  --card: #0c0c0c;
+  --accent: #f48622;
+  --text: #e8dcd6;
+  --text-muted: rgba(232, 220, 214, 0.62);
+  --line: rgba(232, 220, 214, 0.1);
+  --ph: rgba(232, 220, 214, 0.06);
+  color-scheme: dark;
+}
+
+@theme inline {
+  --color-bg: var(--bg);
+  --color-card: var(--card);
+  --color-accent: var(--accent);
+  --color-ink: var(--text);
+  --color-muted: var(--text-muted);
+  --color-line: var(--line);
+  --font-sans: var(--font-satoshi), system-ui, sans-serif;
+}
+
+html,
+body {
+  background: var(--bg);
+  color: var(--text);
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-satoshi), system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+a {
+  color: var(--text);
+}
+
+::selection {
+  background: var(--accent);
+  color: #000000;
+}
+
+/* ---------- Shared pieces ---------- */
+.reset {
+  border: 0;
+  padding: 0;
+  margin: 0;
+  background: none;
+  font: inherit;
+  color: inherit;
+  text-align: left;
+  cursor: pointer;
+  display: block;
+  width: 100%;
+}
+
+.card-hover {
+  transition: transform 0.18s ease-out, filter 0.18s ease-out;
+}
+.card-hover:hover {
+  transform: scale(1.015);
+  filter: brightness(1.15);
+}
+
+.icon-btn {
+  transition: background 0.15s ease-out;
+}
+.icon-btn:hover {
+  background: rgba(232, 220, 214, 0.18) !important;
+}
+
+.cta {
+  transition: background 0.15s ease-out;
+}
+.cta:hover {
+  background: #ff9a3d;
+}
+
+:where(a, button, [tabindex]):focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 14px;
+}
+.icon-btn:focus-visible,
+.cta:focus-visible {
+  border-radius: 999px;
+}
+
+.ph {
+  background: var(--ph);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  font-weight: 500;
+  color: rgba(232, 220, 214, 0.6);
+  text-align: center;
+}
+
+.dots {
+  background-image: radial-gradient(rgba(232, 220, 214, 0.14) 1px, transparent 1.2px);
+  background-size: 9px 9px;
+}
+
+/* ---------- Layout ---------- */
+.side {
+  flex: 0 0 320px;
+  min-width: 0;
+}
+.main {
+  flex: 999 1 560px;
+  min-width: 0;
+}
+
+.masonry {
+  column-count: 4;
+  column-gap: 10px;
+}
+.m-item {
+  break-inside: avoid;
+  margin: 0 0 10px 0;
+}
+
+@media (min-width: 1600px) {
+  .masonry {
+    column-count: 5;
+  }
+}
+@media (max-width: 1279px) {
+  .masonry {
+    column-count: 3;
+  }
+}
+@media (max-width: 1023px) {
+  .side {
+    flex: 1 1 100%;
+    display: grid !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .side > .span-all {
+    grid-column: 1 / -1;
+  }
+}
+@media (max-width: 767px) {
+  .masonry {
+    column-count: 2;
+  }
+}
+@media (max-width: 599px) {
+  .side {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+@media (max-width: 479px) {
+  .masonry {
+    column-count: 1;
+  }
+}
+
+/* ---------- Lightbox ---------- */
+.overlay {
+  animation: fadeIn 0.2s ease-out;
+}
+.frame {
+  position: absolute;
+  top: 80px;
+  bottom: 28px;
+  left: 72px;
+  right: 72px;
+  max-width: 960px;
+  margin: 0 auto;
+  border-radius: 14px;
+  background: var(--card);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  animation: rise 0.2s ease-out;
+}
+.lb-arrow {
+  top: 50%;
+  margin-top: -22px;
+}
+@media (max-width: 767px) {
+  .frame {
+    left: 0;
+    right: 0;
+    top: 72px;
+    bottom: 76px;
+  }
+  .lb-arrow {
+    top: auto;
+    bottom: 16px;
+    margin-top: 0;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    backdrop-filter: blur(0px);
+  }
+  to {
+    opacity: 1;
+  }
+}
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* ---------- Sticky name pill ---------- */
+.name-pill {
+  transition: opacity 0.18s ease-out, transform 0.18s ease-out;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .card-hover,
+  .card-hover:hover {
+    transition: none;
+    transform: none;
+  }
+  .overlay,
+  .frame {
+    animation: none;
+  }
+  .name-pill {
+    transition: none;
+  }
+  html {
+    scroll-behavior: auto !important;
+  }
+}

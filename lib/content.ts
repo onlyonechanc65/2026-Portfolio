@@ -1,0 +1,148 @@
+/**
+ * All site content lives here. Swap placeholders for real content as it arrives.
+ * Anything in [square brackets] is a placeholder.
+ *
+ * Images: put files in /public/work/... and set `image: { src, alt, width, height }`.
+ * When `image` is missing, a gray placeholder block is shown instead.
+ */
+
+export type Img = {
+  src: string;
+  alt: string;
+  width: number;
+  height: number;
+  /** Tiny base64 image for the blur-up placeholder (generated when images are added) */
+  blurDataURL?: string;
+};
+
+export type CaseStudy = {
+  slug: string;
+  num: string;
+  title: string;
+  role: string;
+  outcome: string;
+  product: string;
+  summary: string;
+  hero?: Img;
+  meta: { label: string; value: string }[];
+  sections: { title: string; body: string[]; images?: Img[]; placeholderImage?: boolean }[];
+  impact: { metric: string; label: string }[];
+};
+
+export type VisualWork = {
+  id: string;
+  title: string;
+  type: string;
+  /** Shows title/type under the image on the wall */
+  captioned: boolean;
+  /** Placeholder height in px, used only when there is no image */
+  placeholderHeight: number;
+  image?: Img;
+  /** Full-length images shown inside the lightbox, top to bottom */
+  detail?: Img[];
+};
+
+export const profile = {
+  name: "Chanc Baylor",
+  title: "Senior Product Designer",
+  company: "ServiceNow",
+  photo: undefined as Img | undefined,
+  intro:
+    "I design the hard parts of enterprise products: onboarding, permissions and data-heavy workflows. 8+ years turning research and analytics into measurable wins across SaaS, fintech, healthcare and e-commerce for ServiceNow, T. Rowe Price, PointClickCare, Under Armour & more.",
+  closing:
+    "Research-led, from usability testing and behavioral analytics to design systems and high-fidelity prototypes.",
+  linkedin: "https://www.linkedin.com/in/cbaylor",
+  email: "baylorchanc@gmail.com",
+};
+
+export const currentRole = {
+  company: "ServiceNow",
+  role: "Senior UX Designer",
+  years: "2024 – Present",
+  logo: undefined as Img | undefined,
+};
+
+export const clients = {
+  range: "2018 – 2026",
+  /** Add { name, logo } entries. Placeholder circles show until then. */
+  items: Array.from({ length: 7 }, (_, i) => ({
+    name: `[Client ${i + 1}]`,
+    logo: undefined as Img | undefined,
+  })),
+};
+
+export const location = {
+  city: "Baltimore, Maryland",
+  timeZone: "America/New_York",
+};
+
+export const about = {
+  title: "About & Resume",
+  line: "[One line on what you want next, e.g. the kind of team or problem you want to work on.]",
+  /** Put the PDF at /public/resume.pdf and set this to "/resume.pdf" */
+  resumeUrl: null as string | null,
+};
+
+export const photoStack = {
+  id: "photo-set",
+  title: "[Photo set title]",
+  count: "[#]",
+  type: "[Photo set]",
+  photos: [] as Img[],
+};
+
+export const carousel = {
+  id: "carousel",
+  title: "[Carousel project]",
+  type: "[Project type]",
+  slides: Array.from({ length: 4 }, (_, i) => ({
+    caption: `[Slide caption ${i + 1}]`,
+    image: undefined as Img | undefined,
+  })),
+};
+
+const placeholderCase = (num: string): CaseStudy => ({
+  slug: `case-study-${num}`,
+  num,
+  title: "[Case study title]",
+  role: "[Your role]",
+  outcome: "[One-line outcome]",
+  product: "[Product]",
+  summary: "[One-paragraph summary: the product, who it serves, and the outcome.]",
+  meta: [
+    { label: "Role", value: "[Your role]" },
+    { label: "Team", value: "[Team / partners]" },
+    { label: "Timeline", value: "[Timeline]" },
+    { label: "Tools", value: "[Tools]" },
+  ],
+  sections: [
+    { title: "Problem", body: ["[What was broken, for whom, and why it mattered to the business.]"] },
+    { title: "My role", body: ["[What you owned, who you worked with, and the decisions that were yours.]"] },
+    {
+      title: "Process",
+      body: ["[Research, synthesis, journey mapping, iterations: the moments that changed direction.]"],
+      placeholderImage: true,
+    },
+    { title: "Solution", body: ["[The shipped design and the key decisions behind it.]"], placeholderImage: true },
+    { title: "Impact", body: ["[Results after launch, and what you would do next.]"] },
+  ],
+  impact: [
+    { metric: "[Metric]", label: "[What it measured]" },
+    { metric: "[Metric]", label: "[What it measured]" },
+    { metric: "[Metric]", label: "[What it measured]" },
+  ],
+});
+
+/** Featured row holds up to 3. Add the 3rd here when it's ready. */
+export const caseStudies: CaseStudy[] = [placeholderCase("01"), placeholderCase("02")];
+
+const heights = [220, 340, 260, 180, 300, 240, 380, 200, 280, 320, 230, 260, 190, 350, 250, 290];
+const captioned = [true, false, true, false, false, true, false, true, false, true, false, false, true, false, true, false];
+
+export const visualWork: VisualWork[] = heights.map((h, i) => ({
+  id: `work-${String(i + 1).padStart(2, "0")}`,
+  title: `[Project title ${i + 1}]`,
+  type: "[Project type]",
+  captioned: captioned[i],
+  placeholderHeight: h,
+}));

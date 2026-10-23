@@ -1,0 +1,210 @@
+"use client";
+
+import { useEffect, useRef } from "react";
+import { carousel, photoStack, type CaseStudy, type VisualWork } from "@/lib/content";
+import { CaseStudyArticle } from "./CaseStudyArticle";
+import { Media } from "./Media";
+import { ChevronLeft, ChevronRight, Close } from "./Icons";
+
+export type LightboxItem =
+  | { kind: "case"; cs: CaseStudy }
+  | { kind: "carousel" }
+  | { kind: "stack" }
+  | { kind: "work"; w: VisualWork };
+
+function describe(item: LightboxItem) {
+  switch (item.kind) {
+    case "case":
+      return { key: item.cs.slug, title: item.cs.title, sub: `${item.cs.role} · ${item.cs.product}` };
+    case "carousel":
+      return { key: carousel.id, title: carousel.title, sub: carousel.type };
+    case "stack":
+      return { key: photoStack.id, title: photoStack.title, sub: photoStack.type };
+    case "work":
+      return { key: item.w.id, title: item.w.title, sub: item.w.type };
+  }
+}
+
+const btn = {
+  position: "absolute" as const,
+  width: 44,
+  height: 44,
+  borderRadius: 999,
+  border: 0,
+  background: "rgba(232,220,214,0.10)",
+  color: "var(--text)",
+  cursor: "pointer",
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
+  zIndex: 2,
+};
+
+export function Lightbox({
+  item,
+  onClose,
+  onPrev,
+  onNext,
+  focusClose = true,
+}: {
+  focusClose?: boolean;
+  item: LightboxItem;
+  onClose: () => void;
+  onPrev: () => void;
+  onNext: () => void;
+}) {
+  const dialogRef = useRef<HTMLDivElement>(null);
+  const closeRef = useRef<HTMLButtonElement>(null);
+  const frameRef = useRef<HTMLDivElement>(null);
+  const touch = useRef<{ x: number; y: number } | null>(null);
+  const { key, title, sub } = describe(item);
+
+  useEffect(() => {
+    // Opened from the grid: move focus in. Opened from a shared link: focus the dialog quietly.
+    if (focusClose) closeRef.current?.focus({ preventScroll: true });
+    else dialogRef.current?.focus({ preventScroll: true });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  // New item: start at the top of the frame
+  useEffect(() => {
+    frameRef.current?.scrollTo({ top: 0 });
+  }, [key]);
+
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        e.preventDefault();
+        onClose();
+      } else if (e.key === "ArrowLeft") {
+        e.preventDefault();
+        onPrev();
+      } else if (e.key === "ArrowRight") {
+        e.preventDefault();
+        onNext();
+      } else if (e.key === "Tab" && dialogRef.current) {
+        const nodes = Array.from(
+          dialogRef.current.querySelectorAll<HTMLElement>(
+            'button, a[href], [tabindex]:not([tabindex="-1"])'
+          )
+        ).filter((n) => !n.hasAttribute("disabled"));
+        if (!nodes.length) return;
+        const first = nodes[0];
+        const last = nodes[nodes.length - 1];
+        const active = document.activeElement;
+        if (e.shiftKey && (active === first || !dialogRef.current.contains(active))) {
+          e.preventDefault();
+          last.focus();
+        } else if (!e.shiftKey && (active === last || !dialogRef.current.contains(active))) {
+          e.preventDefault();
+          first.focus();
+        }
+      }
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [onClose, onPrev, onNext]);
+
+  return (
+    <div
+      ref={dialogRef}
+      className="overlay"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="lb-title"
+      tabIndex={-1}
+      onTouchStart={(e) => {
+        const t = e.touches[0];
+        touch.current = { x: t.clientX, y: t.clientY };
+      }}
+      onTouchEnd={(e) => {
+        const start = touch.current;
+        touch.current = null;
+        if (!start) return;
+        const t = e.changedTouches[0];
+        const dx = t.clientX - start.x;
+        const dy = t.clientY - start.y;
+        if (Math.abs(dx) > 60 && Math.abs(dx) > Math.abs(dy) * 1.5) {
+          if (dx < 0) onNext();
+          else onPrev();
+        }
+      }}
+      onClick={(e) => {
+        if (e.target === e.currentTarget) onClose();
+      }}
+      style={{
+        position: "fixed",
+        inset: 0,
+        zIndex: 50,
+        background: "rgba(0,0,0,0.7)",
+        WebkitBackdropFilter: "blur(22px)",
+        backdropFilter: "blur(22px)",
+      }}
+    >
+      <div
+        style={{
+          position: "absolute",
+          left: 20,
+          top: 18,
+          right: 80,
+          display: "flex",
+          flexDirection: "column",
+          gap: 2,
+          minWidth: 0,
+        }}
+      >
+        <span
+          id="lb-title"
+          style={{ fontSize: 13, fontWeight: 700, whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}
+        >
+          {title}
+        </span>
+        <span style={{ fontSize: 11, color: "rgba(232,220,214,0.6)" }}>{sub}</span>
+      </div>
+
+      <button ref={closeRef} className="icon-btn" aria-label="Close" onClick={onClose} style={{ ...btn, right: 16, top: 14 }}>
+        <Close />
+      </button>
+      <button className="icon-btn lb-arrow" aria-label="Previous project" onClick={onPrev} style={{ ...btn, left: 14 }}>
+        <ChevronLeft />
+      </button>
+      <button className="icon-btn lb-arrow" aria-label="Next project" onClick={onNext} style={{ ...btn, right: 14 }}>
+        <ChevronRight />
+      </button>
+
+      <div ref={frameRef} key={key} className="frame" tabIndex={-1}>
+        {item.kind === "case" ? (
+          <CaseStudyArticle cs={item.cs} />
+        ) : (
+          <VisualDetail item={item} />
+        )}
+      </div>
+    </div>
+  );
+}
+
+function VisualDetail({ item }: { item: Exclude<LightboxItem, { kind: "case" }> }) {
+  const imgs =
+    item.kind === "work"
+      ? item.w.detail ?? (item.w.image ? [item.w.image] : [])
+      : item.kind === "carousel"
+        ? carousel.slides.flatMap((s) => (s.image ? [s.image] : []))
+        : photoStack.photos;
+
+  if (imgs.length) {
+    return (
+      <div style={{ display: "flex", flexDirection: "column" }}>
+        {imgs.map((img) => (
+          <Media key={img.src} img={img} label="" sizes="(max-width: 1100px) 100vw, 960px" />
+        ))}
+      </div>
+    );
+  }
+
+  return (
+    <div style={{ display: "flex", flexDirection: "column" }}>
+      <Media label="[FULL-PAGE DESIGN: scrolls inside this frame]" height={760} />
+      <Media label="[CONTINUED]" height={620} style={{ background: "rgba(232,220,214,0.035)" }} />
+    </div>
+  );
+}
