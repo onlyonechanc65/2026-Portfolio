@@ -17,6 +17,7 @@ export type Img = {
 
 import { partnerPortal, imageBuilder } from "./case-studies";
 import { projects } from "./projects";
+import { IMG } from "./images.generated";
 
 /** The four kinds of story beats the case studies call out */
 export type CalloutKind = "Wrong turn" | "Research that changed direction" | "Tradeoff" | "Stakeholder feedback";
@@ -116,12 +117,19 @@ export const about = {
   resumeUrl: null as string | null,
 };
 
+/** Photo set: the first photo sits on top of the stack. Order keeps the two Italy photos apart. */
 export const photoStack = {
   id: "photo-set",
-  title: "[Photo set title]",
-  count: "[#]",
-  type: "[Photo set]",
-  photos: [] as Img[],
+  title: "Off the clock",
+  count: "",
+  type: "Photos",
+  photos: [
+    { key: "photos/barbados", caption: "Summer in Barbados", alt: "Chanc in a white shirt and shorts walking down a palm-lined path in Barbados." },
+    { key: "photos/sardegna", caption: "At a cove in North Sardegna, Italy", alt: "A turquoise cove ringed by granite boulders in northern Sardinia, with one boat anchored." },
+    { key: "photos/virgin-islands", caption: "Jet skis in the Virgin Islands", alt: "Chanc and a friend on two jet skis in turquoise water below green hills in the Virgin Islands." },
+    { key: "photos/new-orleans", caption: "My fiancé and I in New Orleans!", alt: "A smiling selfie of Chanc and his fiancée in a New Orleans restaurant with orange velvet booths." },
+    { key: "photos/italy-family", caption: "Family photo in Italy", alt: "Chanc with family in white and light colors, posed in front of a marble altar in an Italian church." },
+  ].map((p) => ({ img: { ...IMG[p.key as keyof typeof IMG], alt: p.alt } as Img, caption: p.caption })),
 };
 
 export const carousel = {

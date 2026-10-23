@@ -167,5 +167,35 @@ export const IMG = {
     "width": 1500,
     "height": 2000,
     "blurDataURL": "data:image/webp;base64,UklGRowAAABXRUJQVlA4IIAAAACwAgCdASoMABAAA4BaJbACdFQAFO6Vz1Z9H7XyMUAA/vG1Fty25N8gYS6HAxqYIDB0uzxcsnTD4PgTrfvp6404A6CRXYrsI9okkmKPF/mbKU/MIsdtNZi0ITT0IPBPcQGx73egLU2cGIOXWO+CXn8QBPuQV50EJaefRzphYQuAAA=="
+  },
+  "photos/barbados": {
+    "src": "/work/photos/barbados.webp",
+    "width": 1350,
+    "height": 1800,
+    "blurDataURL": "data:image/webp;base64,UklGRnIAAABXRUJQVlA4IGYAAAAQAgCdASoMABAAA4BaJYgCdACwDq+R/HEAAP6jG8qxvk/OZQ55zmJvSLamDFGZ/L5DgFhGga3ILn9OJzHSGEDgQLFX2gadru7g4JHemKI6CeC/JfVYESO+RhiW90JQulXAyOQAAAA="
+  },
+  "photos/virgin-islands": {
+    "src": "/work/photos/virgin-islands.webp",
+    "width": 1350,
+    "height": 1800,
+    "blurDataURL": "data:image/webp;base64,UklGRloAAABXRUJQVlA4IE4AAADwAQCdASoMABAAA4BaJbACdAD0EtS8UN4A/t3AeclnoM/JIaw1PeweUjP+FBPMStc+FHPUqkrIIT6TOaHYvUrfzRv6fsP2SJe4PuYwAAA="
+  },
+  "photos/sardegna": {
+    "src": "/work/photos/sardegna.webp",
+    "width": 1350,
+    "height": 1800,
+    "blurDataURL": "data:image/webp;base64,UklGRlYAAABXRUJQVlA4IEoAAABwAgCdASoMABAAA4BaJZACdH8GJ/ggchsrnvGAAP7nVd4VEgZfkzeGkVhbsGx+AWlkfXTL4ylic8BlOdkBxMTyLz9MMMMhhQAAAA=="
+  },
+  "photos/italy-family": {
+    "src": "/work/photos/italy-family.webp",
+    "width": 1600,
+    "height": 1067,
+    "blurDataURL": "data:image/webp;base64,UklGRkQAAABXRUJQVlA4IDgAAACwAQCdASoMAAgAA4BaJZwAAsbllVsAAPY0c/E2p1CFPiLwPYhpzSW4AOxzjV8eyGE/rDsVdYAAAA=="
+  },
+  "photos/new-orleans": {
+    "src": "/work/photos/new-orleans.webp",
+    "width": 1600,
+    "height": 899,
+    "blurDataURL": "data:image/webp;base64,UklGRl4AAABXRUJQVlA4IFIAAADwAQCdASoMAAcAA4BaJbACdADdkQb1JwAA/toTGoeBGPUHC793sf6JEE01Pfa4n8qLwH2/ZvrmHxBUt8kWY5oW5qBsfQbVI8RFC6496XeQwAAA"
   }
 } as const;

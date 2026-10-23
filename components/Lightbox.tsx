@@ -207,6 +207,23 @@ function Summary({ s }: { s: NonNullable<VisualWork["summary"]> }) {
 }
 
 function VisualDetail({ item }: { item: Exclude<LightboxItem, { kind: "case" }> }) {
+  if (item.kind === "stack" && photoStack.photos.length) {
+    return (
+      <div style={{ display: "flex", flexDirection: "column", gap: 28, padding: "10px 10px 28px" }}>
+        {photoStack.photos.map((ph) => (
+          <figure key={ph.img.src} style={{ margin: 0, display: "flex", flexDirection: "column", alignItems: "center", gap: 10 }}>
+            <Media
+              img={ph.img}
+              label=""
+              sizes="(max-width: 1100px) 100vw, 940px"
+              style={{ borderRadius: 10, width: `min(100%, calc((100vh - 180px) * ${ph.img.width / ph.img.height}))`, height: "auto" }}
+            />
+            <figcaption style={{ fontSize: 13, fontWeight: 500, padding: "0 4px", textAlign: "center" }}>{ph.caption}</figcaption>
+          </figure>
+        ))}
+      </div>
+    );
+  }
   if (item.kind === "work" && item.w.compare) {
     const { before, after } = item.w.compare;
     return (
@@ -233,7 +250,7 @@ function VisualDetail({ item }: { item: Exclude<LightboxItem, { kind: "case" }> 
           : []
       : item.kind === "carousel"
         ? carousel.slides.flatMap((s) => (s.image ? [s.image] : []))
-        : photoStack.photos;
+        : photoStack.photos.map((ph) => ph.img);
 
   if (imgs.length) {
     return (

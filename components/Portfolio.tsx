@@ -251,7 +251,7 @@ export function Portfolio({ initialSlug }: { initialSlug?: string }) {
                   { left: "28%", top: 14, rot: 6, bg: "#262423" },
                   { left: "21%", top: 22, rot: -1, bg: "#302e2c" },
                 ].map((p, i) => {
-                  const img = photoStack.photos[i];
+                  const img = photoStack.photos[2 - i]?.img; // front card shows the first photo
                   return (
                     <div
                       key={i}
