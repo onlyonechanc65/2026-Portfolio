@@ -226,7 +226,11 @@ function VisualDetail({ item }: { item: Exclude<LightboxItem, { kind: "case" }> 
 
   const imgs =
     item.kind === "work"
-      ? [...(item.w.image ? [item.w.image] : []), ...(item.w.detail ?? [])]
+      ? item.w.detail?.length
+        ? item.w.detail // the wall thumbnail isn't repeated when there are detail images
+        : item.w.image
+          ? [item.w.image]
+          : []
       : item.kind === "carousel"
         ? carousel.slides.flatMap((s) => (s.image ? [s.image] : []))
         : photoStack.photos;
