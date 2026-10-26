@@ -122,7 +122,7 @@ export const about = {
   title: "About & Resume",
   line: "I love anime, horror movies, gaming, and most importantly challenging myself to design across multiple mediums! Looking to join a team that's open to experimenting and finding solutions to the world's most complex problems.",
   /** Put the PDF at /public/resume.pdf and set this to "/resume.pdf" */
-  resumeUrl: null as string | null,
+  resumeUrl: "/resume.pdf" as string | null,
 };
 
 /** Photo gallery (the rotating carousel card on the wall). Order keeps the two Italy photos apart. */
