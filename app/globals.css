@@ -153,6 +153,42 @@ a {
   .side {
     grid-template-columns: minmax(0, 1fr);
   }
+  /* Phone order: profile, case studies, then the rest of the left column, then the wall */
+  .shell {
+    flex-direction: column;
+    flex-wrap: nowrap !important;
+    align-items: stretch !important;
+  }
+  .shell > .side,
+  .shell > .main {
+    display: contents !important;
+  }
+  .shell .side > * {
+    order: 2;
+  }
+  .shell .side > .profile-card {
+    order: 0;
+  }
+  .shell .main > * {
+    order: 3;
+  }
+  .shell .main > .case-row,
+  .shell .main > .case-row-label {
+    order: 1;
+  }
+}
+@media (max-width: 1023px) and (min-width: 600px) {
+  .location-card {
+    justify-content: center;
+  }
+}
+
+/* Label above the visual-work part of the wall */
+.wall-label {
+  margin: 18px 2px 2px;
+  font-size: 13px;
+  font-weight: 500;
+  color: rgba(232, 220, 214, 0.6);
 }
 @media (max-width: 479px) {
   .masonry {
@@ -430,6 +466,38 @@ a {
 .cs-section-body figcaption {
   text-wrap: pretty;
 }
+/* Comfortable reading measure; figures, tables and callout boxes stay full width */
+.cs-section-body > p,
+.cs-section-body > ul,
+.cs-section-body aside > p,
+.cs-section-body figure > figcaption {
+  max-width: 34em; /* ~75 chars in Satoshi; ch runs wide in this face */
+}
+
+/* Meta and impact tiles: 4 across on wide frames, 2 across otherwise (never 3 + 1) */
+.cs-tiles {
+  display: grid;
+  gap: 10px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+@media (min-width: 1100px) {
+  .cs-tiles {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+@media (max-width: 420px) {
+  .cs-tiles.meta {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+/* Next case study link at the end of a case study */
+.closing-next {
+  transition: opacity 0.15s ease-out;
+}
+.closing-next:hover {
+  opacity: 0.8;
+}
 .cs-section-body h4,
 .cs-section-body aside > span {
   text-wrap: balance;
@@ -517,6 +585,11 @@ a {
 .frame:focus {
   outline: none;
 }
+/* Keyboard users see where focus is; mouse users don't get a ring */
+html[data-keyboard] .frame:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: -2px;
+}
 
 /* ---------- Clients logo marquee ---------- */
 .marquee {
@@ -530,7 +603,9 @@ a {
   width: max-content;
   animation: marquee 30s linear infinite;
 }
-.marquee:hover .marquee-track {
+.marquee:hover .marquee-track,
+.marquee.paused .marquee-track,
+.clients-card:focus-within .marquee-track {
   animation-play-state: paused;
 }
 .marquee-list {
@@ -613,6 +688,17 @@ a {
 .crm-in .crm-track {
   animation-play-state: running;
 }
+/* On mouse devices the photo rows rest until the card is hovered or focused,
+   so only one or two things move on the wall at a time */
+@media (hover: hover) and (pointer: fine) {
+  .crm-in .crm-track {
+    animation-play-state: paused;
+  }
+  .card-hover:hover .crm-in .crm-track,
+  .card-hover:focus-visible .crm-in .crm-track {
+    animation-play-state: running;
+  }
+}
 .crm-left {
   animation-name: crmLeft;
 }
@@ -647,4 +733,11 @@ a {
   transform: none;
   transition-duration: 600ms, 700ms;
   transition-delay: var(--d, 0ms);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  /* The logo row is already still, so its pause button has nothing to do */
+  .marquee-toggle {
+    display: none !important;
+  }
 }

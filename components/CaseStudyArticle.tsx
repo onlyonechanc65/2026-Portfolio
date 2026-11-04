@@ -26,10 +26,8 @@ export function CaseStudyArticle({ cs, headingId }: { cs: CaseStudy; headingId?:
           gap: 44,
         }}
       >
-        <header style={{ display: "flex", flexDirection: "column", gap: 14 }}>
-          <span style={{ fontSize: 11, fontWeight: 700, letterSpacing: "0.08em", color: "var(--accent)" }}>
-            CASE STUDY {cs.num}
-          </span>
+        <header style={{ display: "flex", flexDirection: "column", gap: 16 }}>
+          <span style={{ fontSize: 13, fontWeight: 500, color: meta }}>Case study {cs.num}</span>
           <h2
             id={headingId}
             style={{
@@ -42,17 +40,17 @@ export function CaseStudyArticle({ cs, headingId }: { cs: CaseStudy; headingId?:
           >
             {cs.title}
           </h2>
-          <p style={{ margin: 0, fontSize: "clamp(17px, 1.5vw, 21px)", lineHeight: 1.5, color: muted, maxWidth: 900 }}>{cs.summary}</p>
+          <p style={{ margin: 0, fontSize: "clamp(17px, 1.5vw, 21px)", lineHeight: 1.5, color: muted, maxWidth: "32em", textWrap: "pretty" }}>{cs.summary}</p>
         </header>
 
-        <dl style={{ margin: 0, display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(150px, 1fr))", gap: 10 }}>
+        <dl className="cs-tiles meta" style={{ margin: 0 }}>
           {cs.meta.map((m) => (
             <div
               key={m.label}
-              style={{ background: soft, borderRadius: 12, padding: "14px 16px", display: "flex", flexDirection: "column", gap: 4 }}
+              style={{ background: soft, borderRadius: 12, padding: 16, display: "flex", flexDirection: "column", gap: 4 }}
             >
               <dt style={{ fontSize: 11, fontWeight: 500, color: meta }}>{m.label}</dt>
-              <dd style={{ margin: 0, fontSize: 15, fontWeight: 500, lineHeight: 1.4 }}>{m.value}</dd>
+              <dd style={{ margin: 0, fontSize: 15, fontWeight: 500, lineHeight: 1.4, textWrap: "balance" }}>{m.value}</dd>
             </div>
           ))}
         </dl>
@@ -82,10 +80,10 @@ export function CaseStudyArticle({ cs, headingId }: { cs: CaseStudy; headingId?:
 
 function Impact({ items }: { items: CaseStudy["impact"] }) {
   return (
-    <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(140px, 1fr))", gap: 10 }}>
+    <div className="cs-tiles">
       {items.map((k, i) => (
-        <div key={i} style={{ background: soft, borderRadius: 12, padding: 20, display: "flex", flexDirection: "column", gap: 6 }}>
-          <span style={{ fontSize: 30, fontWeight: 700, letterSpacing: "-0.02em", color: "var(--accent)", lineHeight: 1.1 }}>
+        <div key={i} style={{ background: soft, borderRadius: 12, padding: 20, display: "flex", flexDirection: "column", gap: 8 }}>
+          <span style={{ fontSize: 30, fontWeight: 700, letterSpacing: "-0.02em", color: "var(--text)", lineHeight: 1.1, fontVariantNumeric: "tabular-nums" }}>
             {k.metric}
           </span>
           <span style={{ fontSize: 14, lineHeight: 1.45, color: muted }}>{k.label}</span>
@@ -101,7 +99,7 @@ function BlockView({ b }: { b: Block }) {
   }
   if ("h" in b) {
     return (
-      <h4 style={{ margin: "10px 0 -4px", fontSize: "clamp(19px, 1.6vw, 22px)", fontWeight: 700, letterSpacing: "-0.01em" }}>{b.h}</h4>
+      <h4 style={{ margin: "8px 0 -4px", fontSize: "clamp(19px, 1.6vw, 22px)", fontWeight: 700, letterSpacing: "-0.01em" }}>{b.h}</h4>
     );
   }
   if ("list" in b) {
@@ -132,12 +130,9 @@ function BlockView({ b }: { b: Block }) {
     return (
       <aside
         aria-label={b.callout}
-        style={{ background: soft, borderRadius: 12, padding: "18px 20px", display: "flex", flexDirection: "column", gap: 8 }}
+        style={{ background: soft, borderRadius: 12, padding: 20, display: "flex", flexDirection: "column", gap: 8 }}
       >
-        <span style={{ display: "flex", alignItems: "center", gap: 8, fontSize: 11, fontWeight: 700, letterSpacing: "0.08em", color: meta }}>
-          <span aria-hidden="true" style={{ width: 6, height: 6, borderRadius: 999, background: "var(--accent)" }} />
-          {b.callout.toUpperCase()}
-        </span>
+        <span style={{ fontSize: 13, fontWeight: 500, color: meta }}>{b.callout}</span>
         <span style={{ fontSize: "clamp(17px, 1.4vw, 20px)", fontWeight: 700, letterSpacing: "-0.01em", lineHeight: 1.35 }}>{b.title}</span>
         <p style={{ margin: 0, fontSize: "clamp(15px, 1.15vw, 17px)", lineHeight: 1.6, color: muted }}>{b.text}</p>
       </aside>
@@ -184,7 +179,7 @@ function BlockView({ b }: { b: Block }) {
               <tr key={r[0]}>
                 {r.map((c, i) =>
                   i === 0 ? (
-                    <th key={i} scope="row" style={{ textAlign: "left", fontWeight: 400, color: muted, padding: "11px 0", borderBottom: "1px solid var(--line)" }}>
+                    <th key={i} scope="row" style={{ textAlign: "left", fontWeight: 400, color: muted, padding: "12px 0", borderBottom: "1px solid var(--line)" }}>
                       {c}
                     </th>
                   ) : (
@@ -193,7 +188,7 @@ function BlockView({ b }: { b: Block }) {
                       style={{
                         textAlign: "right",
                         whiteSpace: "nowrap",
-                        padding: "11px 0 11px 16px",
+                        padding: "12px 0 12px 16px",
                         borderBottom: "1px solid var(--line)",
                         fontWeight: i === r.length - 1 ? 700 : 400,
                         color: i === r.length - 1 ? "var(--text)" : muted,
@@ -213,7 +208,7 @@ function BlockView({ b }: { b: Block }) {
   }
   if ("quote" in b) {
     return (
-      <figure style={{ margin: 0, display: "flex", flexDirection: "column", gap: 10, paddingLeft: 18, borderLeft: "2px solid var(--line)" }}>
+      <figure style={{ margin: 0, display: "flex", flexDirection: "column", gap: 10, paddingLeft: 16, borderLeft: "2px solid var(--line)" }}>
         <blockquote style={{ margin: 0, fontSize: "clamp(20px, 1.9vw, 26px)", lineHeight: 1.4, fontWeight: 500, letterSpacing: "-0.01em" }}>
           &ldquo;{b.quote.text}&rdquo;
         </blockquote>

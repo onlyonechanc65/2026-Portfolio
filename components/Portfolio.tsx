@@ -29,12 +29,27 @@ const meta = "rgba(232,220,214,0.6)";
 
 const cardBase = { background: "var(--card)", borderRadius: 14 } as const;
 
-/* Lightbox order: case studies, photo gallery, then the wall */
+/* Wall order: work with a measured result first, then visual work and the photo gallery */
+const resultWork = visualWork.filter((w) => w.result);
+const otherWork = visualWork.filter((w) => !w.result);
+
+/* Lightbox order: case studies, results, photo gallery, visual work.
+   Prev/next stay inside a group: case studies step between case studies,
+   everything else steps through the wall. */
 const items: LightboxItem[] = [
   ...caseStudies.map((cs): LightboxItem => ({ kind: "case", cs })),
+  ...resultWork.map((w): LightboxItem => ({ kind: "work", w })),
   { kind: "stack" },
-  ...visualWork.map((w): LightboxItem => ({ kind: "work", w })),
+  ...otherWork.map((w): LightboxItem => ({ kind: "work", w })),
 ];
+const CASES = caseStudies.length;
+const groupOf = (i: number) => (i < CASES ? { start: 0, size: CASES } : { start: CASES, size: items.length - CASES });
+const stepFrom = (i: number, dir: 1 | -1) => {
+  const g = groupOf(i);
+  return g.start + ((i - g.start + dir + g.size) % g.size);
+};
+const workIndex = (id: string) => items.findIndex((it) => it.kind === "work" && it.w.id === id);
+const galleryIndex = items.findIndex((it) => it.kind === "stack");
 
 const caseIndex = (slug: string) => items.findIndex((it) => it.kind === "case" && it.cs.slug === slug);
 const urlFor = (i: number | null) => {
@@ -46,10 +61,10 @@ export function Portfolio({ initialSlug }: { initialSlug?: string }) {
   const initial = initialSlug ? caseIndex(initialSlug) : -1;
   const [open, setOpen] = useState<number | null>(initial >= 0 ? initial : null);
   const [showPill, setShowPill] = useState(false);
+  const [logosPaused, setLogosPaused] = useState(false);
 
   const openerRef = useRef<HTMLElement | null>(null);
   const pushedRef = useRef(false);
-  const openedFromGrid = useRef(false);
   const profileRef = useRef<HTMLElement | null>(null);
 
   /* ---------- Open / close / navigate, kept in sync with the URL ---------- */
@@ -57,14 +72,13 @@ export function Portfolio({ initialSlug }: { initialSlug?: string }) {
     openerRef.current = document.activeElement as HTMLElement | null;
     window.history.pushState({ lb: i }, "", urlFor(i));
     pushedRef.current = true;
-    openedFromGrid.current = true;
     setOpen(i);
   }, []);
 
   const go = useCallback((dir: 1 | -1) => {
     setOpen((cur) => {
       if (cur === null) return cur;
-      const next = (cur + dir + items.length) % items.length;
+      const next = stepFrom(cur, dir);
       window.history.replaceState({ lb: next }, "", urlFor(next));
       return next;
     });
@@ -114,6 +128,22 @@ export function Portfolio({ initialSlug }: { initialSlug?: string }) {
     };
   }, [open]);
 
+  /* Remember whether the visitor is using the keyboard, so the reading-area
+     focus ring only appears for keyboard users */
+  useEffect(() => {
+    const root = document.documentElement;
+    const onKey = (e: KeyboardEvent) => {
+      if (["Tab", "PageDown", "PageUp", "ArrowDown", "ArrowUp", " ", "Home", "End", "Enter"].includes(e.key)) root.setAttribute("data-keyboard", "");
+    };
+    const onPointer = () => root.removeAttribute("data-keyboard");
+    window.addEventListener("keydown", onKey, true);
+    window.addEventListener("pointerdown", onPointer, true);
+    return () => {
+      window.removeEventListener("keydown", onKey, true);
+      window.removeEventListener("pointerdown", onPointer, true);
+    };
+  }, []);
+
   /* ---------- Sticky name pill after the profile card scrolls away ---------- */
   useEffect(() => {
     const el = profileRef.current;
@@ -131,8 +161,6 @@ export function Portfolio({ initialSlug }: { initialSlug?: string }) {
     openAt(i);
   };
 
-  const galleryIdx = caseStudies.length;
-  const workIdx = (i: number) => caseStudies.length + 1 + i;
 
   return (
     <>
@@ -140,7 +168,7 @@ export function Portfolio({ initialSlug }: { initialSlug?: string }) {
         inert={open !== null}
         style={{ minHeight: "100vh", boxSizing: "border-box", padding: 12 }}
       >
-        <div style={{ display: "flex", flexWrap: "wrap", gap: 10, alignItems: "flex-start" }}>
+        <div className="shell" style={{ display: "flex", flexWrap: "wrap", gap: 10, alignItems: "flex-start" }}>
           {/* ============ LEFT COLUMN ============ */}
           <aside className="side" style={{ display: "flex", flexDirection: "column", gap: 10 }}>
             <ProfileCard ref={profileRef} />
@@ -148,15 +176,40 @@ export function Portfolio({ initialSlug }: { initialSlug?: string }) {
             {/* Clients */}
             <section
               aria-label="Clients and employers"
-              className="span-all"
+              className="span-all clients-card"
               style={{ ...cardBase, padding: "16px 20px 20px", display: "flex", flexDirection: "column", gap: 16 }}
             >
-              <div style={{ display: "flex", justifyContent: "space-between", fontSize: 11, fontWeight: 500, color: meta }}>
-                <span>Clients</span>
+              <div style={{ display: "flex", alignItems: "center", gap: 8, fontSize: 12, fontWeight: 500, color: meta }}>
+                <span style={{ flex: 1 }}>Clients</span>
                 <span>{clients.range}</span>
+                <button
+                  type="button"
+                  className="icon-btn marquee-toggle"
+                  aria-label={logosPaused ? "Play logo scroll" : "Pause logo scroll"}
+                  aria-pressed={logosPaused}
+                  onClick={() => setLogosPaused((p) => !p)}
+                  style={{
+                    width: 24,
+                    height: 24,
+                    borderRadius: 999,
+                    border: 0,
+                    background: "rgba(232,220,214,0.08)",
+                    color: "var(--text)",
+                    cursor: "pointer",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                  }}
+                >
+                  {logosPaused ? (
+                    <svg width="8" height="8" viewBox="0 0 10 10" aria-hidden="true"><path d="M2 1l7 4-7 4z" fill="currentColor" /></svg>
+                  ) : (
+                    <svg width="8" height="8" viewBox="0 0 10 10" aria-hidden="true"><path d="M2 1h2v8H2zM6 1h2v8H6z" fill="currentColor" /></svg>
+                  )}
+                </button>
               </div>
               {/* Logos scroll in a continuous loop; the list renders twice so the loop is seamless */}
-              <div className="marquee">
+              <div className={`marquee${logosPaused ? " paused" : ""}`}>
                 <div className="marquee-track">
                   {[0, 1].map((copy) => (
                     <ul key={copy} className="marquee-list" aria-hidden={copy === 1 ? true : undefined}>
@@ -185,12 +238,12 @@ export function Portfolio({ initialSlug }: { initialSlug?: string }) {
             {/* Location */}
             <section
               aria-label="Location and local time"
-              className="dots"
-              style={{ ...cardBase, backgroundColor: "var(--card)", padding: "18px 20px", display: "flex", flexDirection: "column", gap: 4 }}
+              className="dots location-card"
+              style={{ ...cardBase, backgroundColor: "var(--card)", padding: 20, display: "flex", flexDirection: "column", gap: 4 }}
             >
               <span style={{ fontSize: 11, fontWeight: 500, color: meta }}>Located in</span>
               <span style={{ fontSize: 15, fontWeight: 700 }}>{location.city}</span>
-              <div style={{ display: "flex", alignItems: "center", gap: 7, marginTop: 6 }}>
+              <div style={{ display: "flex", alignItems: "center", gap: 8, marginTop: 8 }}>
                 <span aria-hidden="true" style={{ width: 7, height: 7, borderRadius: 999, background: "var(--accent)" }} />
                 <LiveTime timeZone={location.timeZone} />
                 <span style={{ fontSize: 12, color: meta }}>local time</span>
@@ -200,9 +253,9 @@ export function Portfolio({ initialSlug }: { initialSlug?: string }) {
             {/* About & Resume */}
             <section
               aria-label="About and resume"
-              style={{ ...cardBase, padding: 20, display: "flex", flexDirection: "column", gap: 14 }}
+              style={{ ...cardBase, padding: 20, display: "flex", flexDirection: "column", gap: 16 }}
             >
-              <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
+              <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
                 <span style={{ fontSize: 15, fontWeight: 700 }}>{about.title}</span>
                 <span style={{ fontSize: 13, lineHeight: 1.5, color: muted }}>{about.line}</span>
               </div>
@@ -235,8 +288,9 @@ export function Portfolio({ initialSlug }: { initialSlug?: string }) {
 
           {/* ============ MAIN ============ */}
           <main className="main" style={{ display: "flex", flexDirection: "column", gap: 10 }}>
-            <h2 className="sr-only">Featured case studies</h2>
+            <h2 className="sr-only case-row-label">Featured case studies</h2>
             <div
+              className="case-row"
               style={{
                 display: "grid",
                 gridTemplateColumns: "repeat(auto-fit, minmax(min(300px, 100%), 1fr))",
@@ -248,18 +302,27 @@ export function Portfolio({ initialSlug }: { initialSlug?: string }) {
               ))}
             </div>
 
-            <h2 className="sr-only">Visual work</h2>
+            <h2 className="sr-only">Selected work with results</h2>
+            <Masonry
+              items={resultWork.map((w) => ({
+                key: w.id,
+                ratio: workRatio(w),
+                node: <WorkCard w={w} onClick={() => openAt(workIndex(w.id))} />,
+              }))}
+            />
+
+            <h2 className="wall-label">Visual work</h2>
             <Masonry
               items={[
                 {
                   key: "gallery",
                   ratio: 5 / 4,
-                  node: <PhotoCarousel onOpen={() => openAt(galleryIdx)} />,
+                  node: <PhotoCarousel onOpen={() => openAt(galleryIndex)} />,
                 },
-                ...visualWork.map((w, i) => ({
+                ...otherWork.map((w) => ({
                   key: w.id,
                   ratio: workRatio(w),
-                  node: <WorkCard w={w} onClick={() => openAt(workIdx(i))} />,
+                  node: <WorkCard w={w} onClick={() => openAt(workIndex(w.id))} />,
                 })),
               ]}
             />
@@ -311,7 +374,15 @@ export function Portfolio({ initialSlug }: { initialSlug?: string }) {
       {open !== null && (
         <Lightbox
           item={items[open]}
-          focusClose={openedFromGrid.current}
+          position={{ index: open - groupOf(open).start + 1, total: groupOf(open).size }}
+          closing={
+            items[open].kind === "case" ? (
+              <CaseClosing
+                next={items[stepFrom(open, 1)]}
+                onNext={() => go(1)}
+              />
+            ) : undefined
+          }
           onClose={close}
           onPrev={() => go(-1)}
           onNext={() => go(1)}
@@ -379,16 +450,16 @@ function ProfileCard({ ref }: { ref: React.Ref<HTMLElement> }) {
       Onboarding drop-off cut from <span style={strong}>35% to 20%</span>
     </>,
     <>
-      Time-to-publish cut from two weeks to <span style={strong}>3–4 days</span>
+      Time-to-publish cut from two weeks <span style={{ whiteSpace: "nowrap" }}>to <span style={strong}>3-4 days</span></span>
     </>,
   ];
 
   return (
     <section
       ref={ref}
-      className="span-all"
+      className="span-all profile-card"
       aria-label={`About ${profile.name}`}
-      style={{ ...cardBase, padding: "22px 22px 20px", display: "flex", flexDirection: "column", gap: 14 }}
+      style={{ ...cardBase, padding: "24px 24px 20px", display: "flex", flexDirection: "column", gap: 16 }}
     >
       <Avatar size={60} />
       <div style={{ display: "flex", flexDirection: "column", gap: 4 }}>
@@ -400,7 +471,7 @@ function ProfileCard({ ref }: { ref: React.Ref<HTMLElement> }) {
           </span>
         </p>
       </div>
-      <p style={{ margin: 0, fontSize: 13, lineHeight: 1.55, color: muted }}>{profile.intro}</p>
+      <p style={{ margin: 0, fontSize: 13, lineHeight: 1.55, color: muted, textWrap: "pretty" }}>{profile.intro}</p>
       <ul
         style={{
           margin: 0,
@@ -408,7 +479,7 @@ function ProfileCard({ ref }: { ref: React.Ref<HTMLElement> }) {
           listStyle: "none",
           display: "flex",
           flexDirection: "column",
-          gap: 7,
+          gap: 8,
           fontSize: 13,
           lineHeight: 1.45,
           color: muted,
@@ -424,7 +495,7 @@ function ProfileCard({ ref }: { ref: React.Ref<HTMLElement> }) {
           </li>
         ))}
       </ul>
-      <p style={{ margin: 0, fontSize: 13, lineHeight: 1.55, color: muted }}>{profile.closing}</p>
+      <p style={{ margin: 0, fontSize: 13, lineHeight: 1.55, color: muted, textWrap: "pretty" }}>{profile.closing}</p>
       <div style={{ display: "flex", alignItems: "center", gap: 8, paddingTop: 4, flexWrap: "nowrap" }}>
         <a
           className="icon-btn"
@@ -496,20 +567,19 @@ function CaseCard({ cs, onClick }: { cs: CaseStudy; onClick: (e: MouseEvent<HTML
       )}
       <div
         style={{
-          padding: "16px 18px 18px",
+          padding: "16px 20px 20px",
           display: "flex",
           alignItems: "flex-end",
           justifyContent: "space-between",
           gap: 16,
         }}
       >
-        <div style={{ display: "flex", flexDirection: "column", gap: 5, minWidth: 0 }}>
-          <span style={{ fontSize: 11, fontWeight: 700, letterSpacing: "0.08em", color: "var(--accent)" }}>
-            CASE STUDY {cs.num}
-          </span>
+        <div style={{ display: "flex", flexDirection: "column", gap: 4, minWidth: 0 }}>
+          <span style={{ fontSize: 12, fontWeight: 500, color: meta }}>Case study {cs.num}</span>
           <span style={{ fontSize: 18, fontWeight: 700, letterSpacing: "-0.015em" }}>{cs.title}</span>
-          <span style={{ fontSize: 13, color: muted, textWrap: "balance" }}>
-            {cs.role} · {cs.outcome}
+          <span style={{ display: "flex", flexDirection: "column", fontSize: 13, lineHeight: 1.45, color: muted }}>
+            <span>{cs.role}</span>
+            <span style={{ textWrap: "balance" }}>{cs.outcome}</span>
           </span>
         </div>
         <span aria-hidden="true" style={{ flexShrink: 0, fontSize: 12, fontWeight: 500, whiteSpace: "nowrap" }}>
@@ -531,7 +601,7 @@ function WorkCard({ w, onClick }: { w: VisualWork; onClick: () => void }) {
       {w.animated === "crm-events" && w.image ? (
         <CrmEventsPreview still={w.image} />
       ) : w.video ? (
-        <LoopVideo src={w.video.src} poster={w.video.poster} />
+        <LoopVideo src={w.video.src} poster={w.video.poster} hoverPlay />
       ) : w.compare ? (
         <BeforeAfter before={w.compare.before} after={w.compare.after} delay={beforeAfterDelay(w.id)} />
       ) : (
@@ -543,10 +613,10 @@ function WorkCard({ w, onClick }: { w: VisualWork; onClick: () => void }) {
         />
       )}
       {(w.captioned || w.result) && (
-        <div style={{ padding: "12px 14px 14px", display: "flex", flexDirection: "column", gap: 4 }}>
+        <div style={{ padding: "12px 16px 16px", display: "flex", flexDirection: "column", gap: 4 }}>
           <span style={{ fontSize: 13, fontWeight: 500 }}>{w.title}</span>
           {w.result && (
-            <span style={{ display: "flex", gap: 7, fontSize: 12, lineHeight: 1.4, fontWeight: 500 }}>
+            <span style={{ display: "flex", gap: 8, fontSize: 12, lineHeight: 1.4, fontWeight: 500 }}>
               <span
                 aria-hidden="true"
                 style={{ flexShrink: 0, width: 5, height: 5, marginTop: 6, borderRadius: 999, background: "var(--accent)" }}
@@ -785,5 +855,85 @@ function PhotoCarousel({ onOpen }: { onOpen: () => void }) {
         </div>
       </div>
     </div>
+  );
+}
+
+/* ---------------- End of a case study ---------------- */
+
+function CaseClosing({ next, onNext }: { next: LightboxItem; onNext: () => void }) {
+  const nextCs = next.kind === "case" ? next.cs : null;
+  return (
+    <aside
+      aria-label="What next"
+      style={{
+        margin: "0 clamp(20px, 6%, 72px) 64px",
+        padding: "28px clamp(20px, 4%, 40px)",
+        borderRadius: 16,
+        background: "rgba(232,220,214,0.05)",
+        display: "flex",
+        flexWrap: "wrap",
+        alignItems: "center",
+        justifyContent: "space-between",
+        gap: 24,
+      }}
+    >
+      {nextCs && (
+        <button
+          type="button"
+          className="reset closing-next"
+          onClick={onNext}
+          style={{ width: "auto", display: "flex", flexDirection: "column", gap: 4, minWidth: 0 }}
+        >
+          <span style={{ fontSize: 13, color: meta }}>Next case study</span>
+          <span style={{ fontSize: "clamp(20px, 2vw, 26px)", fontWeight: 700, letterSpacing: "-0.015em", textWrap: "balance" }}>
+            {nextCs.title} →
+          </span>
+        </button>
+      )}
+      <div style={{ display: "flex", flexWrap: "wrap", gap: 8 }}>
+        <a
+          className="cta"
+          href={`mailto:${profile.email}`}
+          style={{
+            height: 44,
+            padding: "0 20px",
+            borderRadius: 999,
+            background: "var(--accent)",
+            color: "#000000",
+            display: "flex",
+            alignItems: "center",
+            gap: 8,
+            textDecoration: "none",
+            fontSize: 13,
+            fontWeight: 700,
+          }}
+        >
+          <Mail />
+          Email Chanc
+        </a>
+        {about.resumeUrl && (
+          <a
+            className="icon-btn"
+            href={about.resumeUrl}
+            target="_blank"
+            rel="noopener"
+            style={{
+              height: 44,
+              padding: "0 20px",
+              borderRadius: 999,
+              background: "rgba(232,220,214,0.08)",
+              color: "var(--text)",
+              display: "flex",
+              alignItems: "center",
+              textDecoration: "none",
+              fontSize: 13,
+              fontWeight: 700,
+            }}
+          >
+            View resume
+          </a>
+        )}
+      </div>
+    </aside>
   );
 }

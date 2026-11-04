@@ -46,7 +46,7 @@ export const partnerPortal: CaseStudy = {
         {
           callout: "Research that changed direction",
           title: "The average hid two different problems",
-          text: "The tree test averaged 37%, but the distribution mattered more. Transactional tasks reached through the partner nav scored 65–100%; content tasks scored 0–20%. That split the work in two: navigations competing for the same tasks, and content sections with no visible boundary between them.",
+          text: "The tree test averaged 37%, but the distribution mattered more. Transactional tasks reached through the partner nav scored 65-100%; content tasks scored 0-20%. That split the work in two: navigations competing for the same tasks, and content sections with no visible boundary between them.",
         },
         {
           figure: {
@@ -68,7 +68,7 @@ export const partnerPortal: CaseStudy = {
               },
             ],
             caption:
-              "Two navigations with overlapping labels. Tasks that required choosing between them scored 5–55% in testing. One navigation now owns every task.",
+              "Two navigations with overlapping labels. Tasks that required choosing between them scored 5-55% in testing. One navigation now owns every task.",
           },
         },
       ],
@@ -241,7 +241,7 @@ export const imageBuilder: CaseStudy = {
   meta: [
     { label: "Role", value: "Sole designer and builder" },
     { label: "Team", value: "Six reviewers: creative, program management, UX, copy" },
-    { label: "Timeline", value: "April–May 2026, 19 versions, launched in June" },
+    { label: "Timeline", value: "April-May 2026, 19 versions, launched in June" },
     { label: "Tools", value: "HTML, CSS, JavaScript, html2canvas, Claude" },
   ],
   sections: [
@@ -249,7 +249,7 @@ export const imageBuilder: CaseStudy = {
       title: "Problem",
       blocks: [
         {
-          p: "Our team handles around 200 thumbnail requests a year, each with 3–10 assets, and each thumbnail took 20–30 minutes in Photoshop. When our AI launch compressed timelines, the queue backed up across email, comms, events and social.",
+          p: "Our team handles around 200 thumbnail requests a year, each with 3-10 assets, and each thumbnail took 20-30 minutes in Photoshop. When our AI launch compressed timelines, the queue backed up across email, comms, events and social.",
         },
         {
           p: "People didn't wait. They made their own images, and those images drifted off brand. The real problem wasn't that design was slow. It was that the only fast path was the off-brand one, so my goal was to make the on-brand path the fastest.",
@@ -385,9 +385,9 @@ export const imageBuilder: CaseStudy = {
         {
           list: [
             "Adoption: 133 of the 737 people it was rolled out to have made at least one image, 267 images between June and October.",
-            "Speed: a thumbnail now takes 2–5 minutes instead of 20–30.",
+            "Speed: a thumbnail now takes 2-5 minutes instead of 20-30.",
             "Requests: at our usual 200 a year, I'd expect about 67 thumbnail requests in four months. We received 7, all special requests.",
-            "Time saved: at 15–28 minutes per image, the 267 images add up to roughly 65–125 hours since launch.",
+            "Time saved: at 15-28 minutes per image, the 267 images add up to roughly 65-125 hours since launch.",
           ],
         },
         {
@@ -413,8 +413,8 @@ export const imageBuilder: CaseStudy = {
   ],
   impact: [
     { metric: "~90%", label: "Fewer thumbnail requests: 7 received vs. about 67 expected in four months" },
-    { metric: "2–5 min", label: "Per thumbnail, down from 20–30 minutes in Photoshop" },
+    { metric: "2-5 min", label: "Per thumbnail, down from 20-30 minutes in Photoshop" },
     { metric: "267", label: "Images made by 133 people since June" },
-    { metric: "65–125 hrs", label: "Design time saved since launch" },
+    { metric: "65-125 hrs", label: "Design time saved since launch" },
   ],
 };

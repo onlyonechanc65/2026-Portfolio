@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { carousel, photoStack, type CaseStudy, type VisualWork } from "@/lib/content";
 import { CaseStudyArticle } from "./CaseStudyArticle";
 import { Media } from "./Media";
@@ -45,30 +45,35 @@ export function Lightbox({
   onClose,
   onPrev,
   onNext,
-  focusClose = true,
+  position,
+  closing,
 }: {
-  focusClose?: boolean;
+  /** Where this item sits in the prev/next sequence, e.g. 3 of 16 */
+  position?: { index: number; total: number };
+  /** Rendered after a case study: next step for the reader */
+  closing?: React.ReactNode;
   item: LightboxItem;
   onClose: () => void;
   onPrev: () => void;
   onNext: () => void;
 }) {
   const dialogRef = useRef<HTMLDivElement>(null);
-  const closeRef = useRef<HTMLButtonElement>(null);
   const frameRef = useRef<HTMLDivElement>(null);
   const touch = useRef<{ x: number; y: number } | null>(null);
   const { key, title, sub } = describe(item);
+  const [announce, setAnnounce] = useState("");
+  const mounted = useRef(false);
 
+  // New item: start at the top, put focus in the reading area so Page Down,
+  // Space and the arrow keys scroll it, and announce the change.
   useEffect(() => {
-    // Opened from the grid: move focus in. Opened from a shared link: focus the dialog quietly.
-    if (focusClose) closeRef.current?.focus({ preventScroll: true });
-    else dialogRef.current?.focus({ preventScroll: true });
+    const f = frameRef.current;
+    f?.scrollTo({ top: 0 });
+    f?.focus({ preventScroll: true });
+    // Announce changes made with prev/next, not the initial open (the dialog label covers that)
+    if (mounted.current) setAnnounce(position ? `${title}, ${position.index} of ${position.total}` : title);
+    mounted.current = true;
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
-  // New item: start at the top of the frame
-  useEffect(() => {
-    frameRef.current?.scrollTo({ top: 0 });
   }, [key]);
 
   useEffect(() => {
@@ -124,7 +129,8 @@ export function Lightbox({
         const t = e.changedTouches[0];
         const dx = t.clientX - start.x;
         const dy = t.clientY - start.y;
-        if (Math.abs(dx) > 60 && Math.abs(dx) > Math.abs(dy) * 1.5) {
+        // Deliberate horizontal swipes only, so scrolling a long page never flips projects
+        if (Math.abs(dx) > 80 && Math.abs(dx) > Math.abs(dy) * 2) {
           if (dx < 0) onNext();
           else onPrev();
         }
@@ -159,10 +165,21 @@ export function Lightbox({
         >
           {title}
         </span>
-        <span style={{ fontSize: 11, color: "rgba(232,220,214,0.6)" }}>{sub}</span>
+        <span style={{ fontSize: 12, color: "rgba(232,220,214,0.6)" }}>
+          {sub}
+          {position && (
+            <span style={{ fontVariantNumeric: "tabular-nums" }}>
+              {"  ·  "}
+              {position.index} of {position.total}
+            </span>
+          )}
+        </span>
       </div>
+      <span className="sr-only" aria-live="polite">
+        {announce}
+      </span>
 
-      <button ref={closeRef} className="icon-btn" aria-label="Close" onClick={onClose} style={{ ...btn, right: 16, top: 14 }}>
+      <button className="icon-btn" aria-label="Close" onClick={onClose} style={{ ...btn, right: 16, top: 14 }}>
         <Close />
       </button>
       <button className="icon-btn lb-arrow" aria-label="Previous project" onClick={onPrev} style={{ ...btn, left: 14 }}>
@@ -172,9 +189,19 @@ export function Lightbox({
         <ChevronRight />
       </button>
 
-      <div ref={frameRef} key={key} className="frame" tabIndex={-1}>
+      <div
+        ref={frameRef}
+        key={key}
+        className="frame"
+        tabIndex={0}
+        role="region"
+        aria-label={`${title}, scrollable`}
+      >
         {item.kind === "case" ? (
-          <CaseStudyArticle cs={item.cs} />
+          <>
+            <CaseStudyArticle cs={item.cs} />
+            {closing}
+          </>
         ) : (
           <VisualDetail item={item} />
         )}
@@ -195,7 +222,7 @@ function Summary({ s }: { s: NonNullable<VisualWork["summary"]> }) {
         {s.results.map((r) => (
           <div
             key={r}
-            style={{ background: "rgba(232,220,214,0.05)", borderRadius: 12, padding: "16px 18px", display: "flex", flexDirection: "column", gap: 6 }}
+            style={{ background: "rgba(232,220,214,0.05)", borderRadius: 12, padding: "16px 20px", display: "flex", flexDirection: "column", gap: 8 }}
           >
             <span style={{ fontSize: 12, fontWeight: 500, color: metaColor }}>Result</span>
             <span style={{ fontSize: "clamp(16px, 1.3vw, 19px)", fontWeight: 700, lineHeight: 1.35, textWrap: "balance" }}>{r}</span>
@@ -252,6 +279,20 @@ function VisualDetail({ item }: { item: Exclude<LightboxItem, { kind: "case" }> 
         ? carousel.slides.flatMap((s) => (s.image ? [s.image] : []))
         : photoStack.photos.map((ph) => ph.img);
 
+  const fitOne = imgs.length === 1 && !(item.kind === "work" && item.w.summary) && imgs[0].height > imgs[0].width;
+  if (fitOne) {
+    const im = imgs[0];
+    return (
+      <div style={{ display: "flex", justifyContent: "center", padding: 10 }}>
+        <Media
+          img={im}
+          label=""
+          sizes="(max-width: 1580px) 100vw, 1000px"
+          style={{ borderRadius: 10, width: `min(100%, calc((100vh - 120px) * ${im.width / im.height}))`, height: "auto" }}
+        />
+      </div>
+    );
+  }
   if (imgs.length) {
     return (
       <div style={{ display: "flex", flexDirection: "column" }}>

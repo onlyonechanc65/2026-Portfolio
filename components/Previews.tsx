@@ -152,8 +152,11 @@ function BuilderPreview({ aspect }: { aspect: string }) {
   );
 }
 
-/* A silent looping clip on a wall card. Plays only on screen; reduced motion shows the poster. */
-export function LoopVideo({ src, poster }: { src: string; poster: Img }) {
+/* A silent looping clip. Plays only on screen; reduced motion shows the poster.
+   With hoverPlay, mouse users see the poster until they hover or focus the
+   card, so the wall doesn't have everything moving at once. Touch devices
+   (no hover) still autoplay while on screen. */
+export function LoopVideo({ src, poster, hoverPlay = false }: { src: string; poster: Img; hoverPlay?: boolean }) {
   const ref = useRef<HTMLVideoElement>(null);
   const [reduce, setReduce] = useState(false);
   useEffect(() => {
@@ -169,13 +172,29 @@ export function LoopVideo({ src, poster }: { src: string; poster: Img }) {
       v?.pause();
       return;
     }
+    const mouse = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
+    const card = v.closest(".card-hover") as HTMLElement | null;
+    if (hoverPlay && mouse && card) {
+      const play = () => v.play().catch(() => {});
+      const stop = () => v.pause();
+      card.addEventListener("mouseenter", play);
+      card.addEventListener("mouseleave", stop);
+      card.addEventListener("focusin", play);
+      card.addEventListener("focusout", stop);
+      return () => {
+        card.removeEventListener("mouseenter", play);
+        card.removeEventListener("mouseleave", stop);
+        card.removeEventListener("focusin", play);
+        card.removeEventListener("focusout", stop);
+      };
+    }
     const io = new IntersectionObserver(([e]) => {
       if (e.isIntersecting) v.play().catch(() => {});
       else v.pause();
     });
     io.observe(v);
     return () => io.disconnect();
-  }, [reduce]);
+  }, [reduce, hoverPlay]);
   return (
     <video
       ref={ref}

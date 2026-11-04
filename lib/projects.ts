@@ -181,7 +181,7 @@ export const projects: VisualWork[] = [
   },
   {
     id: "ravens-poster",
-    title: "Ravens Poster",
+    title: "Ravens poster",
     type: "Sports poster",
     captioned: false,
     placeholderHeight: 0,
@@ -192,7 +192,7 @@ export const projects: VisualWork[] = [
   },
   {
     id: "tank-davis-poster",
-    title: "Tank Davis Poster",
+    title: "Tank Davis poster",
     type: "Fight poster",
     captioned: true,
     placeholderHeight: 0,
@@ -203,7 +203,7 @@ export const projects: VisualWork[] = [
   },
   {
     id: "kiana-lede-tribute",
-    title: "Kiana Lede Tribute",
+    title: "Kiana Lede tribute",
     type: "Poster design",
     captioned: true,
     placeholderHeight: 0,

@@ -1,4 +1,4 @@
-# Handoff: where the portfolio build left off (Oct 23, 2026)
+# Handoff: where the portfolio build left off (Nov 4, 2026)
 
 Read `CLAUDE.md` first (design brief). This file records what's built and what's still open.
 
@@ -26,7 +26,18 @@ Read `CLAUDE.md` first (design brief). This file records what's built and what's
 
 **Lightbox:** up to 1440px wide on desktop, unchanged on phones.
 
-**Case study type:** sections use a sticky heading column (180px) beside a full-width body column at ≥1024px, stacked below that (`.cs-section` in `globals.css`). Body copy is 16–18px with no max width; `text-wrap: pretty` keeps lone words off line ends.
+**Case study type:** sections use a sticky heading column (180px) beside a full-width body column at ≥1024px, stacked below that (`.cs-section` in `globals.css`). Body copy is 16–18px, capped at `34em` (about 75 characters; don't use `ch`, Satoshi's zero is wide so 68ch ran ~103 characters); `text-wrap: pretty` keeps lone words off line ends.
+
+## Design pass (Nov 4, from /impeccable critique + /unslop polish)
+- **Wall split:** cards with a `result` sit first under a hidden "Selected work with results" heading; the rest follow a muted "Visual work" label, photo gallery first.
+- **Lightbox navigation is grouped:** arrows cycle within case studies (1 of 2) or within the wall (n of 14), never across. The subtitle shows the position; a live region announces each change.
+- **Case study end:** `CaseClosing` in `Portfolio.tsx` adds "Next case study", an orange Email pill and View resume.
+- **Keyboard:** the case-study frame takes focus on open so PageDown/Space/arrows scroll it; the orange focus ring only shows for keyboard users (`html[data-keyboard]`).
+- **Phone order:** profile, then case studies, then the side cards, then the wall (`display: contents` + `order` in `globals.css`).
+- **Motion:** Armis video and CRM rows play on hover with a mouse and autoplay on touch; the clients marquee has a pause button (WCAG 2.2.2) and pauses on hover/focus.
+- **Kickers** read "Case study 01" in sentence case, muted, no orange; orange is kept for result dots, CTAs and the live-time dot.
+- **Favicon:** `app/icon.png` and `app/apple-icon.png` from the profile photo.
+- **Ranges use hyphens** ("65-100%", "2018 - 2026"): Satoshi's en dash reads as an em dash.
 
 ## Design skills in this repo
 - `.claude/skills/impeccable` (Paul Bakaus, Apache 2.0): `/impeccable critique|audit|polish|...`. Its helper binary downloads once from its GitHub releases (checksum-verified). The auto-run design hook was not installed; run `npx impeccable install` to add it.
@@ -36,9 +47,11 @@ Read `CLAUDE.md` first (design brief). This file records what's built and what's
 ## Open items
 - **Resume:** live at `public/resume.pdf` (CBaylor_Resume_2026, 2 pages); `about.resumeUrl = "/resume.pdf"`. Chanc will send an updated version later: replace the file at the same path, no code change needed.
 - More projects to come; each new project becomes a wall card automatically.
+- Pending approval: a softer profile intro that only promises what the two case studies show (draft sent Nov 4). Copy questions: case cards say "Product designer"/"Sole designer" while the profile says Senior; Image Builder summary says 25 → 3 minutes but tiles say 20-30 → 2-5 min; "T.Rowe Header Design" title casing.
 - Unanswered: Partner Portal team is listed by role, not name (ok to add names?); Image Builder screens use a fallback font (real screenshots welcome).
 
 ## Conventions
 - No em dashes in copy except date ranges; never pure white; accent orange used sparingly.
 - Check lone words at line ends and layouts at desktop, tablet and phone before pushing.
-- Commits: author Chanc Baylor <onlyonechanc@gmail.com>, committer left as the environment default (Claude <noreply@anthropic.com>) so the signature shows Verified. Use `git -c author... ` or `--author="Chanc Baylor <onlyonechanc@gmail.com>"`; never override the committer. Push to `main` deploys.
+- Commits: author Chanc Baylor <onlyonechanc@gmail.com>, committer left as the environment default (Claude <noreply@anthropic.com>) so the signature shows Verified. Use `git -c author... ` or `--author="Chanc Baylor <onlyonechanc@gmail.com>"`; never override the committer. Push to `main` deploys. Always `git fetch` and rebase first; another chat may push too.
+- Don't commit `.impeccable/` (local critique snapshots).

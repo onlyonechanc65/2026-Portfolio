@@ -97,7 +97,7 @@ export const profile = {
 };
 
 export const clients = {
-  range: "2018 – 2026",
+  range: "2018 - 2026",
   /**
    * In resume order. `h` is the display height in px, tuned per logo so wide
    * wordmarks and compact marks look the same size. A client with no `src`
