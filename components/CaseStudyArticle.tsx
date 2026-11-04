@@ -86,7 +86,7 @@ function Impact({ items }: { items: CaseStudy["impact"] }) {
           <span style={{ fontSize: 30, fontWeight: 700, letterSpacing: "-0.02em", color: "var(--text)", lineHeight: 1.1, fontVariantNumeric: "tabular-nums" }}>
             {k.metric}
           </span>
-          <span style={{ fontSize: 14, lineHeight: 1.45, color: muted }}>{k.label}</span>
+          <span style={{ fontSize: 14, lineHeight: 1.45, color: muted, textWrap: "balance" }}>{k.label}</span>
         </div>
       ))}
     </div>

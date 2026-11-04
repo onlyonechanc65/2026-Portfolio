@@ -72,7 +72,7 @@ export const projects: VisualWork[] = [
   },
   {
     id: "t-rowe-price-headers",
-    title: "T.Rowe Header Design",
+    title: "T. Rowe Price headers",
     type: "Campaign headers · Co-branding",
     captioned: true,
     placeholderHeight: 0,

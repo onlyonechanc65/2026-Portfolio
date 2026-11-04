@@ -249,7 +249,7 @@ export const imageBuilder: CaseStudy = {
       title: "Problem",
       blocks: [
         {
-          p: "Our team handles around 200 thumbnail requests a year, each with 3-10 assets, and each thumbnail took 20-30 minutes in Photoshop. When our AI launch compressed timelines, the queue backed up across email, comms, events and social.",
+          p: "Our team handles around 200 thumbnail requests a year, each with 3-10 assets, and each thumbnail took about 25 minutes in Photoshop. When our AI launch compressed timelines, the queue backed up across email, comms, events and social.",
         },
         {
           p: "People didn't wait. They made their own images, and those images drifted off brand. The real problem wasn't that design was slow. It was that the only fast path was the off-brand one, so my goal was to make the on-brand path the fastest.",
@@ -385,7 +385,7 @@ export const imageBuilder: CaseStudy = {
         {
           list: [
             "Adoption: 133 of the 737 people it was rolled out to have made at least one image, 267 images between June and October.",
-            "Speed: a thumbnail now takes 2-5 minutes instead of 20-30.",
+            "Speed: a thumbnail now takes about 3 minutes instead of 25.",
             "Requests: at our usual 200 a year, I'd expect about 67 thumbnail requests in four months. We received 7, all special requests.",
             "Time saved: at 15-28 minutes per image, the 267 images add up to roughly 65-125 hours since launch.",
           ],
@@ -413,7 +413,7 @@ export const imageBuilder: CaseStudy = {
   ],
   impact: [
     { metric: "~90%", label: "Fewer thumbnail requests: 7 received vs. about 67 expected in four months" },
-    { metric: "2-5 min", label: "Per thumbnail, down from 20-30 minutes in Photoshop" },
+    { metric: "3 min", label: "Per thumbnail, down from 25 minutes in Photoshop" },
     { metric: "267", label: "Images made by 133 people since June" },
     { metric: "65-125 hrs", label: "Design time saved since launch" },
   ],
