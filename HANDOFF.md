@@ -28,6 +28,11 @@ Read `CLAUDE.md` first (design brief). This file records what's built and what's
 
 **Case study type:** sections use a sticky heading column (180px) beside a full-width body column at ≥1024px, stacked below that (`.cs-section` in `globals.css`). Body copy is 16–18px with no max width; `text-wrap: pretty` keeps lone words off line ends.
 
+## Design skills in this repo
+- `.claude/skills/impeccable` (Paul Bakaus, Apache 2.0): `/impeccable critique|audit|polish|...`. Its helper binary downloads once from its GitHub releases (checksum-verified). The auto-run design hook was not installed; run `npx impeccable install` to add it.
+- `.claude/skills/unslop` (Damir Sokolovsky, CC BY 4.0, keep credit): removes the AI-generated look in nine passes.
+- Both are excluded from the TypeScript build (`tsconfig.json`) and the Vercel upload (`.vercelignore`).
+
 ## Open items
 - **Resume:** live at `public/resume.pdf` (CBaylor_Resume_2026, 2 pages); `about.resumeUrl = "/resume.pdf"`. Chanc will send an updated version later: replace the file at the same path, no code change needed.
 - More projects to come; each new project becomes a wall card automatically.
