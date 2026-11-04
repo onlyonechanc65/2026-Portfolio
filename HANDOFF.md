@@ -47,7 +47,7 @@ Read `CLAUDE.md` first (design brief). This file records what's built and what's
 ## Open items
 - **Resume:** live at `public/resume.pdf` (CBaylor_Resume_2026, 2 pages); `about.resumeUrl = "/resume.pdf"`. Chanc will send an updated version later: replace the file at the same path, no code change needed.
 - More projects to come; each new project becomes a wall card automatically.
-- Pending approval: a softer profile intro that only promises what the two case studies show (draft sent Nov 4).
+- Profile intro softened Nov 4 (approved) to match what the two case studies show; CLAUDE.md updated too.
 - Unanswered: Partner Portal team is listed by role, not name (ok to add names?); Image Builder screens use a fallback font (real screenshots welcome).
 
 ## Conventions

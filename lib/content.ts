@@ -89,7 +89,7 @@ export const profile = {
   company: "ServiceNow",
   photo: { ...IMG["photos/profile"], alt: "Chanc Baylor smiling in glasses and a white shirt" } as Img | undefined,
   intro:
-    "I design the hard parts of enterprise products: onboarding, permissions and data-heavy workflows. 8+ years turning research and analytics into measurable wins across SaaS, fintech, healthcare and e-commerce for ServiceNow, T. Rowe Price, PointClickCare, Under Armour & more.",
+    "I design task-first enterprise experiences: portals, navigation and internal tools that save people time. 8+ years turning research and analytics into measurable wins across SaaS, fintech, healthcare and e-commerce for ServiceNow, T. Rowe Price, PointClickCare, Under Armour & more.",
   closing:
     "Research-led, from usability testing and behavioral analytics to design systems and high-fidelity prototypes.",
   linkedin: "https://www.linkedin.com/in/cbaylor",

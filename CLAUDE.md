@@ -19,7 +19,7 @@ Design and build brief for my personal portfolio. Read this before making any de
 ### Approved profile copy (use exactly)
 - Name: Chanc Baylor
 - Title line: Senior Product Designer @ ServiceNow
-- Intro: "I design the hard parts of enterprise products: onboarding, permissions and data-heavy workflows. 8+ years turning research and analytics into measurable wins across SaaS, fintech, healthcare and e-commerce for ServiceNow, T. Rowe Price, PointClickCare, Under Armour & more."
+- Intro: "I design task-first enterprise experiences: portals, navigation and internal tools that save people time. 8+ years turning research and analytics into measurable wins across SaaS, fintech, healthcare and e-commerce for ServiceNow, T. Rowe Price, PointClickCare, Under Armour & more."
 - Bullets:
   - 30+ experiences shipped for a portal with 1.1M+ annual visits
   - Onboarding drop-off cut from 35% to 20%
