@@ -447,7 +447,7 @@ function ProfileCard({ ref }: { ref: React.Ref<HTMLElement> }) {
       <span style={strong}>30+ experiences shipped</span> for a portal with <span style={strong}>1.1M+ annual visits</span>
     </>,
     <>
-      Onboarding drop-off cut from <span style={strong}>35% to 20%</span>
+      Onboarding drop-off cut by <span style={strong}>35%</span>
     </>,
     <>
       Time-to-publish cut from two weeks <span style={{ whiteSpace: "nowrap" }}>to <span style={strong}>3-4 days</span></span>

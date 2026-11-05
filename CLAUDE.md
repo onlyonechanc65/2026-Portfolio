@@ -22,7 +22,7 @@ Design and build brief for my personal portfolio. Read this before making any de
 - Intro: "I design task-first enterprise experiences: portals, navigation and internal tools that save people time. 8+ years turning research and analytics into measurable wins across SaaS, fintech, healthcare and e-commerce for ServiceNow, T. Rowe Price, PointClickCare, Under Armour & more."
 - Bullets:
   - 30+ experiences shipped for a portal with 1.1M+ annual visits
-  - Onboarding drop-off cut from 35% to 20%
+  - Onboarding drop-off cut by 35%
   - Time-to-publish cut from two weeks to 3–4 days
 - Closing line: "Research-led, from usability testing and behavioral analytics to design systems and high-fidelity prototypes."
 - LinkedIn icon button + orange email pill (baylorchanc@gmail.com) on **one line**
