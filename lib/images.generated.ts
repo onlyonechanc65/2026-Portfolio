@@ -120,42 +120,6 @@ export const IMG = {
     "height": 1080,
     "blurDataURL": "data:image/webp;base64,UklGRkYAAABXRUJQVlA4IDoAAADwAQCdASoMAAcAA4BaJZQCdAEWPXjEpzwA/t3TSi+dM16mnXExaY+0rW9V7VJWkZ8Giap0FWURjgAA"
   },
-  "cyberpunk-promo/before": {
-    "src": "/work/cyberpunk-promo/before.webp",
-    "width": 1080,
-    "height": 1350,
-    "blurDataURL": "data:image/webp;base64,UklGRmAAAABXRUJQVlA4IFQAAAAQAgCdASoMAA8AA4BaJYwCdADdRjFHNGdAAP70p0TcLZQ9DHG1njU/c9U3Qk9UApamFO3FCIM2yoPcU90LZKe7p9Hjh3Tec90IixG5uO2tGAuoAAA="
-  },
-  "cyberpunk-promo/after": {
-    "src": "/work/cyberpunk-promo/after.webp",
-    "width": 1080,
-    "height": 1350,
-    "blurDataURL": "data:image/webp;base64,UklGRnIAAABXRUJQVlA4IGYAAAAwAgCdASoMAA8AA4BaJbACdADdIdErihoeAAD+T+SCH65DW77g8HiF2haEO4dEO/jbXqltOdsKBEWt1XsLt1ndgm6Xza2RKBIQA2iGITqC1BGX3J9z8f25djmv2lPFMWgYewUwAAA="
-  },
-  "who-can-i-run-to/before": {
-    "src": "/work/who-can-i-run-to/before.webp",
-    "width": 1080,
-    "height": 1350,
-    "blurDataURL": "data:image/webp;base64,UklGRkYAAABXRUJQVlA4IDoAAABQAgCdASoMAA8AA4BaJbACdLoAAkc3AM55pdAA+dmKN5ofJQSVXdor/7+78aXxLv/xvHgV0w59AAAA"
-  },
-  "who-can-i-run-to/after": {
-    "src": "/work/who-can-i-run-to/after.webp",
-    "width": 1080,
-    "height": 1350,
-    "blurDataURL": "data:image/webp;base64,UklGRkgAAABXRUJQVlA4IDwAAADwAQCdASoMAA8AA4BaJbACdAEPAASsXQAA/uvRd4ziFbu3cdQAPXFW5iIreDZIpuR/8EF/EF/EFYAAAAA="
-  },
-  "ravens-poster/01": {
-    "src": "/work/ravens-poster/01.webp",
-    "width": 1080,
-    "height": 1350,
-    "blurDataURL": "data:image/webp;base64,UklGRmQAAABXRUJQVlA4IFgAAADwAQCdASoMAA8AA4BaJbACdAEPAltQ/IAA/vbhYheZn9uQ3+Jvk9wWGiHZUeQUUyKy7MHksB+dFnQQqYgfyEG3zG5id/eM+MDFfRQm3EEYg/hxjex5BlAA"
-  },
-  "tank-davis-poster/01": {
-    "src": "/work/tank-davis-poster/01.webp",
-    "width": 1500,
-    "height": 2000,
-    "blurDataURL": "data:image/webp;base64,UklGRowAAABXRUJQVlA4IIAAAACwAgCdASoMABAAA4BaJbACdFQAFO6Vz1Z9H7XyMUAA/vG1Fty25N8gYS6HAxqYIDB0uzxcsnTD4PgTrfvp6404A6CRXYrsI9okkmKPF/mbKU/MIsdtNZi0ITT0IPBPcQGx73egLU2cGIOXWO+CXn8QBPuQV50EJaefRzphYQuAAA=="
-  },
   "photos/barbados": {
     "src": "/work/photos/barbados.webp",
     "width": 1350,
@@ -287,29 +251,5 @@ export const IMG = {
     "width": 384,
     "height": 384,
     "blurDataURL": "data:image/webp;base64,UklGRmAAAABXRUJQVlA4IFQAAAAQAgCdASoMAAwAA4BaJZACdAD6/4/m2DAAAPc2sCwyf5qvv3qnKGNDHvXDythCOmknJvj58zhZ5DkOo7jFab+Rc8uhOg/QRLnUcYsLiHWyf2YAAAA="
-  },
-  "kiana-lede/01": {
-    "src": "/work/kiana-lede/01.webp",
-    "width": 1200,
-    "height": 1200,
-    "blurDataURL": "data:image/webp;base64,UklGRk4AAABXRUJQVlA4IEIAAADwAQCdASoMAAwAA4BaJZQC7AEPAm0aQAAA/vXaUGlGNNyjlzPXtPQ40ehgaH1gjc3vWmQcVIkB+Dg6bdzaNVZIAAA="
-  },
-  "the-sunflower/01": {
-    "src": "/work/the-sunflower/01.webp",
-    "width": 1080,
-    "height": 1201,
-    "blurDataURL": "data:image/webp;base64,UklGRmYAAABXRUJQVlA4IFoAAAAQAgCdASoMAA0AA4BaJZgCdAEXfmg2tG8AAM4+pezUbQza1uNF8P67nDGoUMAw47hpEsZgxF3FJoQgRfhhXMjYRo0qYRFqvyJQSkQLkwewmOz76bE1vPBjwAA="
-  },
-  "halloween/01": {
-    "src": "/work/halloween/01.webp",
-    "width": 1200,
-    "height": 1200,
-    "blurDataURL": "data:image/webp;base64,UklGRlAAAABXRUJQVlA4IEQAAADQAQCdASoMAAwAA4BaJQBdgBuIeJqgAAD+9vnXV80Ud3FVFTf3Znp5Fq4wJoSw0tKKaP1qWtjvfxR4RBkGVTkOv0AAAA=="
-  },
-  "nike-kid/01": {
-    "src": "/work/nike-kid/01.webp",
-    "width": 1200,
-    "height": 1200,
-    "blurDataURL": "data:image/webp;base64,UklGRoYAAABXRUJQVlA4IHoAAACQAgCdASoMAAwAA4BaJbACdDBJSIgL1AFtuIOeQAD+6k2PmQCyOr1amun0E9m7JTAgnWr62cofJ9/WKrgG4r5VmbqIpeyCmFCtVZoXn3mPXS7TY6oTa3GJ1dwzONWUoSqr0bm8jfR9KnBPYH0/vgOIr2PTn3yEUcAAAA=="
   }
 } as const;

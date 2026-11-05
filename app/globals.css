@@ -184,11 +184,14 @@ a {
 }
 
 /* Label above the visual-work part of the wall */
-.wall-label {
-  margin: 18px 2px 2px;
-  font-size: 13px;
-  font-weight: 500;
-  color: rgba(232, 220, 214, 0.6);
+/* Photo gallery in the sidebar: portrait beside the wall, wide when it spans the tablet grid */
+.gallery-card {
+  aspect-ratio: 4 / 5;
+}
+@media (max-width: 1023px) and (min-width: 600px) {
+  .gallery-card {
+    aspect-ratio: 16 / 9;
+  }
 }
 @media (max-width: 479px) {
   .masonry {

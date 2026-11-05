@@ -29,21 +29,18 @@ const meta = "rgba(232,220,214,0.6)";
 
 const cardBase = { background: "var(--card)", borderRadius: 14 } as const;
 
-/* Wall order: work with a measured result first, then visual work and the photo gallery */
-const resultWork = visualWork.filter((w) => w.result);
-const otherWork = visualWork.filter((w) => !w.result);
-
-/* Lightbox order: case studies, results, photo gallery, visual work.
+/* Lightbox order: case studies, wall work, then the photo gallery (opened from the sidebar).
    Prev/next stay inside a group: case studies step between case studies,
-   everything else steps through the wall. */
+   wall work steps through the wall, and the gallery stands alone. */
 const items: LightboxItem[] = [
   ...caseStudies.map((cs): LightboxItem => ({ kind: "case", cs })),
-  ...resultWork.map((w): LightboxItem => ({ kind: "work", w })),
+  ...visualWork.map((w): LightboxItem => ({ kind: "work", w })),
   { kind: "stack" },
-  ...otherWork.map((w): LightboxItem => ({ kind: "work", w })),
 ];
 const CASES = caseStudies.length;
-const groupOf = (i: number) => (i < CASES ? { start: 0, size: CASES } : { start: CASES, size: items.length - CASES });
+const WORK = visualWork.length;
+const groupOf = (i: number) =>
+  i < CASES ? { start: 0, size: CASES } : i < CASES + WORK ? { start: CASES, size: WORK } : { start: CASES + WORK, size: 1 };
 const stepFrom = (i: number, dir: 1 | -1) => {
   const g = groupOf(i);
   return g.start + ((i - g.start + dir + g.size) % g.size);
@@ -284,6 +281,7 @@ export function Portfolio({ initialSlug }: { initialSlug?: string }) {
               </a>
             </section>
 
+            <PhotoCarousel onOpen={() => openAt(galleryIndex)} />
           </aside>
 
           {/* ============ MAIN ============ */}
@@ -302,29 +300,13 @@ export function Portfolio({ initialSlug }: { initialSlug?: string }) {
               ))}
             </div>
 
-            <h2 className="sr-only">Selected work with results</h2>
+            <h2 className="sr-only">Selected work</h2>
             <Masonry
-              items={resultWork.map((w) => ({
+              items={visualWork.map((w) => ({
                 key: w.id,
                 ratio: workRatio(w),
                 node: <WorkCard w={w} onClick={() => openAt(workIndex(w.id))} />,
               }))}
-            />
-
-            <h2 className="wall-label">Visual work</h2>
-            <Masonry
-              items={[
-                {
-                  key: "gallery",
-                  ratio: 5 / 4,
-                  node: <PhotoCarousel onOpen={() => openAt(galleryIndex)} />,
-                },
-                ...otherWork.map((w) => ({
-                  key: w.id,
-                  ratio: workRatio(w),
-                  node: <WorkCard w={w} onClick={() => openAt(workIndex(w.id))} />,
-                })),
-              ]}
             />
           </main>
         </div>
@@ -751,7 +733,8 @@ function PhotoCarousel({ onOpen }: { onOpen: () => void }) {
       onBlur={(e) => {
         if (!e.currentTarget.contains(e.relatedTarget as Node)) setHovering(false);
       }}
-      style={{ position: "relative", ...cardBase, overflow: "hidden", aspectRatio: "4 / 5" }}
+      className="span-all gallery-card"
+      style={{ position: "relative", ...cardBase, overflow: "hidden" }}
     >
       <button
         className="reset"

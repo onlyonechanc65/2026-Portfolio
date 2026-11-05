@@ -123,20 +123,6 @@ export const projects: VisualWork[] = [
     ],
   },
   {
-    id: "cyberpunk-promo",
-    title: "Cyberpunk promo",
-    type: "Photo manipulation",
-    captioned: true,
-    placeholderHeight: 0,
-    compare: {
-      before: img("cyberpunk-promo/before", "Before: the original portrait of a woman resting her hand on her cheek."),
-      after: img(
-        "cyberpunk-promo/after",
-        "After: the same portrait turned cyberpunk, with glowing orange eyes, cybernetic face panels, a barcode and a vertical orange banner of Japanese text."
-      ),
-    },
-  },
-  {
     id: "colby-solar",
     title: "Colby Solar",
     type: "Brand identity",
@@ -161,88 +147,5 @@ export const projects: VisualWork[] = [
       img("colby-solar/03", "A purple Colby Solar van wrap with the logo and a Need a quote? call to action."),
       img("colby-solar/04", "Colby Solar logo on a purple T-shirt and a glossy purple mailer bag."),
     ],
-  },
-  {
-    id: "who-can-i-run-to",
-    title: "Who Can I Run To?",
-    type: "Movie poster",
-    captioned: false,
-    placeholderHeight: 0,
-    compare: {
-      before: img(
-        "who-can-i-run-to/before",
-        "Before: an orange poster with a small running silhouette above warped dark red type reading Who can I run to?"
-      ),
-      after: img(
-        "who-can-i-run-to/after",
-        "After: the same poster in deep red with the warped title type in orange."
-      ),
-    },
-  },
-  {
-    id: "ravens-poster",
-    title: "Ravens poster",
-    type: "Sports poster",
-    captioned: false,
-    placeholderHeight: 0,
-    image: img(
-      "ravens-poster/01",
-      "Purple Ravens poster: Lamar Jackson hands off to Derrick Henry in front of a giant 87, with the headline Longest run in Ravens history."
-    ),
-  },
-  {
-    id: "tank-davis-poster",
-    title: "Tank Davis poster",
-    type: "Fight poster",
-    captioned: true,
-    placeholderHeight: 0,
-    image: img(
-      "tank-davis-poster/01",
-      "Navy and orange poster of Gervonta Tank Davis upside down over a giant orange 30 wins, with three training photos and the quote I knew he was going to tire down."
-    ),
-  },
-  {
-    id: "kiana-lede-tribute",
-    title: "Kiana Lede tribute",
-    type: "Poster design",
-    captioned: true,
-    placeholderHeight: 0,
-    image: img(
-      "kiana-lede/01",
-      "Black and white collage of Kiana Lede performing, layered inside a white frame with the Golden Gate Bridge at night and a train, scattered purple hearts, and her name in white brush lettering with a purple outline."
-    ),
-  },
-  {
-    id: "the-sunflower",
-    title: "The Sunflower",
-    type: "Poster design",
-    captioned: true,
-    placeholderHeight: 0,
-    image: img(
-      "the-sunflower/01",
-      "Collage of a woman in a denim jacket and yellow aviator sunglasses with white eyes, set against a sunflower field, cloudy sky and a starfield, with Only One Chanc in orange brush lettering."
-    ),
-  },
-  {
-    id: "halloween",
-    title: "Halloween",
-    type: "Poster design",
-    captioned: true,
-    placeholderHeight: 0,
-    image: img(
-      "halloween/01",
-      "Three hooded black figures with clasped hands and glowing white rings for faces, standing under a circle of glowing orange orbs against a starry black sky."
-    ),
-  },
-  {
-    id: "nike-kid",
-    title: "Nike kid",
-    type: "Poster design",
-    captioned: true,
-    placeholderHeight: 0,
-    image: img(
-      "nike-kid/01",
-      "Black and white figure with a cracked skull for a face and a white beanie, pulling up a jacket zipper, set against flowing orange and yellow lava."
-    ),
   },
 ];

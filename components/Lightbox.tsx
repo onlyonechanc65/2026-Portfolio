@@ -61,6 +61,8 @@ export function Lightbox({
   const frameRef = useRef<HTMLDivElement>(null);
   const touch = useRef<{ x: number; y: number } | null>(null);
   const { key, title, sub } = describe(item);
+  // A group of one (the photo gallery) has nowhere to step to
+  const single = position?.total === 1;
   const [announce, setAnnounce] = useState("");
   const mounted = useRef(false);
 
@@ -81,10 +83,10 @@ export function Lightbox({
       if (e.key === "Escape") {
         e.preventDefault();
         onClose();
-      } else if (e.key === "ArrowLeft") {
+      } else if (e.key === "ArrowLeft" && !single) {
         e.preventDefault();
         onPrev();
-      } else if (e.key === "ArrowRight") {
+      } else if (e.key === "ArrowRight" && !single) {
         e.preventDefault();
         onNext();
       } else if (e.key === "Tab" && dialogRef.current) {
@@ -108,7 +110,7 @@ export function Lightbox({
     };
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
-  }, [onClose, onPrev, onNext]);
+  }, [onClose, onPrev, onNext, single]);
 
   return (
     <div
@@ -130,7 +132,7 @@ export function Lightbox({
         const dx = t.clientX - start.x;
         const dy = t.clientY - start.y;
         // Deliberate horizontal swipes only, so scrolling a long page never flips projects
-        if (Math.abs(dx) > 80 && Math.abs(dx) > Math.abs(dy) * 2) {
+        if (!single && Math.abs(dx) > 80 && Math.abs(dx) > Math.abs(dy) * 2) {
           if (dx < 0) onNext();
           else onPrev();
         }
@@ -167,7 +169,7 @@ export function Lightbox({
         </span>
         <span style={{ fontSize: 12, color: "rgba(232,220,214,0.6)" }}>
           {sub}
-          {position && (
+          {position && !single && (
             <span style={{ fontVariantNumeric: "tabular-nums" }}>
               {"  ·  "}
               {position.index} of {position.total}
@@ -182,12 +184,16 @@ export function Lightbox({
       <button className="icon-btn" aria-label="Close" onClick={onClose} style={{ ...btn, right: 16, top: 14 }}>
         <Close />
       </button>
-      <button className="icon-btn lb-arrow" aria-label="Previous project" onClick={onPrev} style={{ ...btn, left: 14 }}>
-        <ChevronLeft />
-      </button>
-      <button className="icon-btn lb-arrow" aria-label="Next project" onClick={onNext} style={{ ...btn, right: 14 }}>
-        <ChevronRight />
-      </button>
+      {!single && (
+        <>
+          <button className="icon-btn lb-arrow" aria-label="Previous project" onClick={onPrev} style={{ ...btn, left: 14 }}>
+            <ChevronLeft />
+          </button>
+          <button className="icon-btn lb-arrow" aria-label="Next project" onClick={onNext} style={{ ...btn, right: 14 }}>
+            <ChevronRight />
+          </button>
+        </>
+      )}
 
       <div
         ref={frameRef}
